@@ -1,0 +1,1 @@
+// on this screen system language, keyboard and localization

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:installer/constants.dart';
+import 'package:installer/screens/welcome.dart';
+import 'package:introduction_slider/source/source.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -10,57 +13,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'FleuOS installtion',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Scaffold(
+        body: InstallationScreen(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class InstallationScreen extends StatelessWidget {
+  const InstallationScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return IntroductionSlider(
+      items: const [
+        IntroductionSliderItem(
+          logo: WelcomeContent(),
+          backgroundColor: backgroundColor,
         ),
+        IntroductionSliderItem(
+          logo: FlutterLogo(),
+          // title: Text("Title 2"),
+          backgroundColor: backgroundColor,
+        ),
+      ],
+      done: const Done(
+        child: Icon(Icons.done),
+        home: Text("yo"),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      next: const Next(
+        child: Icon(Icons.arrow_forward),
       ),
     );
   }
