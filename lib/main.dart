@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:installer/constants.dart';
+import 'package:installer/screens/language.dart';
 import 'package:installer/screens/welcome.dart';
 import 'package:introduction_slider/source/source.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
+      themeMode: ThemeMode.dark,
       home: const Scaffold(
         body: InstallationScreen(),
       ),
@@ -35,6 +37,11 @@ class InstallationScreen extends StatelessWidget {
       items: const [
         IntroductionSliderItem(
           logo: WelcomeContent(),
+          backgroundColor: backgroundColor,
+        ),
+        IntroductionSliderItem(
+          logo: LanguageContent(),
+          // title: Text("Title 2"),
           backgroundColor: backgroundColor,
         ),
         IntroductionSliderItem(
