@@ -1,1 +1,0 @@
-// on this screen apps that will be installed with logos and description
