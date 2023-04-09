@@ -15,7 +15,7 @@ class WelcomeContent extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.65,
           child: const Text(
-            "Welcome to FleuOS!",
+            "Welcome to FleuOS",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -27,7 +27,7 @@ class WelcomeContent extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.65,
           child: const Text(
-            "Lets set up system parameters and run installation.",
+            "Lets set up system parameters and run installation",
             style: TextStyle(
               color: Colors.white,
             ),

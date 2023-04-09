@@ -37,17 +37,17 @@ class _LanguageContentState extends State<LanguageContent> {
             children: [
               FleuDropdown(
                 items: const [
+                  'Esperanto',
                   'English',
                   'Russian',
-                  'Esperanto',
                 ],
                 label: 'System language',
                 onChanged: (v) {},
               ),
               FleuDropdown(
                 items: const [
-                  'English',
                   'Russian',
+                  'English',
                   'Esperanto',
                 ],
                 label: 'Keyboard layout',

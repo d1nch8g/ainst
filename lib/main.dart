@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
+import 'package:installer/screens/user.dart';
 import 'package:installer/screens/welcome.dart';
 import 'package:introduction_slider/source/source.dart';
 
@@ -41,12 +42,14 @@ class InstallationScreen extends StatelessWidget {
         ),
         IntroductionSliderItem(
           logo: LanguageContent(),
-          // title: Text("Title 2"),
+          backgroundColor: backgroundColor,
+        ),
+        IntroductionSliderItem(
+          logo: UserContent(),
           backgroundColor: backgroundColor,
         ),
         IntroductionSliderItem(
           logo: FlutterLogo(),
-          // title: Text("Title 2"),
           backgroundColor: backgroundColor,
         ),
       ],
