@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:installer/components/dropdown.dart';
-import 'package:installer/constants.dart';
+import 'package:installer/components/app_box.dart';
 
 class ApplicationsContent extends StatelessWidget {
   const ApplicationsContent({super.key});
@@ -12,7 +11,7 @@ class ApplicationsContent extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.65,
           child: const Text(
-            "Applications",
+            "Software",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -20,7 +19,6 @@ class ApplicationsContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        const SizedBox(height: 24),
         Divider(
           color: Colors.white,
           indent: MediaQuery.of(context).size.width * 0.25,
@@ -28,40 +26,10 @@ class ApplicationsContent extends StatelessWidget {
           thickness: 0.2,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.75,
+          height: MediaQuery.of(context).size.height * 0.8,
           child: Expanded(
             child: ListView(
               children: [
-                const Text(
-                  "Development",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Application(appName: "vscode"),
-                    Application(appName: "nvim"),
-                    Application(appName: "docker"),
-                    Application(appName: "dart"),
-                    Application(appName: "golang"),
-                    Application(appName: "nodejs"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Application(appName: "protoc"),
-                    Application(appName: "rust"),
-                    Application(appName: "flutter"),
-                    Application(appName: "vlang"),
-                    Application(appName: "lua"),
-                    Application(appName: "elixir"),
-                  ],
-                ),
                 const Text(
                   "Office",
                   style: TextStyle(
@@ -73,10 +41,10 @@ class ApplicationsContent extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Application(appName: "onlyoffice"),
-                    Application(appName: "wps-office"),
-                    Application(appName: "open-office"),
-                    Application(appName: "gnome-office"),
+                    AppBox(appName: "onlyoffice"),
+                    AppBox(appName: "wps-office"),
+                    AppBox(appName: "open-office"),
+                    AppBox(appName: "gnome-office"),
                   ],
                 ),
                 const Text(
@@ -90,11 +58,67 @@ class ApplicationsContent extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Application(appName: "blender"),
-                    Application(appName: "godot"),
-                    Application(appName: "krita"),
-                    Application(appName: "gimp"),
-                    Application(appName: "unreal"),
+                    AppBox(appName: "blender"),
+                    AppBox(appName: "godot"),
+                    AppBox(appName: "krita"),
+                    AppBox(appName: "gimp"),
+                    AppBox(appName: "unreal"),
+                  ],
+                ),
+                const Text(
+                  "Internet",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "chromium"),
+                    AppBox(appName: "yandex"),
+                    AppBox(appName: "vivaldi"),
+                    AppBox(appName: "firefox"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "opera"),
+                    AppBox(appName: "gnome-web"),
+                    AppBox(appName: "falkon"),
+                    AppBox(appName: "tor"),
+                  ],
+                ),
+                const Text(
+                  "Development",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "vscode"),
+                    AppBox(appName: "nvim"),
+                    AppBox(appName: "docker"),
+                    AppBox(appName: "dart"),
+                    AppBox(appName: "protoc"),
+                    AppBox(appName: "rust"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "golang"),
+                    AppBox(appName: "nodejs"),
+                    AppBox(appName: "flutter"),
+                    AppBox(appName: "vlang"),
+                    AppBox(appName: "lua"),
+                    AppBox(appName: "elixir"),
                   ],
                 ),
               ],
@@ -118,67 +142,5 @@ class ApplicationGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
-  }
-}
-
-class Application extends StatefulWidget {
-  final String appName;
-  const Application({super.key, required this.appName});
-
-  @override
-  State<Application> createState() => _ApplicationState();
-}
-
-class _ApplicationState extends State<Application> {
-  bool checked = false;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: primaryColor,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          color: backgroundColor,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                widget.appName,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Image.asset(
-                "assets/${widget.appName}.png",
-                width: 65,
-                height: 65,
-              ),
-              const SizedBox(height: 12),
-              Checkbox(
-                value: checked,
-                focusColor: secondaryColor,
-                activeColor: primaryColor,
-                checkColor: backgroundColor,
-                fillColor: const MaterialStatePropertyAll(Colors.white),
-                onChanged: (v) {
-                  setState(() {
-                    checked = v!;
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
