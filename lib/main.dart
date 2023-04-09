@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:installer/constants.dart';
-import 'package:installer/screens/applications.dart';
+import 'package:installer/screens/software.dart';
 import 'package:installer/screens/disk.dart';
 import 'package:installer/screens/language.dart';
 import 'package:installer/screens/user.dart';
