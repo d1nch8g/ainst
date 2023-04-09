@@ -92,6 +92,25 @@ class ApplicationsContent extends StatelessWidget {
                   ],
                 ),
                 const Text(
+                  "Communication",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "telegram"),
+                    AppBox(appName: "mattermost"),
+                    AppBox(appName: "discord"),
+                    AppBox(appName: "slack"),
+                    AppBox(appName: "element"),
+                    AppBox(appName: "signal"),
+                  ],
+                ),
+                const Text(
                   "Development",
                   style: TextStyle(
                     color: Colors.white,
