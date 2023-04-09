@@ -33,7 +33,7 @@ class _LanguageContentState extends State<LanguageContent> {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.65,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               FleuDropdown(
                 items: const [
