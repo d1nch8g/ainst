@@ -80,12 +80,22 @@ class ApplicationsContent extends StatelessWidget {
                   ],
                 ),
                 const Text(
-                  "Office",
+                  "Graphics",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Application(appName: "blender"),
+                    Application(appName: "godot"),
+                    Application(appName: "krita"),
+                    Application(appName: "gimp"),
+                    Application(appName: "unreal"),
+                  ],
                 ),
               ],
             ),
