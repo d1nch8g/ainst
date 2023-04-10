@@ -14,7 +14,7 @@ class NotificationPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 72,
+      height: 54,
       decoration: BoxDecoration(
         color: secondaryColor,
         boxShadow: [
@@ -37,11 +37,15 @@ class NotificationPopup extends StatelessWidget {
               Icon(
                 icon,
                 size: 24,
+                color: Colors.white,
               ),
               const SizedBox(width: 8),
               Text(
                 message,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),

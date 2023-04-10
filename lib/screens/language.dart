@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/components/dropdown.dart';
+import 'package:installer/constants.dart';
 import 'package:installer/screens/user.dart';
 import 'package:installer/utils/senderr.dart';
 import 'package:installer/utils/syscall.dart';
@@ -73,80 +74,85 @@ class _LanguageContentState extends State<LanguageContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          "assets/language.png",
-          height: MediaQuery.of(context).size.height * 0.36,
-        ),
-        const SizedBox(height: 24),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
-          child: const Text(
-            "Choose system and keyboard languages",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        const SizedBox(height: 36),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FleuDropdown(
-                items: systemLanguages,
-                label: 'System language',
-                onChanged: (v) async {
-                  var prefs = await SharedPreferences.getInstance();
-                  prefs.setString("syslang", v);
-                },
-              ),
-              FleuDropdown(
-                items: keyboardLanguages,
-                label: 'Keyboard layout',
-                onChanged: (v) async {
-                  var prefs = await SharedPreferences.getInstance();
-                  prefs.setString("keyboardlang", v);
-                },
-              ),
-              FleuDropdown(
-                items: timezoneList,
-                label: 'Timezone',
-                onChanged: (v) async {
-                  var prefs = await SharedPreferences.getInstance();
-                  prefs.setString("keyboardlang", v);
-                },
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 54),
-        Row(
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FleuTextButton(
-              text: "Back",
-              onPressed: () {
-                Navigator.pop(context);
-              },
+            Image.asset(
+              "assets/language.png",
+              height: MediaQuery.of(context).size.height * 0.36,
             ),
-            const SizedBox(width: 42),
-            FleuTextButton(
-              text: "Next",
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => UserContent(),
-                ));
-              },
+            const SizedBox(height: 24),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: const Text(
+                "Choose system and keyboard languages",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 36),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FleuDropdown(
+                    items: systemLanguages,
+                    label: 'System language',
+                    onChanged: (v) async {
+                      var prefs = await SharedPreferences.getInstance();
+                      prefs.setString("syslang", v);
+                    },
+                  ),
+                  FleuDropdown(
+                    items: keyboardLanguages,
+                    label: 'Keyboard layout',
+                    onChanged: (v) async {
+                      var prefs = await SharedPreferences.getInstance();
+                      prefs.setString("keyboardlang", v);
+                    },
+                  ),
+                  FleuDropdown(
+                    items: timezoneList,
+                    label: 'Timezone',
+                    onChanged: (v) async {
+                      var prefs = await SharedPreferences.getInstance();
+                      prefs.setString("keyboardlang", v);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 54),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FleuTextButton(
+                  text: "Back",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const SizedBox(width: 42),
+                FleuTextButton(
+                  text: "Next",
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => UserContent(),
+                    ));
+                  },
+                ),
+              ],
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 }

@@ -86,31 +86,90 @@ class UserContent extends StatelessWidget {
                   },
                 ),
                 const SizedBox(width: 42),
-                FleuTextButton(
-                  text: "Next",
-                  onPressed: () {
-                    if (passController.text != confpassController.text) {
-                      showBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return const NotificationPopup(
-                            message: "Passwords does not match",
-                            icon: Icons.error,
-                          );
-                        },
-                      );
-                      return;     
-                    }
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const DiskContent(),
-                    ));
-                  },
-                ),
+                UserCheckButton(
+                  userController: userController,
+                  emailController: emailController,
+                  passController: passController,
+                  confpassController: confpassController,
+                )
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class UserCheckButton extends StatelessWidget {
+  final TextEditingController userController;
+  final TextEditingController emailController;
+  final TextEditingController passController;
+  final TextEditingController confpassController;
+  const UserCheckButton({
+    super.key,
+    required this.userController,
+    required this.emailController,
+    required this.passController,
+    required this.confpassController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FleuTextButton(
+      text: "Next",
+      onPressed: () {
+        if (passController.text != confpassController.text) {
+          showBottomSheet(
+            context: context,
+            builder: (context) {
+              return const NotificationPopup(
+                message: "Password does not match",
+                icon: Icons.error,
+              );
+            },
+          );
+          Future.delayed(const Duration(milliseconds: 2382), () {
+            Navigator.pop(context);
+          });
+          return;
+        }
+        if (userController.text.length < 3) {
+          showBottomSheet(
+            context: context,
+            builder: (context) {
+              return const NotificationPopup(
+                message: "Username is too short",
+                icon: Icons.error,
+              );
+            },
+          );
+          Future.delayed(const Duration(milliseconds: 2382), () {
+            Navigator.pop(context);
+          });
+          return;
+        }
+        if (!emailController.text.contains("@") ||
+            !emailController.text.contains(".")) {
+          showBottomSheet(
+            context: context,
+            builder: (context) {
+              return const NotificationPopup(
+                message: "Email is incorrect.",
+                icon: Icons.error,
+              );
+            },
+          );
+          Future.delayed(const Duration(milliseconds: 2382), () {
+            Navigator.pop(context);
+          });
+          return;
+        }
+
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const DiskContent(),
+        ));
+      },
     );
   }
 }
