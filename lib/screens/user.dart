@@ -165,7 +165,6 @@ class UserCheckButton extends StatelessWidget {
           });
           return;
         }
-
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const DiskContent(),
         ));

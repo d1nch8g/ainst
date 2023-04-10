@@ -1,77 +1,26 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/components/dropdown.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/user.dart';
-import 'package:installer/utils/senderr.dart';
-import 'package:installer/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageContent extends StatefulWidget {
-  const LanguageContent({super.key});
+  final List<String> keyboardLanguages;
+  final List<String> systemLanguages;
+  final List<String> timezoneList;
+  const LanguageContent({
+    super.key,
+    required this.keyboardLanguages,
+    required this.systemLanguages,
+    required this.timezoneList,
+  });
 
   @override
   State<LanguageContent> createState() => _LanguageContentState();
 }
 
 class _LanguageContentState extends State<LanguageContent> {
-  List<String> keyboardLanguages = ["Russian"];
-  List<String> systemLanguages = ["English"];
-  List<String> timezoneList = ["Moscow/Europe"];
-
-  setKeyboardLanguages() async {
-    var out = await syscall("localectl --no-pager list-keymaps");
-    if (out.error) {
-      sendErr("Stderr: ${out.stderr}, stdout: ${out.stdout}");
-      return [];
-    }
-    setState(() {
-      keyboardLanguages = out.stdout.split("\n");
-    });
-  }
-
-  setTimezoneList() async {
-    var out = await syscall("timedatectl --no-pager list-timezones");
-    if (out.error) {
-      sendErr("Stderr: ${out.stderr}, stdout: ${out.stdout}");
-      return [];
-    }
-    setState(() {
-      timezoneList = out.stdout.split("\n");
-    });
-  }
-
-  setSystemLanguages() async {
-    var str = await File("/etc/locale.gen").readAsString();
-    var splitted = str.split("\n");
-    List<String> rez = [];
-    for (var element in splitted) {
-      element = element.replaceAll("#", '').trim();
-      if (element != '') {
-        rez.add(element.split(" ")[0]);
-      }
-      if (element.startsWith("and is incl")) {
-        rez = [];
-        continue;
-      }
-    }
-    setState(() {
-      systemLanguages = rez;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setKeyboardLanguages();
-      setTimezoneList();
-      setSystemLanguages();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +52,7 @@ class _LanguageContentState extends State<LanguageContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FleuDropdown(
-                    items: systemLanguages,
+                    items: widget.systemLanguages,
                     label: 'System language',
                     onChanged: (v) async {
                       var prefs = await SharedPreferences.getInstance();
@@ -111,7 +60,7 @@ class _LanguageContentState extends State<LanguageContent> {
                     },
                   ),
                   FleuDropdown(
-                    items: keyboardLanguages,
+                    items: widget.keyboardLanguages,
                     label: 'Keyboard layout',
                     onChanged: (v) async {
                       var prefs = await SharedPreferences.getInstance();
@@ -119,7 +68,7 @@ class _LanguageContentState extends State<LanguageContent> {
                     },
                   ),
                   FleuDropdown(
-                    items: timezoneList,
+                    items: widget.timezoneList,
                     label: 'Timezone',
                     onChanged: (v) async {
                       var prefs = await SharedPreferences.getInstance();

@@ -1,11 +1,61 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
+import 'package:installer/utils/senderr.dart';
+import 'package:installer/utils/syscall.dart';
 import 'package:window_manager/window_manager.dart';
 
-class WelcomeContent extends StatelessWidget {
+class WelcomeContent extends StatefulWidget {
   const WelcomeContent({super.key});
+
+  @override
+  State<WelcomeContent> createState() => _WelcomeContentState();
+}
+
+class _WelcomeContentState extends State<WelcomeContent> {
+  List<String> keyboardLanguages = [];
+  List<String> systemLanguages = [];
+  List<String> timezoneList = [];
+
+  setParams() async {
+    var kmaps = await syscall("localectl --no-pager list-keymaps");
+    if (kmaps.error) {
+      sendErr("stderr: ${kmaps.stderr} / ${kmaps.stdout}");
+      return;
+    }
+    var tdctl = await syscall("timedatectl --no-pager list-timezones");
+    if (tdctl.error) {
+      sendErr("stderr: ${kmaps.stderr} / ${kmaps.stdout}");
+      return;
+    }
+    var str = await File("/etc/locale.gen").readAsString();
+    var splitted = str.split("\n");
+    List<String> langs = [];
+    for (var element in splitted) {
+      element = element.replaceAll("#", '').trim();
+      if (element != '') {
+        langs.add(element.split(" ")[0]);
+      }
+      if (element.startsWith("and is incl")) {
+        langs = [];
+        continue;
+      }
+    }
+    setState(() {
+      keyboardLanguages = kmaps.stdout.split("\n");
+      systemLanguages = langs;
+      timezoneList = tdctl.stdout.split("\n");
+    });
+  }
+
+  @override
+  void initState() {
+    setParams();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +106,15 @@ class WelcomeContent extends StatelessWidget {
                 FleuTextButton(
                   text: "Install",
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LanguageContent(),
-                    ));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => LanguageContent(
+                          keyboardLanguages: keyboardLanguages,
+                          systemLanguages: systemLanguages,
+                          timezoneList: timezoneList,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
