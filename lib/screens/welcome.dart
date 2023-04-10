@@ -1,40 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:installer/components/buttons.dart';
+import 'package:installer/constants.dart';
+import 'package:installer/screens/language.dart';
+import 'package:window_manager/window_manager.dart';
 
 class WelcomeContent extends StatelessWidget {
   const WelcomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          "assets/fleuos.png",
-          height: MediaQuery.of(context).size.height * 0.36,
-        ),
-        const SizedBox(height: 24),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
-          child: const Text(
-            "Welcome to FleuOS",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/fleuos.png",
+              height: MediaQuery.of(context).size.height * 0.36,
             ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        const SizedBox(height: 24),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
-          child: const Text(
-            "Lets set up system parameters and run installation",
-            style: TextStyle(
-              color: Colors.white,
+            const SizedBox(height: 24),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: const Text(
+                "Welcome to FleuOS",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: const Text(
+                "You can test the system on this live ISO image, or run installation process.",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FleuTextButton(
+                  text: "Test system",
+                  onPressed: () {
+                    windowManager.destroy();
+                  },
+                ),
+                const SizedBox(width: 42),
+                FleuTextButton(
+                  text: "Install",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LanguageContent()),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

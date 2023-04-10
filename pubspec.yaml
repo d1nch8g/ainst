@@ -12,7 +12,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   dropdown_button2: ^2.0.0
   window_manager: ^0.3.2
-  introduction_slider: ^2.0.1
 
 dev_dependencies:
   flutter_test:

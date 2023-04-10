@@ -47,24 +47,6 @@ class ApplicationsContent extends StatelessWidget {
                   ],
                 ),
                 const Text(
-                  "Graphics",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    AppBox(appName: "blender"),
-                    AppBox(appName: "godot"),
-                    AppBox(appName: "krita"),
-                    AppBox(appName: "gimp"),
-                    AppBox(appName: "unreal"),
-                  ],
-                ),
-                const Text(
                   "Internet",
                   style: TextStyle(
                     color: Colors.white,
@@ -110,7 +92,7 @@ class ApplicationsContent extends StatelessWidget {
                   ],
                 ),
                 const Text(
-                  "Communication",
+                  "Graphics and editing",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -120,12 +102,21 @@ class ApplicationsContent extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    AppBox(appName: "telegram"),
-                    AppBox(appName: "mattermost"),
-                    AppBox(appName: "discord"),
-                    AppBox(appName: "slack"),
-                    AppBox(appName: "element"),
-                    AppBox(appName: "signal"),
+                    AppBox(appName: "blender"),
+                    AppBox(appName: "godot"),
+                    AppBox(appName: "krita"),
+                    AppBox(appName: "lunacy"),
+                    AppBox(appName: "audacity"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "kdenlive"),
+                    AppBox(appName: "openshot"),
+                    AppBox(appName: "gaphor"),
+                    AppBox(appName: "gimp"),
+                    AppBox(appName: "blockbench"),
                   ],
                 ),
                 const Text(
