@@ -14,17 +14,17 @@ class _AppBoxState extends State<AppBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: primaryColor,
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(18)),
           color: backgroundColor,
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+          padding: const EdgeInsets.fromLTRB(21, 6, 21, 6),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -32,17 +32,17 @@ class _AppBoxState extends State<AppBox> {
                 widget.appName,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 15,
+                  fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 9),
               Image.asset(
                 "assets/${widget.appName}.png",
-                width: 65,
-                height: 65,
+                width: 54,
+                height: 54,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 9),
               Checkbox(
                 value: checked,
                 focusColor: secondaryColor,

@@ -44,7 +44,6 @@ class ApplicationsContent extends StatelessWidget {
                     AppBox(appName: "onlyoffice"),
                     AppBox(appName: "wps-office"),
                     AppBox(appName: "open-office"),
-                    AppBox(appName: "gnome-office"),
                   ],
                 ),
                 const Text(
@@ -89,6 +88,25 @@ class ApplicationsContent extends StatelessWidget {
                     AppBox(appName: "gnome-web"),
                     AppBox(appName: "falkon"),
                     AppBox(appName: "tor"),
+                  ],
+                ),
+                const Text(
+                  "Communication",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    AppBox(appName: "telegram"),
+                    AppBox(appName: "mattermost"),
+                    AppBox(appName: "discord"),
+                    AppBox(appName: "slack"),
+                    AppBox(appName: "element"),
+                    AppBox(appName: "signal"),
                   ],
                 ),
                 const Text(
