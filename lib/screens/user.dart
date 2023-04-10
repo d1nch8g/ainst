@@ -19,7 +19,7 @@ class UserContent extends StatelessWidget {
               "assets/user.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 32),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
@@ -35,14 +35,14 @@ class UserContent extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   FlueTextField(
                     hint: "user",
                   ),
+                  SizedBox(width: 32),
                   FlueTextField(
-                    hint: "password",
-                    password: true,
+                    hint: "email",
                   ),
                 ],
               ),
@@ -51,11 +51,13 @@ class UserContent extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   FlueTextField(
-                    hint: "email",
+                    hint: "password",
+                    password: true,
                   ),
+                  SizedBox(width: 32),
                   FlueTextField(
                     hint: "confirm password",
                     password: true,
@@ -63,7 +65,7 @@ class UserContent extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

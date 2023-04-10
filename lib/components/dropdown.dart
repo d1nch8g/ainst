@@ -19,6 +19,7 @@ class FleuDropdown extends StatefulWidget {
 
 class _FleuDropdownState extends State<FleuDropdown> {
   String? selectedValue;
+  var controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,34 +35,30 @@ class _FleuDropdownState extends State<FleuDropdown> {
         ),
         const SizedBox(height: 16),
         DropdownButtonHideUnderline(
-          child: DropdownButton2(
+          child: DropdownButton2<String>(
             isExpanded: true,
-            hint: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    widget.items[0],
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+            hint: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Select Item',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
                 ),
-              ],
+              ),
             ),
             items: widget.items
-                .map((item) => DropdownMenuItem<String>(
+                .map((item) => DropdownMenuItem(
                       value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ))
                 .toList(),
@@ -73,45 +70,74 @@ class _FleuDropdownState extends State<FleuDropdown> {
               widget.onChanged(value!);
             },
             buttonStyleData: ButtonStyleData(
-              height: 50,
-              width: 160,
-              padding: const EdgeInsets.only(left: 14, right: 14),
+              height: 40,
+              width: 240,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: Colors.black26,
-                ),
-                color: primaryColor,
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                border: Border.all(color: primaryColor),
               ),
-              elevation: 2,
+              overlayColor: const MaterialStatePropertyAll(secondaryColor),
             ),
-            iconStyleData: const IconStyleData(
-              icon: Icon(
-                Icons.arrow_forward_ios_outlined,
+            dropdownStyleData: const DropdownStyleData(
+              maxHeight: 260,
+              decoration: BoxDecoration(
+                color: backgroundColor,
               ),
-              iconSize: 14,
-              iconEnabledColor: Colors.white,
-              iconDisabledColor: primaryColor,
             ),
-            dropdownStyleData: DropdownStyleData(
-                maxHeight: 200,
-                width: 200,
-                padding: null,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  color: primaryColor,
-                ),
-                elevation: 8,
-                offset: const Offset(-20, 0),
-                scrollbarTheme: ScrollbarThemeData(
-                  radius: const Radius.circular(40),
-                  thickness: MaterialStateProperty.all(6),
-                  thumbVisibility: MaterialStateProperty.all(true),
-                )),
             menuItemStyleData: const MenuItemStyleData(
               height: 40,
-              padding: EdgeInsets.only(left: 14, right: 14),
+              overlayColor: MaterialStatePropertyAll(secondaryColor),
             ),
+            dropdownSearchData: DropdownSearchData(
+              searchController: controller,
+              searchInnerWidgetHeight: 50,
+              searchInnerWidget: Container(
+                height: 50,
+                padding: const EdgeInsets.only(
+                  top: 8,
+                  bottom: 4,
+                  right: 8,
+                  left: 8,
+                ),
+                child: TextFormField(
+                  expands: true,
+                  maxLines: null,
+                  autofocus: true,
+                  controller: controller,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    focusColor: primaryColor,
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryColor),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
+                    hintText: 'Search for an item...',
+                    hintStyle: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+              searchMatchFn: (item, searchValue) {
+                return (item.value.toString().contains(searchValue));
+              },
+            ),
+            onMenuStateChange: (isOpen) {
+              if (!isOpen) {
+                controller.clear();
+              }
+            },
           ),
         ),
       ],

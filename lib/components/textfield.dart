@@ -20,6 +20,10 @@ class FlueTextField extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: primaryColor),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           filled: true,
           hintStyle: const TextStyle(color: Colors.white),
           hintText: hint,
