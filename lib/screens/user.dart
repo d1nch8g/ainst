@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
+import 'package:installer/components/notification.dart';
 import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/disk.dart';
 
 class UserContent extends StatelessWidget {
-  const UserContent({super.key});
+  UserContent({super.key});
+
+  final userController = TextEditingController();
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
+  final confpassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +42,15 @@ class UserContent extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.65,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   FlueTextField(
                     hint: "user",
+                    controller: userController,
                   ),
-                  SizedBox(width: 32),
+                  const SizedBox(width: 32),
                   FlueTextField(
                     hint: "email",
+                    controller: emailController,
                   ),
                 ],
               ),
@@ -52,15 +60,17 @@ class UserContent extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.65,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   FlueTextField(
                     hint: "password",
                     password: true,
+                    controller: passController,
                   ),
-                  SizedBox(width: 32),
+                  const SizedBox(width: 32),
                   FlueTextField(
                     hint: "confirm password",
                     password: true,
+                    controller: confpassController,
                   ),
                 ],
               ),
@@ -79,6 +89,18 @@ class UserContent extends StatelessWidget {
                 FleuTextButton(
                   text: "Next",
                   onPressed: () {
+                    if (passController.text != confpassController.text) {
+                      showBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return const NotificationPopup(
+                            message: "Passwords does not match",
+                            icon: Icons.error,
+                          );
+                        },
+                      );
+                      return;     
+                    }
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const DiskContent(),
                     ));

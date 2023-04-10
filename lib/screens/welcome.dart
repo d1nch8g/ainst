@@ -57,7 +57,7 @@ class WelcomeContent extends StatelessWidget {
                   text: "Install",
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LanguageContent(),
+                      builder: (context) => LanguageContent(),
                     ));
                   },
                 ),

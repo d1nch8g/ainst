@@ -4,9 +4,11 @@ import 'package:installer/constants.dart';
 class FlueTextField extends StatelessWidget {
   final String hint;
   final bool password;
+  final TextEditingController controller;
   const FlueTextField({
     super.key,
     required this.hint,
+    required this.controller,
     this.password = false,
   });
 
@@ -15,6 +17,7 @@ class FlueTextField extends StatelessWidget {
     return SizedBox(
       width: 280,
       child: TextFormField(
+        controller: controller,
         obscureText: password,
         decoration: InputDecoration(
           border: OutlineInputBorder(
