@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/components/dropdown.dart';
 import 'package:installer/constants.dart';
+import 'package:installer/screens/user.dart';
 
 class LanguageContent extends StatefulWidget {
   const LanguageContent({super.key});
@@ -85,11 +86,9 @@ class _LanguageContentState extends State<LanguageContent> {
                 FleuTextButton(
                   text: "Next",
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LanguageContent()),
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const UserContent(),
+                    ));
                   },
                 ),
               ],

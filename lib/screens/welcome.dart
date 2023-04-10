@@ -56,11 +56,9 @@ class WelcomeContent extends StatelessWidget {
                 FleuTextButton(
                   text: "Install",
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LanguageContent()),
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LanguageContent(),
+                    ));
                   },
                 ),
               ],
