@@ -48,7 +48,7 @@ class DiskContent extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FleuDropdown(
+                  FleuBaseDropdown(
                     label: 'Installation disk',
                     items: const [
                       '/dev/sda',
@@ -56,12 +56,12 @@ class DiskContent extends StatelessWidget {
                     ],
                     onChanged: (v) {},
                   ),
-                  FleuDropdown(
-                    label: 'Type of filesystem',
+                  FleuBaseDropdown(
+                    label: 'File system type',
                     items: const [
                       'ext4',
+                      'FAT32',
                       'btrfs',
-                      'fat32',
                     ],
                     onChanged: (v) {},
                   ),
