@@ -1,11 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/components/dropdown.dart';
+import 'package:installer/components/notification.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/installation.dart';
+import 'package:installer/utils/senderr.dart';
+import 'package:installer/utils/syscall.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class DiskContent extends StatelessWidget {
+class DiskContent extends StatefulWidget {
   const DiskContent({super.key});
+
+  @override
+  State<DiskContent> createState() => _DiskContentState();
+}
+
+class _DiskContentState extends State<DiskContent> {
+  List<String> disks = ["/dev/sda"];
+
+  setDisks() async {
+    disks = [];
+    var rez = await syscall("lsblk");
+    if (rez.error) {
+      sendErr("stdout: ${rez.stdout}, stderr: ${rez.stderr}");
+    }
+    for (var line in rez.stdout.split("\n")) {
+      if (line.contains("disk") && !line.contains("SWAP")) {
+        var name = line.replaceAll(RegExp(" +"), " ").split(" ")[0];
+        var size = line.replaceAll(RegExp(" +"), " ").split(" ")[3];
+        setState(() {
+          disks.add("${name} - ${size}");
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setDisks();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,37 +67,17 @@ class DiskContent extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.52,
-              child: const Text(
-                "Type of filesystem should be chosen depending on type of hard drive you have and it's specs. Default option is 'ext4', but for SSD drives consider using 'btrfs'",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FleuBaseDropdown(
                     label: 'Installation disk',
-                    items: const [
-                      '/dev/sda',
-                      '/dev/sdb',
-                    ],
-                    onChanged: (v) {},
-                  ),
-                  FleuBaseDropdown(
-                    label: 'File system type',
-                    items: const [
-                      'ext4',
-                      'FAT32',
-                      'btrfs',
-                    ],
-                    onChanged: (v) {},
+                    items: disks,
+                    onChanged: (value) async {
+                      var prefs = await SharedPreferences.getInstance();
+                      prefs.setString("disk", value);
+                    },
                   ),
                 ],
               ),
@@ -79,19 +93,46 @@ class DiskContent extends StatelessWidget {
                   },
                 ),
                 const SizedBox(width: 42),
-                FleuTextButton(
-                  text: "Next",
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const InstallationContent(),
-                    ));
-                  },
-                ),
+                const DiskCheckButton(),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class DiskCheckButton extends StatelessWidget {
+  const DiskCheckButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FleuTextButton(
+      text: "Next",
+      onPressed: () async {
+        var prefs = await SharedPreferences.getInstance();
+        if (prefs.getString("disk") == null) {
+          // ignore: use_build_context_synchronously
+          showBottomSheet(
+            context: context,
+            builder: (context) {
+              return const NotificationPopup(
+                message: "Choose at least one disk for installtion",
+                icon: Icons.error,
+                duration: Duration(milliseconds: 1342),
+              );
+            },
+          );
+          return;
+        }
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const InstallationContent(),
+        ));
+      },
     );
   }
 }

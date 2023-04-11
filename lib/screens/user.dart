@@ -4,6 +4,7 @@ import 'package:installer/components/notification.dart';
 import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/disk.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserContent extends StatelessWidget {
   UserContent({super.key});
@@ -114,6 +115,19 @@ class UserCheckButton extends StatelessWidget {
     required this.confpassController,
   });
 
+  setParams({
+    required String user,
+    required String email,
+    required String pass,
+    required String confpass,
+  }) async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString("user", user);
+    prefs.setString("email", email);
+    prefs.setString("pass", pass);
+    prefs.setString("confpass", confpass);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FleuTextButton(
@@ -162,6 +176,12 @@ class UserCheckButton extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const DiskContent(),
         ));
+        setParams(
+          user: userController.text,
+          email: emailController.text,
+          pass: passController.text,
+          confpass: confpassController.text,
+        );
       },
     );
   }
