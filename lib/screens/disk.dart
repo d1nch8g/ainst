@@ -29,7 +29,7 @@ class _DiskContentState extends State<DiskContent> {
         var name = line.replaceAll(RegExp(" +"), " ").split(" ")[0];
         var size = line.replaceAll(RegExp(" +"), " ").split(" ")[3];
         setState(() {
-          disks.add("${name} - ${size}");
+          disks.add("$name - $size");
         });
       }
     }
