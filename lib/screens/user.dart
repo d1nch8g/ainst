@@ -126,12 +126,10 @@ class UserCheckButton extends StatelessWidget {
               return const NotificationPopup(
                 message: "Password does not match",
                 icon: Icons.error,
+                duration: Duration(milliseconds: 1342),
               );
             },
           );
-          Future.delayed(const Duration(milliseconds: 2382), () {
-            Navigator.pop(context);
-          });
           return;
         }
         if (userController.text.length < 3) {
@@ -141,12 +139,10 @@ class UserCheckButton extends StatelessWidget {
               return const NotificationPopup(
                 message: "Username is too short",
                 icon: Icons.error,
+                duration: Duration(milliseconds: 1342),
               );
             },
           );
-          Future.delayed(const Duration(milliseconds: 2382), () {
-            Navigator.pop(context);
-          });
           return;
         }
         if (!emailController.text.contains("@") ||
@@ -157,12 +153,10 @@ class UserCheckButton extends StatelessWidget {
               return const NotificationPopup(
                 message: "Email is incorrect.",
                 icon: Icons.error,
+                duration: Duration(milliseconds: 1342),
               );
             },
           );
-          Future.delayed(const Duration(milliseconds: 2382), () {
-            Navigator.pop(context);
-          });
           return;
         }
         Navigator.of(context).push(MaterialPageRoute(

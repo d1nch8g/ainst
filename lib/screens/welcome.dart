@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
-import 'package:installer/utils/senderr.dart';
-import 'package:installer/utils/syscall.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 class WelcomeContent extends StatefulWidget {
@@ -16,45 +13,15 @@ class WelcomeContent extends StatefulWidget {
 }
 
 class _WelcomeContentState extends State<WelcomeContent> {
-  List<String> keyboardLanguages = [];
-  List<String> systemLanguages = [];
-  List<String> timezoneList = [];
-
-  setParams() async {
-    var kmaps = await syscall("localectl --no-pager list-keymaps");
-    if (kmaps.error) {
-      sendErr("stderr: ${kmaps.stderr} / ${kmaps.stdout}");
-      return;
-    }
-    var tdctl = await syscall("timedatectl --no-pager list-timezones");
-    if (tdctl.error) {
-      sendErr("stderr: ${kmaps.stderr} / ${kmaps.stdout}");
-      return;
-    }
-    var str = await File("/etc/locale.gen").readAsString();
-    var splitted = str.split("\n");
-    List<String> langs = [];
-    for (var element in splitted) {
-      element = element.replaceAll("#", '').trim();
-      if (element != '') {
-        langs.add(element.split(" ")[0]);
-      }
-      if (element.startsWith("and is incl")) {
-        langs = [];
-        continue;
-      }
-    }
-    setState(() {
-      keyboardLanguages = kmaps.stdout.split("\n");
-      systemLanguages = langs;
-      timezoneList = tdctl.stdout.split("\n");
-    });
+  cleanPrefs() async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 
   @override
   void initState() {
-    setParams();
     super.initState();
+    cleanPrefs();
   }
 
   @override
@@ -108,11 +75,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => LanguageContent(
-                          keyboardLanguages: keyboardLanguages,
-                          systemLanguages: systemLanguages,
-                          timezoneList: timezoneList,
-                        ),
+                        builder: (context) => const LanguageContent(),
                       ),
                     );
                   },

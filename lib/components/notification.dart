@@ -2,14 +2,29 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class NotificationPopup extends StatelessWidget {
+class NotificationPopup extends StatefulWidget {
   final String message;
   final IconData icon;
+  final Duration duration;
   const NotificationPopup({
     super.key,
     required this.message,
     required this.icon,
+    required this.duration,
   });
+
+  @override
+  State<NotificationPopup> createState() => _NotificationPopupState();
+}
+
+class _NotificationPopupState extends State<NotificationPopup> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(widget.duration, () {
+      Navigator.pop(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +50,13 @@ class NotificationPopup extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                icon,
+                widget.icon,
                 size: 24,
                 color: Colors.white,
               ),
               const SizedBox(width: 8),
               Text(
-                message,
+                widget.message,
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,

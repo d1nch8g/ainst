@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:installer/constants.dart';
 
-class FleuDropdown extends StatefulWidget {
+class FleuSearchDropdown extends StatefulWidget {
   final String label;
   final List<String> items;
   final void Function(String) onChanged;
-  const FleuDropdown({
+  const FleuSearchDropdown({
     super.key,
     required this.items,
     required this.onChanged,
@@ -14,10 +14,10 @@ class FleuDropdown extends StatefulWidget {
   });
 
   @override
-  State<FleuDropdown> createState() => _FleuDropdownState();
+  State<FleuSearchDropdown> createState() => _FleuSearchDropdownState();
 }
 
-class _FleuDropdownState extends State<FleuDropdown> {
+class _FleuSearchDropdownState extends State<FleuSearchDropdown> {
   String? selectedValue;
   var controller = TextEditingController();
 
