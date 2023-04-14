@@ -1,3 +1,7 @@
+.PHONY: package
+package:
+
+
 .PHONY: build
 build:
 	flutter build linux
