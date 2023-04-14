@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=System Install
+GenericName=System Install
+Comment=System Install
+Exec=/bin/ymp %U
+Icon=/assets/installer.png
+Type=Application

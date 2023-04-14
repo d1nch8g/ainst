@@ -20,5 +20,5 @@ makedepends=()
 checks=("skip")
 
 package() {
-  install $pkgdir/usr/bin/installer
+  install -Dm744 ./ $pkgdir/usr/bin/gnome-archinstall/**
 }
