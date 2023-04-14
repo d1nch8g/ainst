@@ -54,7 +54,7 @@ class LanguageContent extends StatelessWidget {
                     label: 'Keyboard layout',
                     onChanged: (layout) async {
                       var prefs = await SharedPreferences.getInstance();
-                      prefs.setString("keyboardlang", kbLayouts[layout]!);
+                      prefs.setString("kblayout", kbLayouts[layout]!);
                     },
                   ),
                   FleuSearchDropdown(
@@ -114,7 +114,7 @@ class LanguageCheckButton extends StatelessWidget {
           );
           return;
         }
-        if (prefs.getString("keyboardlang") == null) {
+        if (prefs.getString("kblayout") == null) {
           // ignore: use_build_context_synchronously
           showBottomSheet(
             context: context,

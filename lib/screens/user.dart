@@ -101,12 +101,10 @@ class UserCheckButton extends StatelessWidget {
   setParams({
     required String user,
     required String pass,
-    required String confpass,
   }) async {
     var prefs = await SharedPreferences.getInstance();
     prefs.setString("user", user);
     prefs.setString("pass", pass);
-    prefs.setString("confpass", confpass);
   }
 
   @override
@@ -146,7 +144,6 @@ class UserCheckButton extends StatelessWidget {
         setParams(
           user: userController.text,
           pass: passController.text,
-          confpass: confpassController.text,
         );
       },
     );
