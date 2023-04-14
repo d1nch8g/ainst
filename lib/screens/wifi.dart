@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
+import 'package:installer/components/notification.dart';
+import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
+import 'package:installer/screens/language.dart';
 import 'package:installer/utils/connect.dart';
 
 class WifiContent extends StatefulWidget {
@@ -20,24 +23,40 @@ class _WifiContentState extends State<WifiContent> {
     var list = await netscan();
     List<Widget> updatedWifis = [];
     for (var wifi in list) {
-      updatedWifis.add(IconButton(
-        onPressed: () {},
-        icon: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(width: 24),
-            const Icon(
-              Icons.wifi,
-              color: Colors.white,
-            ),
-            const SizedBox(width: 24),
-            Text(
-              wifi,
-              style: const TextStyle(
+      updatedWifis.add(TextButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            barrierColor: Colors.black.withOpacity(0.55),
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: backgroundColor,
+                title: ConnectWidget(
+                  name: wifi,
+                ),
+              );
+            },
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(width: 24),
+              const Icon(
+                Icons.wifi,
                 color: Colors.white,
               ),
-            ),
-          ],
+              const SizedBox(width: 24),
+              Text(
+                wifi,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ));
     }
@@ -120,6 +139,123 @@ class _WifiContentState extends State<WifiContent> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ConnectWidget extends StatefulWidget {
+  final String name;
+  ConnectWidget({super.key, required this.name});
+
+  @override
+  State<ConnectWidget> createState() => _ConnectWidgetState();
+}
+
+class _ConnectWidgetState extends State<ConnectWidget> {
+  final TextEditingController controller = TextEditingController();
+  Widget placeholder = SizedBox(
+    height: 54,
+    child: FlueTextField(
+      hint: "password",
+      controller: TextEditingController(),
+      password: true,
+    ),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      placeholder = SizedBox(
+        height: 54,
+        child: FlueTextField(
+          hint: "password",
+          controller: controller,
+          password: true,
+        ),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            "Enter wifi password",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 622),
+            child: placeholder,
+          ),
+          const SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FleuTextButton(
+                text: "Close",
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              const SizedBox(width: 42),
+              FleuTextButton(
+                text: "Connect",
+                onPressed: () async {
+                  setState(() {
+                    placeholder = const SpinKitChasingDots(
+                      color: Colors.white,
+                      size: 54,
+                    );
+                  });
+                  var rez = await netconnect(widget.name, controller.text);
+                  if (rez) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LanguageContent(),
+                      ),
+                    );
+                    return;
+                  } else {
+                    setState(() {
+                      placeholder = const SizedBox(
+                        height: 54,
+                        child: Text(
+                          "Wrong password",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                      Future.delayed(const Duration(milliseconds: 1234), () {
+                        setState(() {
+                          placeholder = SizedBox(
+                            height: 54,
+                            child: FlueTextField(
+                              hint: "password",
+                              controller: controller,
+                              password: true,
+                            ),
+                          );
+                        });
+                      });
+                    });
+                  }
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
