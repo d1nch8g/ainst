@@ -10,7 +10,6 @@ class UserContent extends StatelessWidget {
   UserContent({super.key});
 
   final userController = TextEditingController();
-  final emailController = TextEditingController();
   final passController = TextEditingController();
   final confpassController = TextEditingController();
 
@@ -50,19 +49,6 @@ class UserContent extends StatelessWidget {
                   ),
                   const SizedBox(width: 32),
                   FlueTextField(
-                    hint: "email",
-                    controller: emailController,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.65,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FlueTextField(
                     hint: "password",
                     password: true,
                     controller: passController,
@@ -89,7 +75,6 @@ class UserContent extends StatelessWidget {
                 const SizedBox(width: 42),
                 UserCheckButton(
                   userController: userController,
-                  emailController: emailController,
                   passController: passController,
                   confpassController: confpassController,
                 )
@@ -104,26 +89,22 @@ class UserContent extends StatelessWidget {
 
 class UserCheckButton extends StatelessWidget {
   final TextEditingController userController;
-  final TextEditingController emailController;
   final TextEditingController passController;
   final TextEditingController confpassController;
   const UserCheckButton({
     super.key,
     required this.userController,
-    required this.emailController,
     required this.passController,
     required this.confpassController,
   });
 
   setParams({
     required String user,
-    required String email,
     required String pass,
     required String confpass,
   }) async {
     var prefs = await SharedPreferences.getInstance();
     prefs.setString("user", user);
-    prefs.setString("email", email);
     prefs.setString("pass", pass);
     prefs.setString("confpass", confpass);
   }
@@ -159,26 +140,11 @@ class UserCheckButton extends StatelessWidget {
           );
           return;
         }
-        if (!emailController.text.contains("@") ||
-            !emailController.text.contains(".")) {
-          showBottomSheet(
-            context: context,
-            builder: (context) {
-              return const NotificationPopup(
-                message: "Email is incorrect.",
-                icon: Icons.error,
-                duration: Duration(milliseconds: 1342),
-              );
-            },
-          );
-          return;
-        }
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const DiskContent(),
         ));
         setParams(
           user: userController.text,
-          email: emailController.text,
           pass: passController.text,
           confpass: confpassController.text,
         );
