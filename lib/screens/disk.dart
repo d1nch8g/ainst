@@ -76,7 +76,7 @@ class _DiskContentState extends State<DiskContent> {
                     items: disks,
                     onChanged: (value) async {
                       var prefs = await SharedPreferences.getInstance();
-                      prefs.setString("disk", value);
+                      prefs.setString("disk", value.split(" ")[0]);
                     },
                   ),
                 ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
+import 'package:installer/utils/install.dart';
 
 class InstallationContent extends StatefulWidget {
   const InstallationContent({super.key});
@@ -11,6 +13,49 @@ class InstallationContent extends StatefulWidget {
 
 class _InstallationContentState extends State<InstallationContent> {
   Widget placeholder = Container();
+
+  runInstall() {
+    setState(() {
+      placeholder = Column(
+        key: UniqueKey(),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SpinKitRipple(
+            color: Colors.white,
+            size: MediaQuery.of(context).size.height * 0.36,
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "Installing the system...",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "That should take a couple minutes, relax",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          const FleuTextButton(
+            text: "Reboot",
+          ),
+        ],
+      );
+    });
+    writeConfigurations();          
+  }
 
   @override
   void initState() {
@@ -51,7 +96,9 @@ class _InstallationContentState extends State<InstallationContent> {
             const SizedBox(height: 24),
             FleuTextButton(
               text: "Run",
-              onPressed: () {},
+              onPressed: () {
+                runInstall();
+              },
             ),
           ],
         );

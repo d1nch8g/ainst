@@ -15,7 +15,7 @@ class FlueTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 280,
+      width: 220,
       child: TextFormField(
         controller: controller,
         obscureText: password,

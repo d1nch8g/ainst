@@ -11,7 +11,7 @@ writeConfigurations() async {
   var kblayout = prefs.getString("kblayout");
   var timezone = prefs.getString("timezone");
 
-  var credsFile = File("~/creds.json");
+  var credsFile = File("/root/creds.json");
   credsFile = await credsFile.writeAsString('''{
   "!root-password": "$pass",
   "!users": [
@@ -23,7 +23,7 @@ writeConfigurations() async {
   ]
 }''');
 
-  var diskFile = File("~/disk.json");
+  var diskFile = File("/root/disk.json");
   diskFile = await diskFile.writeAsString('''{
   "/dev/$disk": {
     "partitions": [
@@ -90,7 +90,7 @@ writeConfigurations() async {
   }
 }''');
 
-  var configFile = File("~/config.json");
+  var configFile = File("/root/config.json");
   configFile = await configFile.writeAsString('''{
   "additional-repositories": ["multilib"],
   "audio": "pipewire",
@@ -101,6 +101,8 @@ writeConfigurations() async {
   "harddrives": ["/dev/$disk"],
   "hostname": "fleuos-$user",
   "keyboard-layout": "$kblayout",
+  "sys-language": "$syslang",
+  "timezone": "$timezone",
   "bootloader": "systemd-bootctl",
   "nic": {
     "dhcp": true,
@@ -164,8 +166,6 @@ writeConfigurations() async {
   "silent": false,
   "swap": false,
   "sys-encoding": "UTF-8",
-  "sys-language": "$syslang",
-  "timezone": "$timezone",
   "version": "2.5.5"
 }''');
 }
