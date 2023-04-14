@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/utils/install.dart';
+import 'package:installer/utils/syscall.dart';
 
 class InstallationContent extends StatefulWidget {
   const InstallationContent({super.key});
@@ -14,7 +15,7 @@ class InstallationContent extends StatefulWidget {
 class _InstallationContentState extends State<InstallationContent> {
   Widget placeholder = Container();
 
-  runInstall() {
+  runInstall() async {
     setState(() {
       placeholder = Column(
         key: UniqueKey(),
@@ -47,14 +48,69 @@ class _InstallationContentState extends State<InstallationContent> {
               textAlign: TextAlign.center,
             ),
           ),
+          const SizedBox(height: 88),
+        ],
+      );
+    });
+    await writeConfigurations();
+    var rez = await installSystem();
+    if (rez != "ok") {
+      setState(() {
+        placeholder = SizedBox(
+          width: MediaQuery.of(context).size.width * 0.65,
+          height: MediaQuery.of(context).size.height * 0.85,
+          child: SingleChildScrollView(
+            child: Text(
+              rez,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      });
+      return;
+    }
+    setState(() {
+      placeholder = Column(
+        key: UniqueKey(),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/restart.png",
+            height: MediaQuery.of(context).size.height * 0.36,
+          ),
           const SizedBox(height: 24),
-          const FleuTextButton(
-            text: "Reboot",
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "Complete",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "Reboot the system",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          FleuTextButton(
+            text: "Run",
+            onPressed: () {
+              syscall("reboot ''");
+            },
           ),
         ],
       );
     });
-    writeConfigurations();          
   }
 
   @override

@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:installer/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-writeConfigurations() async {
+Future writeConfigurations() async {
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
   var pass = prefs.getString("pass")!;
@@ -168,4 +169,38 @@ writeConfigurations() async {
   "sys-encoding": "UTF-8",
   "version": "2.5.5"
 }''');
+}
+
+Future<String> installSystem() async {
+  var prefs = await SharedPreferences.getInstance();
+  var user = prefs.getString("user")!;
+
+  var callList = [
+    "archinstall --silent --disk_layouts disk.json --config config.json --creds creds.json",
+    "cp /etc/os-release /mnt/archinstall/etc/os-release",
+    "cp /etc/pacman.conf /mnt/archinstall/etc/pacman.conf",
+    "cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user",
+    "mkdir -p /mnt/archinstall/etc/dconf/db/local.d",
+    "cp /etc/dconf/db/local.d/00-settings /mnt/archinstall/etc/dconf/db/local.d/00-settings",
+    "mkdir -p /mnt/archinstall/etc/dconf/profile",
+    "cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user",
+    "sed -i 's/timeout 3/timeout 0/g' /mnt/archinstall/boot/loader/loader.conf",
+    "sed -i 's|/bin/bash|/usr/bin/zsh|g' /mnt/archinstall/etc/passwd",
+    "cp -R /root/* /mnt/archinstall/home/$user",
+    "cp -R /root/.[^.]* /mnt/archinstall/home/$user",
+    "chmod a+rwx -R /mnt/archinstall/home/$user",
+    "mkdir -p /mnt/archinstall/usr/local/share/backgrounds",
+    "cp /usr/local/share/backgrounds/wallpaper.jpg /mnt/archinstall/usr/local/share/backgrounds/wallpaper.jpg",
+    "cp /usr/local/share/backgrounds/fleu-linux.png /mnt/archinstall/usr/local/share/backgrounds/fleu-linux.png",
+    "arch-chroot /mnt/archinstall pacman -R --noconfirm epiphany gnome-music gnome-console",
+    "arch-chroot /mnt/archinstall dconf update",
+  ];
+
+  for (var call in callList) {
+    var rez = await syscall(call);
+    if (rez.error) {
+      return "Unable to execute call: $call \n ${rez.stdout}${rez.stderr}";
+    }
+  }
+  return "ok";
 }
