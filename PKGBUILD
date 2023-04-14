@@ -30,6 +30,6 @@ build() {
 }
 
 package() {
-  install -Dm744 $srcdir/gnome-archinstall/build/linux/x64/release/bundle/installer $pkgdir/usr/bin/installer
-  # install -Dm744 $srcdir/gnome-archinstall/installer.desktop $pkgdir/usr/share/applications/installer.desktop
+  install -Dm744 $srcdir/gnome-archinstall/build/linux/x64/release/bundle/installer $pkgdir/lib/installer/installer
+  install -Dm744 $srcdir/gnome-archinstall/installer.desktop $pkgdir/usr/share/applications/installer.desktop
 }
