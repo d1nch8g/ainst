@@ -26,5 +26,6 @@ build() {
 }
 
 package() {
-  cp -R $srcdir/gnome-archinstall/build/linux/x64/release/bundle/** $pkgdir/lib/installer
+  mkdir -p $pkgdir/gnome-archinstall/lib/installer
+  cp -R $srcdir/gnome-archinstall/build/linux/x64/release/bundle/** $pkgdir/gnome-archinstall/lib/installer
 }
