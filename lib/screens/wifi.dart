@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
+import 'package:installer/utils/connect.dart';
 
 class WifiContent extends StatefulWidget {
   const WifiContent({super.key});
@@ -10,6 +12,46 @@ class WifiContent extends StatefulWidget {
 }
 
 class _WifiContentState extends State<WifiContent> {
+  List<Widget> wifibuttons = [
+    const SpinKitCircle(color: Colors.white),
+  ];
+
+  updateWifiList() async {
+    var list = await netscan();
+    List<Widget> updatedWifis = [];
+    for (var wifi in list) {
+      updatedWifis.add(IconButton(
+        onPressed: () {},
+        icon: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(width: 24),
+            const Icon(
+              Icons.wifi,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 24),
+            Text(
+              wifi,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ));
+    }
+    setState(() {
+      wifibuttons = updatedWifis;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updateWifiList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +95,9 @@ class _WifiContentState extends State<WifiContent> {
               ),
               width: MediaQuery.of(context).size.width * 0.35,
               height: MediaQuery.of(context).size.height * 0.44,
+              child: ListView(
+                children: wifibuttons,
+              ),
             ),
             const SizedBox(height: 24),
             Row(

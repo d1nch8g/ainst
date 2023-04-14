@@ -7,7 +7,7 @@ Future<bool> netcheck() async {
 }
 
 Future<List<String>> netscan() async {
-  var rez = await syscall("nmcli -c no -m multiline device wifi list  ");
+  var rez = await syscall("nmcli -c no -m multiline device wifi list");
   List<String> results = [];
   if (rez.error) {
     return [];
