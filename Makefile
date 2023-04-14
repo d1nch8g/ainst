@@ -1,3 +1,6 @@
+.PHONY: build
+build:
+	flutter build linux
 
 .PHONY: test
 test:
