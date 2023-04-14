@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
+import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
+import 'package:installer/screens/wifi.dart';
+import 'package:installer/utils/connect.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -13,15 +16,49 @@ class WelcomeContent extends StatefulWidget {
 }
 
 class _WelcomeContentState extends State<WelcomeContent> {
+  Widget connectWidget = const FleuTextButton(text: "Install");
+
   cleanPrefs() async {
     var prefs = await SharedPreferences.getInstance();
     prefs.clear();
+  }
+
+  checkConn() async {
+    var connected = await netcheck();
+    if (connected) {
+      setState(() {
+        connectWidget = FleuTextButton(
+          text: "Install",
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const LanguageContent(),
+              ),
+            );
+          },
+        );
+      });
+      return;
+    }
+    setState(() {
+      connectWidget = FleuTextButton(
+        text: "Install",
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const WifiContent(),
+            ),
+          );
+        },
+      );
+    });
   }
 
   @override
   void initState() {
     super.initState();
     cleanPrefs();
+    checkConn();
   }
 
   @override
@@ -70,16 +107,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
                   },
                 ),
                 const SizedBox(width: 42),
-                FleuTextButton(
-                  text: "Install",
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const LanguageContent(),
-                      ),
-                    );
-                  },
-                ),
+                connectWidget,
               ],
             ),
           ],

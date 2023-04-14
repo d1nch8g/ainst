@@ -1,12 +1,12 @@
 import 'package:installer/utils/syscall.dart';
 
 // Returns true if it's ok
-Future<bool> check() async {
+Future<bool> netcheck() async {
   var rez = await syscall("ping -c 2 yandex.ru");
   return !rez.error;
 }
 
-Future<List<String>> scan() async {
+Future<List<String>> netscan() async {
   var rez = await syscall("nmcli -c no -m multiline device wifi list  ");
   List<String> results = [];
   if (rez.error) {
@@ -25,7 +25,7 @@ Future<List<String>> scan() async {
 }
 
 // Returns true if it's ok
-Future<bool> connect(String net, String pass) async {
+Future<bool> netconnect(String net, String pass) async {
   var rez = await syscall("nmcli device wifi connect $net password $pass");
   return !rez.error;
 }
