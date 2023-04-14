@@ -18,6 +18,10 @@ class _WifiContentState extends State<WifiContent> {
   List<Widget> wifibuttons = [
     const SpinKitCircle(color: Colors.white),
   ];
+  Widget currImg = Image.asset(
+    "assets/wifi.png",
+    height: 96,
+  );
 
   updateWifiList() async {
     var list = await netscan();
@@ -33,6 +37,14 @@ class _WifiContentState extends State<WifiContent> {
                 backgroundColor: backgroundColor,
                 title: ConnectWidget(
                   name: wifi,
+                  connectCallback: () {
+                    setState(() {
+                      currImg = Image.asset(
+                        "assets/check.png",
+                        height: MediaQuery.of(context).size.height * 0.12,
+                      );
+                    });
+                  },
                 ),
               );
             },
@@ -51,9 +63,7 @@ class _WifiContentState extends State<WifiContent> {
               const SizedBox(width: 24),
               Text(
                 wifi,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
+                style: const TextStyle(color: Colors.white),
               ),
             ],
           ),
@@ -79,9 +89,9 @@ class _WifiContentState extends State<WifiContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/wifi.png",
-              height: MediaQuery.of(context).size.height * 0.12,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 644),
+              child: currImg,
             ),
             const SizedBox(height: 24),
             SizedBox(
@@ -131,8 +141,16 @@ class _WifiContentState extends State<WifiContent> {
                 const SizedBox(width: 42),
                 FleuTextButton(
                   text: "Next",
-                  onPressed: () {
-                    Navigator.pop(context);
+                  onPressed: () async {
+                    var ok = await netcheck();
+                    if (ok) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LanguageContent(),
+                        ),
+                      );
+                    }
                   },
                 ),
               ],
@@ -146,7 +164,12 @@ class _WifiContentState extends State<WifiContent> {
 
 class ConnectWidget extends StatefulWidget {
   final String name;
-  ConnectWidget({super.key, required this.name});
+  final void Function() connectCallback;
+  const ConnectWidget({
+    super.key,
+    required this.name,
+    required this.connectCallback,
+  });
 
   @override
   State<ConnectWidget> createState() => _ConnectWidgetState();
@@ -220,11 +243,8 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                   var rez = await netconnect(widget.name, controller.text);
                   if (rez) {
                     // ignore: use_build_context_synchronously
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const LanguageContent(),
-                      ),
-                    );
+                    Navigator.pop(context);
+                    widget.connectCallback();
                     return;
                   } else {
                     setState(() {
