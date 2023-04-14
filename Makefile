@@ -1,9 +1,7 @@
-
-.PHONY: package
-package:
-	mkdir -p src
-	mkdir -p pkg
-	cp -R build/linux/x64/release/bundle/** src
+.PHONY: pkg
+pkg:
+	sudo rm -r src
+	sudo rm -r pkg
 	makepkg -s
 
 .PHONY: build

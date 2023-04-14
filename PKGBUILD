@@ -19,6 +19,12 @@ optdepends=(
 makedepends=()
 checks=("skip")
 
+build() {
+  git clone https://dancheg97.ru/dancheg97/gnome-archinstall
+  cd gnome-archinstall
+  make build
+}
+
 package() {
-  install -Dm744 ./ $pkgdir/usr/bin/gnome-archinstall/**
+  cp -R $srcdir/gnome-archinstall/build/linux/x64/release/bundle/** $pkgdir/lib/installer
 }
