@@ -7,15 +7,11 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    size: Size(800, 600),
-    center: true,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
+    title: "Install the system",
+    fullScreen: true,
     titleBarStyle: TitleBarStyle.hidden,
   );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.setFullScreen(true);
-  });
+  windowManager.waitUntilReadyToShow(windowOptions, () async {});
 
   runApp(const MyApp());
 }
