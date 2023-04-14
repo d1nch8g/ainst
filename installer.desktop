@@ -2,6 +2,6 @@
 Name=System Install
 GenericName=System Install
 Comment=System Install
-Exec=/bin/ymp %U
-Icon=/assets/installer.png
+Exec=/lib/installer/installer
+Icon=/lib/installer/data/flutter_assets/assets/installer.png
 Type=Application

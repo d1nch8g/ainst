@@ -1,7 +1,8 @@
 .PHONY: pkg
 pkg:
-	sudo rm -r src
-	sudo rm -r pkg
+	sudo rm -rf src
+	sudo rm -rf pkg
+	rm -f gnome-archinstall-1-1-x86_64.pkg.tar.zst
 	makepkg -s
 
 .PHONY: build

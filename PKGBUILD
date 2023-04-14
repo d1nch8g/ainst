@@ -16,7 +16,11 @@ optdepends=(
   'sudo: privilege elevation'
   'doas: privilege elevation'
 )
-makedepends=()
+makedepends=(
+  "flutter"
+  "clang"
+  "cmake"
+)
 checks=("skip")
 
 build() {
@@ -26,6 +30,6 @@ build() {
 }
 
 package() {
-  mkdir -p $pkgdir/gnome-archinstall/lib/installer
-  cp -R $srcdir/gnome-archinstall/build/linux/x64/release/bundle/** $pkgdir/gnome-archinstall/lib/installer
+  install -Dm744 $srcdir/gnome-archinstall/build/linux/x64/release/bundle/installer $pkgdir/lib/installer
+  install -Dm744 $srcdir/gnome-archinstall/gnome-archinstall.desktop $pkgdir/usr/share/applications/installer.desktop
 }
