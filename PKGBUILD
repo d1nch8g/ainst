@@ -33,20 +33,21 @@ sha1sums=(
 )
 
 package() {
-  cd "${srcdir}/fmnx-install-${pkgver}"
+  cd "${srcdir}/fmnx-install"
 
   flutter build linux
 
+  cd build/linux/x64/release/bundle
+
   # # Install app resources
-  # find . -type f -exec install -Dm644 {} "${pkgdir}/usr/share/ymp/{}" \;
+  find . -type f -exec install -Dm644 {} "${pkgdir}/usr/share/ymp/{}" \;
 
   # # Install bin
-  # install -Dm755 "${srcdir}/ymp.sh" "${pkgdir}/usr/bin/ymp"
+  install -Dm755 "${srcdir}/fmnx-install.sh" "${pkgdir}/usr/bin/fmnx-install"
 
   # # Install desktop
-  # install -Dm755 "${srcdir}/ymp.desktop" "${pkgdir}/usr/share/applications/ymp.desktop"
+  install -Dm755 "${srcdir}/fmnx-install.desktop" "${pkgdir}/usr/share/applications/fmnx-install.desktop"
 
   # # Install icon
-  # install -Dm644 "assets/icons/main_icon.png" "${pkgdir}/usr/share/icons/hicolor/128x128/apps/ymp.png"
-
+  install -Dm644 "data/flutter_assets/assets/installer.png" "${pkgdir}/usr/share/icons/hicolor/128x128/apps/fmnx-install.png"
 }
