@@ -36,6 +36,7 @@ package() {
   cd "${srcdir}/fmnx-install"
 
   flutter build linux
+  chmod a+rwx -R build/linux/x64/release/bundle
 
   cd build/linux/x64/release/bundle
 
