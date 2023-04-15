@@ -36,12 +36,11 @@ package() {
   cd "${srcdir}/fmnx-install"
 
   flutter build linux
-  chmod a+rwx -R build/linux/x64/release/bundle
 
   cd build/linux/x64/release/bundle
 
   # # Install app resources
-  find . -type f -exec install -Dm644 {} "${pkgdir}/usr/share/fmnx-install/{}" \;
+  find . -type f -exec install -Dm755 {} "${pkgdir}/usr/share/fmnx-install/{}" \;
 
   # # Install bin
   install -Dm755 "${srcdir}/fmnx-install.sh" "${pkgdir}/usr/bin/fmnx-install"
