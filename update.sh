@@ -4,9 +4,17 @@ echo "Enter new ver:"
 read newver
 sed -i "s|$pkgver|$newver|g" PKGBUILD
 
-git add .
-git commit -m $newver
-git tag -a $newver -m New release version
-git push
+cd ..
+tar -czf fmnx-install-v$newver.tar.gz fmnx-install
+mv fmnx-install-v$newver.tar.gz fmnx-install
+cd fmnx-install
 
-fmnx-install-v0.2.tar.gz
+tarsum=$(sha1sum  fmnx-install-v$newver.tar.gz)
+echo $tarsum
+read tarsum
+awk "{ if (NR == 30) print "$tarsum"; else print $0}" PKGBUILD > PKGBUILD
+
+git add .
+git commit -m v$newver
+git tag v$newver
+git push
