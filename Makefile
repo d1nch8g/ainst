@@ -1,7 +1,7 @@
 
 .PHONY: build
 build:
-	flutter build linux
+	sh update.sh
 
 .PHONY: test
 test:

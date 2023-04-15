@@ -185,7 +185,7 @@ Future<String> installSystem() async {
     "cp /etc/dconf/db/local.d/00-settings /mnt/archinstall/etc/dconf/db/local.d/00-settings",
     "mkdir -p /mnt/archinstall/etc/dconf/profile",
     "cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user",
-    "sed -i 's/timeout 3/timeout 0/g' /mnt/archinstall/boot/loader/loader.conf",
+    "sed -i 's/3/0/g' /mnt/archinstall/boot/loader/loader.conf",
     "sed -i 's|/bin/bash|/usr/bin/zsh|g' /mnt/archinstall/etc/passwd",
     "cp -R /root/* /mnt/archinstall/home/$user",
     "cp -R /root/.[^.]* /mnt/archinstall/home/$user",

@@ -96,7 +96,7 @@ class _WifiContentState extends State<WifiContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Connect to network",
+                "Подключиться к сети",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -108,7 +108,7 @@ class _WifiContentState extends State<WifiContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "First you need to connect to some network to continue installation.",
+                "Подключитесь к беспроводной сети или установите проводное соединение.",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -179,7 +179,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
   Widget placeholder = SizedBox(
     height: 54,
     child: TextForm(
-      hint: "password",
+      hint: "Введите пароль",
       controller: TextEditingController(),
       password: true,
     ),
@@ -192,7 +192,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
       placeholder = SizedBox(
         height: 54,
         child: TextForm(
-          hint: "password",
+          hint: "пароль",
           controller: controller,
           password: true,
         ),
@@ -208,7 +208,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            "Enter wifi password",
+            "Введите пароль",
             style: TextStyle(
               color: Colors.white,
             ),
@@ -224,14 +224,14 @@ class _ConnectWidgetState extends State<ConnectWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FleuTextButton(
-                text: "Close",
+                text: "Закрыть",
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               const SizedBox(width: 42),
               FleuTextButton(
-                text: "Connect",
+                text: "Подключиться",
                 onPressed: () async {
                   setState(() {
                     placeholder = const SpinKitChasingDots(
@@ -250,7 +250,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                       placeholder = const SizedBox(
                         height: 54,
                         child: Text(
-                          "Wrong password",
+                          "Пароль неверный",
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -261,7 +261,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                           placeholder = SizedBox(
                             height: 54,
                             child: TextForm(
-                              hint: "password",
+                              hint: "пароль",
                               controller: controller,
                               password: true,
                             ),
