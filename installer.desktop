@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=System Install
-GenericName=System Install
-Comment=System Install
-Exec=/lib/installer/installer
-Icon=/lib/installer/data/flutter_assets/assets/installer.png
-Type=Application
