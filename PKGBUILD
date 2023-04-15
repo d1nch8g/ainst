@@ -40,7 +40,7 @@ package() {
   cd build/linux/x64/release/bundle
 
   # # Install app resources
-  find . -type f -exec install -Dm644 {} "${pkgdir}/usr/share/ymp/{}" \;
+  find . -type f -exec install -Dm644 {} "${pkgdir}/usr/share/fmnx-install/{}" \;
 
   # # Install bin
   install -Dm755 "${srcdir}/fmnx-install.sh" "${pkgdir}/usr/bin/fmnx-install"
