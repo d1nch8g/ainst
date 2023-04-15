@@ -29,7 +29,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Installing the system...",
+              "Система устанавливается...",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -41,7 +41,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "That should take a couple minutes, relax",
+              "Это произойдет в течении нескольких минут, чилим",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -82,7 +82,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Complete",
+              "Готово",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -94,7 +94,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Reboot the system",
+              "Теперь можно перезагрузить и зайти в систему",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -103,7 +103,7 @@ class _InstallationContentState extends State<InstallationContent> {
           ),
           const SizedBox(height: 24),
           FleuTextButton(
-            text: "Run",
+            text: "Перезагрузка",
             onPressed: () {
               syscall("reboot ''");
             },
@@ -130,7 +130,7 @@ class _InstallationContentState extends State<InstallationContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Start installation",
+                "Начать установку",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -142,7 +142,7 @@ class _InstallationContentState extends State<InstallationContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Don't remove the insatllation medium, please :)",
+                "Установка обычно не занимает более 15 минут, зависит от скорости подключения",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -151,7 +151,7 @@ class _InstallationContentState extends State<InstallationContent> {
             ),
             const SizedBox(height: 24),
             FleuTextButton(
-              text: "Run",
+              text: "Запуск",
               onPressed: () {
                 runInstall();
               },

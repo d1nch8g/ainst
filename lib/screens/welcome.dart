@@ -15,7 +15,7 @@ class WelcomeContent extends StatefulWidget {
 }
 
 class _WelcomeContentState extends State<WelcomeContent> {
-  Widget connectWidget = const FleuTextButton(text: "Install");
+  Widget connectWidget = const FleuTextButton(text: "Установить");
 
   cleanPrefs() async {
     var prefs = await SharedPreferences.getInstance();
@@ -27,7 +27,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
     if (connected) {
       setState(() {
         connectWidget = FleuTextButton(
-          text: "Install",
+          text: "Установить",
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -41,7 +41,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
     }
     setState(() {
       connectWidget = FleuTextButton(
-        text: "Install",
+        text: "Установить",
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -76,7 +76,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Welcome to FleuOS",
+                "Добро пожаловать в установщик FMNX",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -88,7 +88,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "You can test the system on this live ISO image, or run installation process.",
+                "Вы можете попробовать частичную версию системы или начать установку",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -100,7 +100,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FleuTextButton(
-                  text: "Test system",
+                  text: "Попробовать систему",
                   onPressed: () {
                     windowManager.destroy();
                   },

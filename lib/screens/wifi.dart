@@ -132,14 +132,14 @@ class _WifiContentState extends State<WifiContent> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FleuTextButton(
-                  text: "Back",
+                  text: "Назад",
                   onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
                 const SizedBox(width: 42),
                 FleuTextButton(
-                  text: "Next",
+                  text: "Далее",
                   onPressed: () async {
                     var ok = await netcheck();
                     if (ok) {
@@ -178,7 +178,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
   final TextEditingController controller = TextEditingController();
   Widget placeholder = SizedBox(
     height: 54,
-    child: FlueTextField(
+    child: TextForm(
       hint: "password",
       controller: TextEditingController(),
       password: true,
@@ -191,7 +191,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
     setState(() {
       placeholder = SizedBox(
         height: 54,
-        child: FlueTextField(
+        child: TextForm(
           hint: "password",
           controller: controller,
           password: true,
@@ -260,7 +260,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                         setState(() {
                           placeholder = SizedBox(
                             height: 54,
-                            child: FlueTextField(
+                            child: TextForm(
                               hint: "password",
                               controller: controller,
                               password: true,

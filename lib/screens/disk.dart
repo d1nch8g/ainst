@@ -57,7 +57,7 @@ class _DiskContentState extends State<DiskContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Choose a disk and type of file system",
+                "Выберите диск для установки системы",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -71,8 +71,8 @@ class _DiskContentState extends State<DiskContent> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FleuBaseDropdown(
-                    label: 'Installation disk',
+                  BaseDropdown(
+                    label: 'Установочный диск',
                     items: disks,
                     onChanged: (value) async {
                       var prefs = await SharedPreferences.getInstance();
@@ -87,7 +87,7 @@ class _DiskContentState extends State<DiskContent> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FleuTextButton(
-                  text: "Back",
+                  text: "Назад",
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -111,7 +111,7 @@ class DiskCheckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FleuTextButton(
-      text: "Next",
+      text: "Далее",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();
         if (prefs.getString("disk") == null) {
@@ -120,7 +120,7 @@ class DiskCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Choose at least one disk for installtion",
+                message: "Выберите диск для установки.",
                 icon: Icons.error,
                 duration: Duration(milliseconds: 1342),
               );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:installer/constants.dart';
 
-class FlueTextField extends StatelessWidget {
+class TextForm extends StatelessWidget {
   final String hint;
   final bool password;
   final TextEditingController controller;
-  const FlueTextField({
+  const TextForm({
     super.key,
     required this.hint,
     required this.controller,

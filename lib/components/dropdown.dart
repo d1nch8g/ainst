@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:installer/constants.dart';
 
-class FleuSearchDropdown extends StatefulWidget {
+class SearchDropdown extends StatefulWidget {
   final String label;
   final List<String> items;
   final void Function(String) onChanged;
-  const FleuSearchDropdown({
+  const SearchDropdown({
     super.key,
     required this.items,
     required this.onChanged,
@@ -14,10 +14,10 @@ class FleuSearchDropdown extends StatefulWidget {
   });
 
   @override
-  State<FleuSearchDropdown> createState() => _FleuSearchDropdownState();
+  State<SearchDropdown> createState() => _SearchDropdownState();
 }
 
-class _FleuSearchDropdownState extends State<FleuSearchDropdown> {
+class _SearchDropdownState extends State<SearchDropdown> {
   String? selectedValue;
   var controller = TextEditingController();
 
@@ -40,7 +40,7 @@ class _FleuSearchDropdownState extends State<FleuSearchDropdown> {
             hint: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Select Item',
+                'Выберите элемент',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -118,7 +118,7 @@ class _FleuSearchDropdownState extends State<FleuSearchDropdown> {
                       horizontal: 10,
                       vertical: 8,
                     ),
-                    hintText: 'Search for an item...',
+                    hintText: 'Поиск по значениям...',
                     hintStyle: const TextStyle(
                       fontSize: 12,
                       color: Colors.white,
@@ -148,11 +148,11 @@ class _FleuSearchDropdownState extends State<FleuSearchDropdown> {
   }
 }
 
-class FleuBaseDropdown extends StatefulWidget {
+class BaseDropdown extends StatefulWidget {
   final String label;
   final List<String> items;
   final void Function(String) onChanged;
-  const FleuBaseDropdown({
+  const BaseDropdown({
     super.key,
     required this.items,
     required this.label,
@@ -160,10 +160,10 @@ class FleuBaseDropdown extends StatefulWidget {
   });
 
   @override
-  State<FleuBaseDropdown> createState() => _FleuBaseDropdownState();
+  State<BaseDropdown> createState() => _BaseDropdownState();
 }
 
-class _FleuBaseDropdownState extends State<FleuBaseDropdown> {
+class _BaseDropdownState extends State<BaseDropdown> {
   String? selectedValue;
 
   @override
@@ -185,7 +185,7 @@ class _FleuBaseDropdownState extends State<FleuBaseDropdown> {
             hint: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Select item',
+                'Выберите элемент',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,

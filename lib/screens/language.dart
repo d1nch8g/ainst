@@ -27,7 +27,7 @@ class LanguageContent extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Choose system and keyboard languages",
+                "Выберите язык системы и раскладку клавиатуры",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -41,25 +41,25 @@ class LanguageContent extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FleuBaseDropdown(
+                  BaseDropdown(
                     items: langMapping.keys.toList(),
-                    label: 'System language',
+                    label: 'Язык системы',
                     onChanged: (lang) async {
                       var prefs = await SharedPreferences.getInstance();
                       prefs.setString("syslang", langMapping[lang]!);
                     },
                   ),
-                  FleuBaseDropdown(
+                  BaseDropdown(
                     items: kbLayouts.keys.toList(),
-                    label: 'Keyboard layout',
+                    label: 'Раскладка клавиатуры',
                     onChanged: (layout) async {
                       var prefs = await SharedPreferences.getInstance();
                       prefs.setString("kblayout", kbLayouts[layout]!);
                     },
                   ),
-                  FleuSearchDropdown(
+                  SearchDropdown(
                     items: timezones,
-                    label: 'Timezone',
+                    label: 'Часовой пояс',
                     onChanged: (v) async {
                       var prefs = await SharedPreferences.getInstance();
                       prefs.setString("timezone", v);
@@ -73,7 +73,7 @@ class LanguageContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FleuTextButton(
-                  text: "Back",
+                  text: "Назад",
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -97,7 +97,7 @@ class LanguageCheckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FleuTextButton(
-      text: "Next",
+      text: "Далее",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();
         if (prefs.getString("syslang") == null) {
@@ -106,7 +106,7 @@ class LanguageCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Set system language",
+                message: "Установите системный язык",
                 icon: Icons.info,
                 duration: Duration(milliseconds: 1342),
               );
@@ -120,7 +120,7 @@ class LanguageCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Set keyboard layout",
+                message: "Установите раскладку клавиатуры",
                 icon: Icons.info,
                 duration: Duration(milliseconds: 1342),
               );
@@ -134,7 +134,7 @@ class LanguageCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Choose your timezone",
+                message: "Выберите часовой пояс",
                 icon: Icons.info,
                 duration: Duration(milliseconds: 1342),
               );
@@ -752,12 +752,12 @@ const timezones = [
   "Zulu",
 ];
 const Map<String, String> langMapping = {
+  "Russian": "ru_RU",
   "Chinese": "zh_CN",
   "English": "en_US",
   "Spanish": "es_ES",
   "Arabic": "ar_AE",
   "French": "fr_FR",
-  "Russian": "ru_RU",
   "Prtueges": "pt_PT",
   "Deutch": "de_DE",
   "Serbian": "sr_RS",
@@ -765,10 +765,10 @@ const Map<String, String> langMapping = {
   "Esperanto": "eo",
 };
 const Map<String, String> kbLayouts = {
+  "Russian (ru)": "ru",
+  "Serbian (sr-cy)": "sr-cy",
   "English (en)": "en",
   "Spanish (es)": "es",
   "French (fr)": "fr",
-  "Russian (ru)": "ru",
   "Deutch (de)": "de",
-  "Serbian (sr-cy)": "sr-cy",
 };
