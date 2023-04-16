@@ -11,3 +11,16 @@ git push
 git push origin --tags
 
 makepkg -sfri
+
+echo 'Publishing package to FMNX, enter creds.'
+echo 'Enter separated by space'
+read username password
+echo $username
+echo $password
+
+filename=fmnx-install-$newver-$newver-x86_64.pkg.tar.zst
+
+curl --user $username:$password \
+     --upload-file $filename \
+     https://gitea.example.com/api/packages/testuser/generic/fmnx-install/$filename
+
