@@ -18,8 +18,10 @@ rm tmpsum
 
 sed -i "s|$sha1sums|$newsum|g"
 
-
 git add .
 git commit -m v$newver
 git tag v$newver
 git push
+git push origin --tags
+
+makepkg -sfri
