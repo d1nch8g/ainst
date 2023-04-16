@@ -1,8 +1,8 @@
 # Maintainer: Dancheg97 <dancheg97@fmnx.ru>
 
 pkgname=fmnx-install
-pkgver="0.7"
-pkgrel="0.7"
+pkgver="0.7.1"
+pkgrel="0.7.1"
 pkgdesc="UI wrapper over archinstall written in dart."
 arch=("x86_64")
 url="https://fmnx.ru/dancheg97/fmnx-install"
@@ -27,9 +27,9 @@ source=(
   "fmnx-install.sh"
 )
 sha1sums=(
-  "e933ad4cd9d55913b39823980.7de80998b8fc07"
-  "2b70889e272f65bc70f0.78007f2a92a80294e1d"
-  "6a52eafaa1a580e08f09c9b6c616f978471c0.7e"
+  "SKIP"
+  "SKIP"
+  "SKIP"
 )
 
 package() {
