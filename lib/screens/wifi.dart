@@ -131,14 +131,14 @@ class _WifiContentState extends State<WifiContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FleuTextButton(
+                FmnxTextButton(
                   text: "Назад",
                   onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
                 const SizedBox(width: 42),
-                FleuTextButton(
+                FmnxTextButton(
                   text: "Далее",
                   onPressed: () async {
                     var ok = await netcheck();
@@ -223,14 +223,14 @@ class _ConnectWidgetState extends State<ConnectWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FleuTextButton(
+              FmnxTextButton(
                 text: "Закрыть",
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               const SizedBox(width: 42),
-              FleuTextButton(
+              FmnxTextButton(
                 text: "Подключиться",
                 onPressed: () async {
                   setState(() {

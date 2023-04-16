@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FleuOS installtion',
+      title: 'FMNX install',
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),

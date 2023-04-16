@@ -102,7 +102,7 @@ class _InstallationContentState extends State<InstallationContent> {
             ),
           ),
           const SizedBox(height: 24),
-          FleuTextButton(
+          FmnxTextButton(
             text: "Перезагрузка",
             onPressed: () {
               syscall("reboot ''");
@@ -150,7 +150,7 @@ class _InstallationContentState extends State<InstallationContent> {
               ),
             ),
             const SizedBox(height: 24),
-            FleuTextButton(
+            FmnxTextButton(
               text: "Запуск",
               onPressed: () {
                 runInstall();

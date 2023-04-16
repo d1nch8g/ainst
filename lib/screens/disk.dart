@@ -86,7 +86,7 @@ class _DiskContentState extends State<DiskContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FleuTextButton(
+                FmnxTextButton(
                   text: "Назад",
                   onPressed: () {
                     Navigator.pop(context);
@@ -110,7 +110,7 @@ class DiskCheckButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FleuTextButton(
+    return FmnxTextButton(
       text: "Далее",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();

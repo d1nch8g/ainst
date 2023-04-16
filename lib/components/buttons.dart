@@ -29,10 +29,10 @@ class FmnxButton extends StatelessWidget {
   }
 }
 
-class FleuTextButton extends StatelessWidget {
+class FmnxTextButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
-  const FleuTextButton({
+  const FmnxTextButton({
     super.key,
     required this.text,
     this.onPressed,

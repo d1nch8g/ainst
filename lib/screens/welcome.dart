@@ -15,7 +15,7 @@ class WelcomeContent extends StatefulWidget {
 }
 
 class _WelcomeContentState extends State<WelcomeContent> {
-  Widget connectWidget = const FleuTextButton(text: "Установить");
+  Widget connectWidget = const FmnxTextButton(text: "Установить");
 
   cleanPrefs() async {
     var prefs = await SharedPreferences.getInstance();
@@ -26,7 +26,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
     var connected = await netcheck();
     if (connected) {
       setState(() {
-        connectWidget = FleuTextButton(
+        connectWidget = FmnxTextButton(
           text: "Установить",
           onPressed: () {
             Navigator.of(context).push(
@@ -40,7 +40,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
       return;
     }
     setState(() {
-      connectWidget = FleuTextButton(
+      connectWidget = FmnxTextButton(
         text: "Установить",
         onPressed: () {
           Navigator.of(context).push(
@@ -69,7 +69,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/fleuos.png",
+              "assets/logo.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),
@@ -99,7 +99,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FleuTextButton(
+                FmnxTextButton(
                   text: "Попробовать систему",
                   onPressed: () {
                     windowManager.destroy();

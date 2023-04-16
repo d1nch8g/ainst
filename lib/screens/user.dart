@@ -66,7 +66,7 @@ class UserContent extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FleuTextButton(
+                FmnxTextButton(
                   text: "Назад",
                   onPressed: () {
                     Navigator.pop(context);
@@ -109,7 +109,7 @@ class UserCheckButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FleuTextButton(
+    return FmnxTextButton(
       text: "Далее",
       onPressed: () {
         if (passController.text != confpassController.text) {
