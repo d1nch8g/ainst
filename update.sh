@@ -22,5 +22,5 @@ filename=fmnx-install-$newver-$newver-x86_64.pkg.tar.zst
 
 curl --user $username:$password \
      --upload-file $filename \
-     https://fmnx.ru/api/packages/testuser/generic/fmnx-install/$filename
+     https://fmnx.ru/api/packages/$username/generic/fmnx-install/$filename
 

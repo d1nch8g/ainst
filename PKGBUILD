@@ -1,8 +1,8 @@
 # Maintainer: Dancheg97 <dancheg97@fmnx.ru>
 
 pkgname=fmnx-install
-pkgver="0.10"
-pkgrel="0.10"
+pkgver="0.11"
+pkgrel="0.11"
 pkgdesc="UI wrapper over archinstall written in dart."
 arch=("x86_64")
 url="https://fmnx.ru/dancheg97/fmnx-install"
