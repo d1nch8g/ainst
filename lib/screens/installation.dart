@@ -21,7 +21,7 @@ class _InstallationContentState extends State<InstallationContent> {
         key: UniqueKey(),
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SpinKitRipple(
+          SpinKitFadingCircle(
             color: Colors.white,
             size: MediaQuery.of(context).size.height * 0.36,
           ),
@@ -42,6 +42,17 @@ class _InstallationContentState extends State<InstallationContent> {
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
               "Это произойдет в течении нескольких минут, чилим",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 88),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "Пока можно настроить вкладки в браузере или войти в телеграм, пользовательская папка будет перенесена в установленную систему",
               style: TextStyle(
                 color: Colors.white,
               ),
