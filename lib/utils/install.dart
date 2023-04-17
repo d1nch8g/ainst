@@ -193,8 +193,8 @@ Future<String> installSystem() async {
     "cp /usr/local/share/backgrounds/fmnx-linux.png /mnt/archinstall/usr/local/share/backgrounds/fmnx-linux.png",
     "arch-chroot /mnt/archinstall pacman -R --noconfirm epiphany gnome-music gnome-console",
     "arch-chroot /mnt/archinstall dconf update",
-    "sed -i 's|/bin/bash|/usr/bin/zsh|g' /mnt/archinstall/etc/passwd",
-    "sed -i 's/3/0/g' /mnt/archinstall/boot/loader/loader.conf",
+    "sed -i s|/bin/bash|/usr/bin/zsh|g /mnt/archinstall/etc/passwd",
+    "sed -i s/3/0/g /mnt/archinstall/boot/loader/loader.conf",
   ];
 
   for (var call in callList) {
