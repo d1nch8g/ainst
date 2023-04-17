@@ -2,6 +2,7 @@
 
 pkgname=fmnx-install
 pkgver="0.14"
+pkgrel="1"
 pkgdesc="UI wrapper over archinstall written in dart."
 arch=("x86_64")
 url="https://fmnx.ru/dancheg97/fmnx-install"
