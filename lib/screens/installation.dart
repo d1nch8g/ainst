@@ -24,7 +24,7 @@ class _InstallationContentState extends State<InstallationContent> {
           Image.asset(
             "assets/loading.gif",
             height: MediaQuery.of(context).size.height * 0.36,
-            width: MediaQuery.of(context).size.height * 0.36,
+            width: MediaQuery.of(context).size.height * 0.36                                  ,
           ),
           const SizedBox(height: 24),
           SizedBox(
