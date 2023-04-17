@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/utils/install.dart';
