@@ -21,9 +21,10 @@ class _InstallationContentState extends State<InstallationContent> {
         key: UniqueKey(),
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SpinKitFadingCircle(
-            color: Colors.white,
-            size: MediaQuery.of(context).size.height * 0.36,
+          Image.asset(
+            "assets/loading.gif",
+            height: MediaQuery.of(context).size.height * 0.36,
+            width: MediaQuery.of(context).size.height * 0.36,
           ),
           const SizedBox(height: 24),
           SizedBox(
@@ -52,65 +53,65 @@ class _InstallationContentState extends State<InstallationContent> {
         ],
       );
     });
-    await writeConfigurations();
-    var rez = await installSystem();
-    if (rez != "ok") {
-      setState(() {
-        placeholder = SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
-          height: MediaQuery.of(context).size.height * 0.85,
-          child: SingleChildScrollView(
-            child: Text(
-              rez,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-      });
-      return;
-    }
-    setState(() {
-      placeholder = Column(
-        key: UniqueKey(),
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            "assets/restart.png",
-            height: MediaQuery.of(context).size.height * 0.36,
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            child: const Text(
-              "Готово",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            child: const Text(
-              "Теперь можно перезагрузить и зайти в систему",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 24),
-          FmnxTextButton(
-            text: "Перезагрузка",
-            onPressed: () {
-              syscall("reboot ''");
-            },
-          ),
-        ],
-      );
-    });
+    // await writeConfigurations();
+    // var rez = await installSystem();
+    // if (rez != "ok") {
+    //   setState(() {
+    //     placeholder = SizedBox(
+    //       width: MediaQuery.of(context).size.width * 0.65,
+    //       height: MediaQuery.of(context).size.height * 0.85,
+    //       child: SingleChildScrollView(
+    //         child: Text(
+    //           rez,
+    //           style: const TextStyle(color: Colors.white),
+    //         ),
+    //       ),
+    //     );
+    //   });
+    //   return;
+    // }
+    // setState(() {
+    //   placeholder = Column(
+    //     key: UniqueKey(),
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       Image.asset(
+    //         "assets/restart.png",
+    //         height: MediaQuery.of(context).size.height * 0.36,
+    //       ),
+    //       const SizedBox(height: 24),
+    //       SizedBox(
+    //         width: MediaQuery.of(context).size.width * 0.65,
+    //         child: const Text(
+    //           "Готово",
+    //           style: TextStyle(
+    //             color: Colors.white,
+    //             fontSize: 24,
+    //           ),
+    //           textAlign: TextAlign.center,
+    //         ),
+    //       ),
+    //       const SizedBox(height: 24),
+    //       SizedBox(
+    //         width: MediaQuery.of(context).size.width * 0.65,
+    //         child: const Text(
+    //           "Теперь можно перезагрузить и зайти в систему",
+    //           style: TextStyle(
+    //             color: Colors.white,
+    //           ),
+    //           textAlign: TextAlign.center,
+    //         ),
+    //       ),
+    //       const SizedBox(height: 24),
+    //       FmnxTextButton(
+    //         text: "Перезагрузка",
+    //         onPressed: () {
+    //           syscall("reboot ''");
+    //         },
+    //       ),
+    //     ],
+    //   );
+    // });
   }
 
   @override
