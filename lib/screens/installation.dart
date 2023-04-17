@@ -41,25 +41,14 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Это произойдет в течении нескольких минут, чилим",
+              "Это произойдет в течении нескольких минут, можно настроить вкладки в браузере или войти в телеграм, пользовательская папка будет перенесена в установленную систему",
               style: TextStyle(
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
             ),
           ),
-          const SizedBox(height: 6),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            child: const Text(
-              "Пока можно настроить вкладки в браузере или войти в телеграм, пользовательская папка будет перенесена в установленную систему",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 88),
+          const SizedBox(height: 44),
         ],
       );
     });
