@@ -196,7 +196,6 @@ Future<String> installSystem() async {
     "arch-chroot /mnt/archinstall dconf update",
     "sed -i s|/bin/bash|/usr/bin/zsh|g /mnt/archinstall/etc/passwd",
     "sed -i s/3/0/g /mnt/archinstall/boot/loader/loader.conf",
-    "arch-chroot /mnt/archinstall systemctl start bluetooth.service",
   ];
 
   for (var call in callList) {
