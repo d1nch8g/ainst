@@ -119,6 +119,8 @@ Future writeConfigurations() async {
     "path": "/usr/lib/python3.10/site-packages/archinstall/profiles/desktop.py"
   },
   "packages": [
+    "bluez",
+    "bluez-utils",
     "gnome-shell",
     "gnome-session",
     "gnome-terminal",
@@ -194,6 +196,7 @@ Future<String> installSystem() async {
     "arch-chroot /mnt/archinstall dconf update",
     "sed -i s|/bin/bash|/usr/bin/zsh|g /mnt/archinstall/etc/passwd",
     "sed -i s/3/0/g /mnt/archinstall/boot/loader/loader.conf",
+    "arch-chroot /mnt/archinstall systemctl start bluetooth.service",
   ];
 
   for (var call in callList) {
