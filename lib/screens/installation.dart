@@ -48,7 +48,7 @@ class _InstallationContentState extends State<InstallationContent> {
               textAlign: TextAlign.center,
             ),
           ),
-          const SizedBox(height: 88),
+          const SizedBox(height: 6),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
