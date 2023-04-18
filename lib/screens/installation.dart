@@ -75,8 +75,9 @@ class _InstallationContentState extends State<InstallationContent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/restart.png",
+            "assets/refresh.png",
             height: MediaQuery.of(context).size.height * 0.36,
+            width: MediaQuery.of(context).size.height * 0.36,
           ),
           const SizedBox(height: 24),
           SizedBox(
