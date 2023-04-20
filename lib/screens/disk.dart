@@ -57,7 +57,7 @@ class _DiskContentState extends State<DiskContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Выберите диск для установки системы",
+                "Choose installation disk for the system",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -72,7 +72,7 @@ class _DiskContentState extends State<DiskContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BaseDropdown(
-                    label: 'Установочный диск',
+                    label: 'Installation disk',
                     items: disks,
                     onChanged: (value) async {
                       var prefs = await SharedPreferences.getInstance();
@@ -87,7 +87,7 @@ class _DiskContentState extends State<DiskContent> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FmnxTextButton(
-                  text: "Назад",
+                  text: "Back",
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -111,7 +111,7 @@ class DiskCheckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FmnxTextButton(
-      text: "Далее",
+      text: "Next",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();
         if (prefs.getString("disk") == null) {
@@ -120,7 +120,7 @@ class DiskCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Выберите диск для установки.",
+                message: "Choose disk for installation.",
                 icon: Icons.error,
                 duration: Duration(milliseconds: 1342),
               );

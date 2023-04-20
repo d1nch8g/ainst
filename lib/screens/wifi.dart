@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
+import 'package:installer/components/notification.dart';
 import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
@@ -96,7 +97,7 @@ class _WifiContentState extends State<WifiContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Подключиться к сети",
+                "Connect to network",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -108,7 +109,7 @@ class _WifiContentState extends State<WifiContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Подключитесь к беспроводной сети или установите проводное соединение.",
+                "Connect to wireless network, or establish wired connection, then press 'Next'",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -132,14 +133,14 @@ class _WifiContentState extends State<WifiContent> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FmnxTextButton(
-                  text: "Назад",
+                  text: "Back",
                   onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
                 const SizedBox(width: 42),
                 FmnxTextButton(
-                  text: "Далее",
+                  text: "Next",
                   onPressed: () async {
                     var ok = await netcheck();
                     if (ok) {
@@ -149,6 +150,19 @@ class _WifiContentState extends State<WifiContent> {
                           builder: (context) => const LanguageContent(),
                         ),
                       );
+                    } else {
+                      // ignore: use_build_context_synchronously
+                      showBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return const NotificationPopup(
+                            message: "Connect to network",
+                            icon: Icons.error,
+                            duration: Duration(milliseconds: 1342),
+                          );
+                        },
+                      );
+                      return;
                     }
                   },
                 ),
@@ -179,7 +193,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
   Widget placeholder = SizedBox(
     height: 54,
     child: TextForm(
-      hint: "Введите пароль",
+      hint: "Enter password",
       controller: TextEditingController(),
       password: true,
     ),
@@ -192,7 +206,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
       placeholder = SizedBox(
         height: 54,
         child: TextForm(
-          hint: "пароль",
+          hint: "password",
           controller: controller,
           password: true,
         ),
@@ -208,7 +222,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            "Введите пароль",
+            "Enter password",
             style: TextStyle(
               color: Colors.white,
             ),
@@ -224,14 +238,14 @@ class _ConnectWidgetState extends State<ConnectWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FmnxTextButton(
-                text: "Закрыть",
+                text: "Close",
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               const SizedBox(width: 42),
               FmnxTextButton(
-                text: "Подключиться",
+                text: "Connect",
                 onPressed: () async {
                   setState(() {
                     placeholder = const SpinKitChasingDots(
@@ -250,7 +264,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                       placeholder = const SizedBox(
                         height: 54,
                         child: Text(
-                          "Пароль неверный",
+                          "Password incorrect",
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -261,7 +275,7 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                           placeholder = SizedBox(
                             height: 54,
                             child: TextForm(
-                              hint: "пароль",
+                              hint: "password",
                               controller: controller,
                               password: true,
                             ),

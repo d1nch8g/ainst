@@ -29,7 +29,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Система устанавливается...",
+              "Installing the system...",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -41,7 +41,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Это произойдет в течении нескольких минут, можно настроить вкладки в браузере или войти в телеграм, пользовательская папка будет перенесена в установленную систему",
+              "System installation process have started. User folder will be transfered into installed system, so you can set up telegram, or get into browser until installation is complete.",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -83,7 +83,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Готово",
+              "Done",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -95,7 +95,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Теперь можно перезагрузить и зайти в систему",
+              "Now you can reboot and log into system",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -104,7 +104,7 @@ class _InstallationContentState extends State<InstallationContent> {
           ),
           const SizedBox(height: 24),
           FmnxTextButton(
-            text: "Перезагрузка",
+            text: "Reboot",
             onPressed: () {
               syscall("reboot ''");
             },
@@ -131,7 +131,7 @@ class _InstallationContentState extends State<InstallationContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Начать установку",
+                "Run installation",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -143,7 +143,7 @@ class _InstallationContentState extends State<InstallationContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Установка обычно не занимает более 15 минут, зависит от скорости подключения",
+                "Installation usually does not take more than 15 minutes, chill...",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -152,7 +152,7 @@ class _InstallationContentState extends State<InstallationContent> {
             ),
             const SizedBox(height: 24),
             FmnxTextButton(
-              text: "Запуск",
+              text: "Start",
               onPressed: () {
                 runInstall();
               },

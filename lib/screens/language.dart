@@ -27,7 +27,7 @@ class LanguageContent extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Выберите язык системы и раскладку клавиатуры",
+                "Chosse system language and keyboard layout",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -43,7 +43,7 @@ class LanguageContent extends StatelessWidget {
                 children: [
                   BaseDropdown(
                     items: langMapping.keys.toList(),
-                    label: 'Язык системы',
+                    label: 'System language',
                     onChanged: (lang) async {
                       var prefs = await SharedPreferences.getInstance();
                       prefs.setString("syslang", langMapping[lang]!);
@@ -51,7 +51,7 @@ class LanguageContent extends StatelessWidget {
                   ),
                   BaseDropdown(
                     items: kbLayouts.keys.toList(),
-                    label: 'Раскладка клавиатуры',
+                    label: 'Keyboard layout',
                     onChanged: (layout) async {
                       var prefs = await SharedPreferences.getInstance();
                       prefs.setString("kblayout", kbLayouts[layout]!);
@@ -59,7 +59,7 @@ class LanguageContent extends StatelessWidget {
                   ),
                   SearchDropdown(
                     items: timezones,
-                    label: 'Часовой пояс',
+                    label: 'Timezone',
                     onChanged: (v) async {
                       var prefs = await SharedPreferences.getInstance();
                       prefs.setString("timezone", v);
@@ -97,7 +97,7 @@ class LanguageCheckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FmnxTextButton(
-      text: "Далее",
+      text: "Next",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();
         if (prefs.getString("syslang") == null) {
@@ -106,7 +106,7 @@ class LanguageCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Установите системный язык",
+                message: "Choose system language",
                 icon: Icons.info,
                 duration: Duration(milliseconds: 1342),
               );
@@ -120,7 +120,7 @@ class LanguageCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Установите раскладку клавиатуры",
+                message: "Choose keyboard layout",
                 icon: Icons.info,
                 duration: Duration(milliseconds: 1342),
               );
@@ -134,7 +134,7 @@ class LanguageCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Выберите часовой пояс",
+                message: "Choose timezone",
                 icon: Icons.info,
                 duration: Duration(milliseconds: 1342),
               );
@@ -751,6 +751,7 @@ const timezones = [
   "WET",
   "Zulu",
 ];
+
 const Map<String, String> langMapping = {
   "Russian": "ru_RU",
   "Chinese": "zh_CN",
@@ -764,6 +765,7 @@ const Map<String, String> langMapping = {
   "Thai": "th_TH",
   "Esperanto": "eo",
 };
+
 const Map<String, String> kbLayouts = {
   "Russian (ru)": "ru",
   "Serbian (sr-cy)": "sr-cy",

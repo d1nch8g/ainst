@@ -29,7 +29,7 @@ class UserContent extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Создание пользователя",
+                "Create user",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -44,18 +44,18 @@ class UserContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextForm(
-                    hint: "Имя",
+                    hint: "Name",
                     controller: userController,
                   ),
                   const SizedBox(width: 32),
                   TextForm(
-                    hint: "Пароль",
+                    hint: "Password",
                     password: true,
                     controller: passController,
                   ),
                   const SizedBox(width: 32),
                   TextForm(
-                    hint: "Подтверждение",
+                    hint: "Password check",
                     password: true,
                     controller: confpassController,
                   ),
@@ -67,7 +67,7 @@ class UserContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FmnxTextButton(
-                  text: "Назад",
+                  text: "Back",
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -110,14 +110,14 @@ class UserCheckButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FmnxTextButton(
-      text: "Далее",
+      text: "Next",
       onPressed: () {
         if (passController.text != confpassController.text) {
           showBottomSheet(
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Пароли не совпадают",
+                message: "Passwords does not match",
                 icon: Icons.error,
                 duration: Duration(milliseconds: 1342),
               );
@@ -130,7 +130,7 @@ class UserCheckButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const NotificationPopup(
-                message: "Имя пользователя слишком короткое",
+                message: "User name is too short",
                 icon: Icons.error,
                 duration: Duration(milliseconds: 1342),
               );

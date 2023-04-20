@@ -40,7 +40,7 @@ class _SearchDropdownState extends State<SearchDropdown> {
             hint: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Выберите элемент',
+                'Choose element',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
@@ -118,7 +118,7 @@ class _SearchDropdownState extends State<SearchDropdown> {
                       horizontal: 10,
                       vertical: 8,
                     ),
-                    hintText: 'Поиск по значениям...',
+                    hintText: 'Search for value...',
                     hintStyle: const TextStyle(
                       fontSize: 12,
                       color: Colors.white,
