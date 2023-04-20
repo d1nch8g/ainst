@@ -3,7 +3,7 @@ import 'package:installer/components/buttons.dart';
 import 'package:installer/components/notification.dart';
 import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
-import 'package:installer/screens/disk.dart';
+import 'package:installer/screens/hardware.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserContent extends StatelessWidget {
@@ -139,7 +139,7 @@ class UserCheckButton extends StatelessWidget {
           return;
         }
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const DiskContent(),
+          builder: (context) => const HardwareContent(),
         ));
         setParams(
           user: userController.text,

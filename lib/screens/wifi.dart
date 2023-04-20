@@ -41,7 +41,8 @@ class _WifiContentState extends State<WifiContent> {
                     setState(() {
                       currImg = Image.asset(
                         "assets/check.png",
-                        height: MediaQuery.of(context).size.height * 0.12,
+                        key: UniqueKey(),
+                        height: 96,
                       );
                     });
                   },
@@ -92,6 +93,9 @@ class _WifiContentState extends State<WifiContent> {
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 644),
               child: currImg,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
             ),
             const SizedBox(height: 24),
             SizedBox(

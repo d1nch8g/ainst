@@ -152,11 +152,13 @@ class BaseDropdown extends StatefulWidget {
   final String label;
   final List<String> items;
   final void Function(String) onChanged;
+  final double width;
   const BaseDropdown({
     super.key,
     required this.items,
     required this.label,
     required this.onChanged,
+    this.width = 240,
   });
 
   @override
@@ -216,7 +218,7 @@ class _BaseDropdownState extends State<BaseDropdown> {
             },
             buttonStyleData: ButtonStyleData(
               height: 40,
-              width: 240,
+              width: widget.width,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                 border: Border.all(color: primaryColor),

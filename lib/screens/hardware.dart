@@ -8,15 +8,24 @@ import 'package:installer/utils/senderr.dart';
 import 'package:installer/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DiskContent extends StatefulWidget {
-  const DiskContent({super.key});
+class HardwareContent extends StatefulWidget {
+  const HardwareContent({super.key});
 
   @override
-  State<DiskContent> createState() => _DiskContentState();
+  State<HardwareContent> createState() => _HardwareContentState();
 }
 
-class _DiskContentState extends State<DiskContent> {
+class _HardwareContentState extends State<HardwareContent> {
   List<String> disks = ["/dev/sda"];
+  List<String> gpuDrivers = [
+    "All open-source (default)",
+    "AMD / ATI (open-source)",
+    "Intel (open-source)",
+    "Nvidia (open kernel module for newer GPUs, Turing+)",
+    "Nvidia (open-source nouveau driver)",
+    "Nvidia (proprietary)",
+    "VMware / VirtualBox (open-source)",
+  ];
 
   setDisks() async {
     disks = [];
@@ -57,7 +66,7 @@ class _DiskContentState extends State<DiskContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Choose installation disk for the system",
+                "Choose hardware parameters",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -66,21 +75,29 @@ class _DiskContentState extends State<DiskContent> {
               ),
             ),
             const SizedBox(height: 24),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.65,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  BaseDropdown(
-                    label: 'Installation disk',
-                    items: disks,
-                    onChanged: (value) async {
-                      var prefs = await SharedPreferences.getInstance();
-                      prefs.setString("disk", value.split(" ")[0]);
-                    },
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BaseDropdown(
+                  label: 'Installation disk',
+                  items: disks,
+                  width: 240,
+                  onChanged: (value) async {
+                    var prefs = await SharedPreferences.getInstance();
+                    prefs.setString("disk", value.split(" ")[0]);
+                  },
+                ),
+                const SizedBox(width: 32),
+                BaseDropdown(
+                  label: 'Graphics drivers',
+                  items: gpuDrivers,
+                  width: 420,
+                  onChanged: (String v) async {
+                    var prefs = await SharedPreferences.getInstance();
+                    prefs.setString("gfx", v);
+                  },
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             Row(
@@ -121,6 +138,20 @@ class DiskCheckButton extends StatelessWidget {
             builder: (context) {
               return const NotificationPopup(
                 message: "Choose disk for installation.",
+                icon: Icons.error,
+                duration: Duration(milliseconds: 1342),
+              );
+            },
+          );
+          return;
+        }
+        if (prefs.getString("gfx") == null) {
+          // ignore: use_build_context_synchronously
+          showBottomSheet(
+            context: context,
+            builder: (context) {
+              return const NotificationPopup(
+                message: "Choose graphics drivers.",
                 icon: Icons.error,
                 duration: Duration(milliseconds: 1342),
               );
