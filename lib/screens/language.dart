@@ -73,7 +73,7 @@ class LanguageContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FmnxTextButton(
-                  text: "Назад",
+                  text: "Back",
                   onPressed: () {
                     Navigator.pop(context);
                   },

@@ -185,7 +185,7 @@ class _BaseDropdownState extends State<BaseDropdown> {
             hint: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Выберите элемент',
+                'Choose element',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
