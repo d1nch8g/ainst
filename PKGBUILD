@@ -46,7 +46,7 @@ package() {
   install -Dm755 "${srcdir}/fmnx-install.sh" "${pkgdir}/usr/bin/fmnx-install"
 
   # # Install desktop
-  install -Dm755 "${srcdir}/fmnx-install.desktop" "${pkgdir}/usr/share/applications/fmnx-install.desktop"
+  install -Dm755 "${srcdir}/installer.desktop" "${pkgdir}/usr/share/applications/installer.desktop"
 
   # # Install icon
   install -Dm644 "data/flutter_assets/assets/installer.png" "${pkgdir}/usr/share/icons/hicolor/512x512/apps/fmnx-install.png"
