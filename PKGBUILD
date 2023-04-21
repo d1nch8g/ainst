@@ -23,8 +23,8 @@ makedepends=(
 )
 source=(
   "fmnx-install-v${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz"
-  "fmnx-install.desktop"
   "fmnx-install.sh"
+  "installer.desktop"
 )
 sha1sums=(
   "SKIP"
