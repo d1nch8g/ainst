@@ -3,5 +3,6 @@ Name=System Install
 GenericName=System Install
 Comment=System Install
 Exec=/usr/share/fmnx-install/installer
+WMClass=installer
 Icon=/usr/share/fmnx-install/data/flutter_assets/assets/installer.png
 Type=Application
