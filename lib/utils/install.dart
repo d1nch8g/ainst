@@ -7,6 +7,7 @@ Future writeConfigurations() async {
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
   var pass = prefs.getString("pass")!;
+  var email = prefs.getString("email")!;
   var disk = prefs.getString("disk")!;
   var syslang = prefs.getString("syslang");
   var kblayout = prefs.getString("kblayout");
@@ -132,6 +133,16 @@ Future writeConfigurations() async {
   "sys-encoding": "UTF-8",
   "version": "2.5.5"
 }''');
+
+  var gitfile = File("/root/.gitconfig");
+  configFile = await gitfile.writeAsString('''[credential]
+	helper = store
+[user]
+	name = $user
+	email = $email
+[safe]
+	directory = /opt/flutter
+''');
 }
 
 Future<String> installSystem() async {

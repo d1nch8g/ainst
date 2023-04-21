@@ -10,6 +10,7 @@ class UserContent extends StatelessWidget {
   UserContent({super.key});
 
   final userController = TextEditingController();
+  final emailController = TextEditingController();
   final passController = TextEditingController();
   final confpassController = TextEditingController();
 
@@ -49,6 +50,19 @@ class UserContent extends StatelessWidget {
                   ),
                   const SizedBox(width: 32),
                   TextForm(
+                    hint: "Email",
+                    controller: emailController,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextForm(
                     hint: "Password",
                     password: true,
                     controller: passController,
@@ -77,6 +91,7 @@ class UserContent extends StatelessWidget {
                   userController: userController,
                   passController: passController,
                   confpassController: confpassController,
+                  emailController: emailController,
                 )
               ],
             ),
@@ -89,21 +104,21 @@ class UserContent extends StatelessWidget {
 
 class UserCheckButton extends StatelessWidget {
   final TextEditingController userController;
+  final TextEditingController emailController;
   final TextEditingController passController;
   final TextEditingController confpassController;
   const UserCheckButton({
     super.key,
     required this.userController,
+    required this.emailController,
     required this.passController,
     required this.confpassController,
   });
 
-  setParams({
-    required String user,
-    required String pass,
-  }) async {
+  setParams(String user, String email, String pass) async {
     var prefs = await SharedPreferences.getInstance();
     prefs.setString("user", user);
+    prefs.setString("email", email);
     prefs.setString("pass", pass);
   }
 
@@ -118,6 +133,20 @@ class UserCheckButton extends StatelessWidget {
             builder: (context) {
               return const NotificationPopup(
                 message: "Passwords does not match",
+                icon: Icons.error,
+                duration: Duration(milliseconds: 1342),
+              );
+            },
+          );
+          return;
+        }
+        if (!emailController.text.contains("@") ||
+            !emailController.text.contains(".")) {
+          showBottomSheet(
+            context: context,
+            builder: (context) {
+              return const NotificationPopup(
+                message: "Email is incorrect",
                 icon: Icons.error,
                 duration: Duration(milliseconds: 1342),
               );
@@ -142,8 +171,9 @@ class UserCheckButton extends StatelessWidget {
           builder: (context) => const HardwareContent(),
         ));
         setParams(
-          user: userController.text,
-          pass: passController.text,
+          userController.text,
+          emailController.text,
+          passController.text,
         );
       },
     );
