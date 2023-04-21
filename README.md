@@ -30,3 +30,8 @@ to provide more 'user-friendly' experience for installation process.
 
 First, you need to run this application on `arch` based linux distribution, and get
 `archintall` utility.
+
+<!--
+TODO
+add some adjustments for dev tools and other stuff
+-->

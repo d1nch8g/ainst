@@ -12,7 +12,12 @@ Future writeConfigurations() async {
   var kblayout = prefs.getString("kblayout");
   var timezone = prefs.getString("timezone");
 
-  var credsFile = File("/root/creds.json");
+  var pkgsFile = File("/usr/additional_packages");
+  var rawPkgs = await pkgsFile.readAsString();
+  var packages = rawPkgs.split("\n");
+  var jsonPkgs = '"${packages.join('","')}"';
+
+  var credsFile = File("/usr/creds.json");
   credsFile = await credsFile.writeAsString('''{
   "!root-password": "$pass",
   "!users": [
@@ -24,7 +29,7 @@ Future writeConfigurations() async {
   ]
 }''');
 
-  var diskFile = File("/root/disk.json");
+  var diskFile = File("/usr/disk.json");
   diskFile = await diskFile.writeAsString('''{
   "/dev/$disk": {
     "partitions": [
@@ -91,7 +96,7 @@ Future writeConfigurations() async {
   }
 }''');
 
-  var configFile = File("/root/config.json");
+  var configFile = File("/usr/config.json");
   configFile = await configFile.writeAsString('''{
   "additional-repositories": ["multilib"],
   "audio": "pipewire",
@@ -119,51 +124,7 @@ Future writeConfigurations() async {
     "path": "/usr/lib/python3.10/site-packages/archinstall/profiles/desktop.py"
   },
   "packages": [
-    "bluez",
-    "bluez-utils",
-    "gnome-shell",
-    "gnome-session",
-    "gnome-terminal",
-    "gnome-control-center",
-    "gnome-settings-daemon",
-    "gnome-calculator",
-    "gnome-calendar",
-    "gnome-disk-utility",
-    "gnome-keyring",
-    "gnome-logs",
-    "gnome-system-monitor",
-    "gnome-shell-extensions",
-    "gnome-tweaks",
-    "gnome-characters",
-    "gnome-browser-connector",
-    "gnome-weather",
-    "gnome-shell-extension-dash-to-dock",
-    "gnome-shell-extension-gtile",
-    "dconf",
-    "dconf-editor",
-    "chromium",
-    "geary",
-    "simple-scan",
-    "nautilus",
-    "xorg-drivers",
-    "networkmanager",
-    "gedit",
-    "eog",
-    "nano",
-    "git",
-    "xdg-user-dirs-gtk",
-    "papirus-icon-theme",
-    "ttf-droid",
-    "adw-gtk-theme",
-    "zsh-autosuggestions",
-    "zsh-syntax-highlighting",
-    "zsh-theme-powerlevel10k-bin-git",
-    "deja-dup",
-    "baobab",
-    "drawing",
-    "yay",
-    "onlyoffice-bin",
-    "telegram-desktop"
+    $jsonPkgs
   ],
   "script": "guided",
   "silent": false,
@@ -177,26 +138,10 @@ Future<String> installSystem() async {
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
 
-  var callList = [
-    "archinstall --silent --disk_layouts disk.json --config config.json --creds creds.json",
-    "cp /etc/os-release /mnt/archinstall/etc/os-release",
-    "cp /etc/pacman.conf /mnt/archinstall/etc/pacman.conf",
-    "mkdir -p /mnt/archinstall/etc/dconf/profile",
-    "cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user",
-    "mkdir -p /mnt/archinstall/etc/dconf/db/local.d",
-    "cp /etc/dconf/db/local.d/00-settings /mnt/archinstall/etc/dconf/db/local.d/00-settings",
-    "mkdir -p /mnt/archinstall/etc/dconf/profile",
-    "cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user",
-    "cp -a /root/. /mnt/archinstall/home/$user",
-    "chmod a+rwx -R /mnt/archinstall/home/$user",
-    "mkdir -p /mnt/archinstall/usr/local/share/backgrounds",
-    "cp /usr/local/share/backgrounds/wallpaper.jpg /mnt/archinstall/usr/local/share/backgrounds/wallpaper.jpg",
-    "cp /usr/local/share/backgrounds/fmnx-linux.png /mnt/archinstall/usr/local/share/backgrounds/fmnx-linux.png",
-    "arch-chroot /mnt/archinstall pacman -R --noconfirm epiphany gnome-music gnome-console",
-    "arch-chroot /mnt/archinstall dconf update",
-    "sed -i s|/bin/bash|/usr/bin/zsh|g /mnt/archinstall/etc/passwd",
-    "sed -i s/3/0/g /mnt/archinstall/boot/loader/loader.conf",
-  ];
+  var installFile = File("/usr/install.sh");
+  var rawInstall = await installFile.readAsString();
+  var rawInstallWithUser = rawInstall.replaceAll("<USER>", user);
+  var callList = rawInstallWithUser.split("\n");
 
   for (var call in callList) {
     var rez = await syscall(call);
