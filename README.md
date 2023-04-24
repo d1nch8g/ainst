@@ -33,5 +33,5 @@ First, you need to run this application on `arch` based linux distribution, and 
 
 <!--
 TODO
-add some adjustments for dev tools and other stuff
+yt-dlp n9YDz-Iwgyw
 -->

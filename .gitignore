@@ -50,3 +50,4 @@ app.*.map.json
 
 /*.tar.gz
 /*.tar.zst
+**.webm

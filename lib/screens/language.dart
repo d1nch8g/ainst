@@ -753,8 +753,8 @@ const timezones = [
 ];
 
 const Map<String, String> langMapping = {
-  "Russian": "ru_RU",
   "Chinese": "zh_CN",
+  "Russian": "ru_RU",
   "English": "en_US",
   "Spanish": "es_ES",
   "Arabic": "ar_AE",
@@ -767,9 +767,9 @@ const Map<String, String> langMapping = {
 };
 
 const Map<String, String> kbLayouts = {
+  "English (en)": "en",
   "Russian (ru)": "ru",
   "Serbian (sr-cy)": "sr-cy",
-  "English (en)": "en",
   "Spanish (es)": "es",
   "French (fr)": "fr",
   "Deutch (de)": "de",
