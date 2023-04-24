@@ -6,6 +6,7 @@ import 'package:installer/components/textfield.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
 import 'package:installer/utils/connect.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WifiContent extends StatefulWidget {
   const WifiContent({super.key});
@@ -146,8 +147,8 @@ class _WifiContentState extends State<WifiContent> {
                 FmnxTextButton(
                   text: "Next",
                   onPressed: () async {
-                    var ok = await netcheck();
-                    if (ok) {
+                    var prefs = await SharedPreferences.getInstance();
+                    if (prefs.getBool("conn") ?? false) {
                       // ignore: use_build_context_synchronously
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -257,11 +258,15 @@ class _ConnectWidgetState extends State<ConnectWidget> {
                       size: 54,
                     );
                   });
-                  var rez = await netconnect(widget.name, controller.text);
-                  if (rez) {
+                  var connected =
+                      await netconnect(widget.name, controller.text);
+                  var checked = await netcheck();
+                  if (connected && checked) {
                     // ignore: use_build_context_synchronously
                     Navigator.pop(context);
                     widget.connectCallback();
+                    var prefs = await SharedPreferences.getInstance();
+                    prefs.setBool("conn", true);
                     return;
                   } else {
                     setState(() {

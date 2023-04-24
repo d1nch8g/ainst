@@ -41,7 +41,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "System installation process have started. User folder will be transfered into installed system, so you can set up telegram, or get into browser until installation is complete.",
+              "System installation process have started. You can watch some Richard Stallman untill it's complete.",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -95,7 +95,7 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "Now you can reboot and log into system",
+              "Now you can reboot and log into system.",
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -143,7 +143,7 @@ class _InstallationContentState extends State<InstallationContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Installation usually does not take more than 15 minutes, chill...",
+                "Installation usually takes ~ 15-25 minutes, depending on disk and internet connection speed.",
                 style: TextStyle(
                   color: Colors.white,
                 ),

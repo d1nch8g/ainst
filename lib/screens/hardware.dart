@@ -21,8 +21,6 @@ class _HardwareContentState extends State<HardwareContent> {
     "All open-source (default)",
     "AMD / ATI (open-source)",
     "Intel (open-source)",
-    "Nvidia (open kernel module for newer GPUs, Turing+)",
-    "Nvidia (open-source nouveau driver)",
     "Nvidia (proprietary)",
     "VMware / VirtualBox (open-source)",
   ];
@@ -81,7 +79,7 @@ class _HardwareContentState extends State<HardwareContent> {
                 BaseDropdown(
                   label: 'Installation disk',
                   items: disks,
-                  width: 240,
+                  width: 320,
                   onChanged: (value) async {
                     var prefs = await SharedPreferences.getInstance();
                     prefs.setString("disk", value.split(" ")[0]);
@@ -91,7 +89,7 @@ class _HardwareContentState extends State<HardwareContent> {
                 BaseDropdown(
                   label: 'Graphics drivers',
                   items: gpuDrivers,
-                  width: 420,
+                  width: 320,
                   onChanged: (String v) async {
                     var prefs = await SharedPreferences.getInstance();
                     prefs.setString("gfx", v);
