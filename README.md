@@ -10,9 +10,9 @@
 
 UI wrapper over archinstall utility styled to suite gnome applications. Installer is
 in alpha stage and providing only base functionality of archinstall, but can be
-easily customized and completed with all required functionality. Program is
+easily customized and completed with all required functionality. Flutter app is
 making system calls to archinstall and serves only as graphical representation
-to provide more 'user-friendly' experience for installation process.
+to provide 'user-friendly' experience for installation process.
 
 - Welcome screen
 

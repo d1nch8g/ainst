@@ -1,10 +1,8 @@
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
 import 'package:installer/screens/welcome.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
-  DartVLC.initialize();
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
