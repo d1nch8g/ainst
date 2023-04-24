@@ -1,7 +1,10 @@
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
+import 'package:installer/utils/install.dart';
+import 'package:installer/utils/syscall.dart';
 
 class InstallationContent extends StatefulWidget {
   const InstallationContent({super.key});
@@ -15,25 +18,14 @@ class _InstallationContentState extends State<InstallationContent> {
 
   runInstall() async {
     setState(() {
-      final player = Player(id: 69420);
-      final playlist = Playlist(
-        medias: [
-          Media.asset('assets/stallman.webm'),
-        ],
-      );
-      player.open(playlist);
-
       placeholder = Column(
         key: UniqueKey(),
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Video(
-            player: player,
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.height * 0.7,
-            scale: 1.0,
-            showControls: true,
+          SpinKitCubeGrid(
+            color: Colors.white,
+            size: MediaQuery.of(context).size.height * 0.36,
           ),
           const SizedBox(height: 24),
           SizedBox(
@@ -62,66 +54,66 @@ class _InstallationContentState extends State<InstallationContent> {
         ],
       );
     });
-    // await writeConfigurations();
-    // var rez = await installSystem();
-    // if (rez != "ok") {
-    //   setState(() {
-    //     placeholder = SizedBox(
-    //       width: MediaQuery.of(context).size.width * 0.65,
-    //       height: MediaQuery.of(context).size.height * 0.85,
-    //       child: SingleChildScrollView(
-    //         child: Text(
-    //           rez,
-    //           style: const TextStyle(color: Colors.white),
-    //         ),
-    //       ),
-    //     );
-    //   });
-    //   return;
-    // }
-    // setState(() {
-    //   placeholder = Column(
-    //     key: UniqueKey(),
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Image.asset(
-    //         "assets/refresh.png",
-    //         height: MediaQuery.of(context).size.height * 0.36,
-    //         width: MediaQuery.of(context).size.height * 0.36,
-    //       ),
-    //       const SizedBox(height: 24),
-    //       SizedBox(
-    //         width: MediaQuery.of(context).size.width * 0.65,
-    //         child: const Text(
-    //           "Done",
-    //           style: TextStyle(
-    //             color: Colors.white,
-    //             fontSize: 24,
-    //           ),
-    //           textAlign: TextAlign.center,
-    //         ),
-    //       ),
-    //       const SizedBox(height: 24),
-    //       SizedBox(
-    //         width: MediaQuery.of(context).size.width * 0.65,
-    //         child: const Text(
-    //           "Now you can reboot and log into system.",
-    //           style: TextStyle(
-    //             color: Colors.white,
-    //           ),
-    //           textAlign: TextAlign.center,
-    //         ),
-    //       ),
-    //       const SizedBox(height: 24),
-    //       FmnxTextButton(
-    //         text: "Reboot",
-    //         onPressed: () {
-    //           syscall("reboot ''");
-    //         },
-    //       ),
-    //     ],
-    //   );
-    // });
+    await writeConfigurations();
+    var rez = await installSystem();
+    if (rez != "ok") {
+      setState(() {
+        placeholder = SizedBox(
+          width: MediaQuery.of(context).size.width * 0.65,
+          height: MediaQuery.of(context).size.height * 0.85,
+          child: SingleChildScrollView(
+            child: Text(
+              rez,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      });
+      return;
+    }
+    setState(() {
+      placeholder = Column(
+        key: UniqueKey(),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/refresh.png",
+            height: MediaQuery.of(context).size.height * 0.36,
+            width: MediaQuery.of(context).size.height * 0.36,
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "Done",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: const Text(
+              "Now you can reboot and log into system.",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 24),
+          FmnxTextButton(
+            text: "Reboot",
+            onPressed: () {
+              syscall("reboot ''");
+            },
+          ),
+        ],
+      );
+    });
   }
 
   @override
