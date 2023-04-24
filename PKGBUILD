@@ -9,6 +9,7 @@ url="https://fmnx.ru/dancheg97/fmnx-install"
 options=(!lto)
 license=("GPL3")
 depends=(
+  "vlc"
   "archinstall"
   "networkmanager"
 )
