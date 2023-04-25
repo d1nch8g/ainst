@@ -4,6 +4,7 @@ import 'package:installer/components/buttons.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/utils/install.dart';
 import 'package:installer/utils/syscall.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InstallationContent extends StatefulWidget {
   const InstallationContent({super.key});
@@ -42,14 +43,20 @@ class _InstallationContentState extends State<InstallationContent> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: const Text(
-              "System installation process have started. You can watch some Richard Stallman until it's complete :)",
+              "System installation process have started. You can learn more about distro on the page below.",
               style: TextStyle(
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
             ),
           ),
-          const SizedBox(height: 44),
+          const SizedBox(height: 24),
+          FmnxTextButton(
+            text: "Open documentation",
+            onPressed: () {
+              launchUrl(Uri.parse('https://docs.fmnx.ru/'));
+            },
+          ),
         ],
       );
     });
