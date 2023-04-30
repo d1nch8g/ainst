@@ -33,5 +33,5 @@ First, you need to run this application on `arch` based linux distribution, and 
 
 <!--
 TODO
-yt-dlp n9YDz-Iwgyw
+xprop WM_CLASS
 -->
