@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
+import 'package:installer/components/notification.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
-import 'package:installer/screens/wifi.dart';
 import 'package:installer/utils/connect.dart';
+import 'package:installer/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -42,10 +43,16 @@ class _WelcomeContentState extends State<WelcomeContent> {
     setState(() {
       connectWidget = FmnxTextButton(
         text: "Install",
-        onPressed: () {
+        onPressed: () async {
+          var connected = await netcheck();
+          if (!connected) {
+            syscall("gnome-control-center");
+            return;
+          }
+          // ignore: use_build_context_synchronously
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const WifiContent(),
+              builder: (context) => const LanguageContent(),
             ),
           );
         },
@@ -76,7 +83,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Welcome to FMNX installer",
+                "System installation",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -88,7 +95,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "You can test the live ISO image or run installation.",
+                "First connect to wifi, then run installation.",
                 style: TextStyle(
                   color: Colors.white,
                 ),

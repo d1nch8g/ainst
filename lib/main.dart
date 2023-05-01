@@ -7,7 +7,7 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    title: "System install",
+    title: "System installer",
     fullScreen: true,
     titleBarStyle: TitleBarStyle.hidden,
   );
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FMNX install',
+      title: 'System installation',
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),

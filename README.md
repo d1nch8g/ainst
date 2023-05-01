@@ -4,9 +4,9 @@
 
 <h2 align="center">UI wrapper over archintall utility styled as gnome app</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://dancheg97.ru/dancheg97/fmnx-install/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/GITEA-REPO-blue.svg)](https://dancheg97.ru/dancheg97/fmnx-install)
-[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-red.svg)](https://github.com/fmnx-ru/fmnx-install)
+[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.io/dev/install/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/GITEA-REPO-blue.svg)](https://fmnx.io/dev/install)
+[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-red.svg)](https://github.com/fmnx-io/install)
 
 UI wrapper over archinstall utility styled to suite gnome applications. Installer is
 in alpha stage and providing only base functionality of archinstall, but can be
@@ -35,7 +35,6 @@ First, you need to run this application on `arch` based linux distribution, and 
 TODO
 xprop WM_CLASS
 -->
-
 
 ---
 
