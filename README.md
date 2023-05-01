@@ -2,7 +2,7 @@
 <img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="./assets/installer.png" />
 </p>
 
-<h2 align="center">UI wrapper over archintall utility styled as gnome app</h2>
+<h2 align="center">System installation utility</h2>
 
 [![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.io/dev/install/src/branch/main/LICENSE)
 [![Generic badge](https://img.shields.io/badge/GITEA-REPO-blue.svg)](https://fmnx.io/dev/install)
@@ -12,34 +12,20 @@ UI wrapper over archinstall utility styled to suite gnome applications. Installe
 in alpha stage and providing only base functionality of archinstall, but can be
 easily customized and completed with all required functionality. Flutter app is
 making system calls to archinstall and serves only as graphical representation
-to provide 'user-friendly' experience for installation process.
+to provide 'user-friendly' experience installation process.
 
-- Welcome screen
-
-![](examples/welcome.png)
-
-- Disk screen
+- Hardware parameters:
 
 ![](examples/disks.png)
 
-- Langs screen
+- Language choice example:
 
 ![](examples/langs.png)
-
-### Development.
-
-First, you need to run this application on `arch` based linux distribution, and get
-`archintall` utility.
-
-<!--
-TODO
-xprop WM_CLASS
--->
-
----
 
 ### 📦 Install package with pack:
 
 ```
 pack get fmnx.io/dancheg97/fmnx-install
 ```
+
+<!-- xprop WM_CLASS -->
