@@ -54,7 +54,7 @@ class _InstallationContentState extends State<InstallationContent> {
           FmnxTextButton(
             text: "Open documentation",
             onPressed: () {
-              launchUrl(Uri.parse('https://docs.fmnx.ru/'));
+              launchUrl(Uri.parse('https://docs.fmnx.io/'));
             },
           ),
         ],

@@ -48,3 +48,7 @@ pkg/**
 src/**
 **.tar.gz
 **.pkg.tar.zst
+.gitconfig
+creds.json
+disk.json
+config.json

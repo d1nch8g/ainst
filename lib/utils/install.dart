@@ -3,6 +3,11 @@ import 'dart:io';
 import 'package:installer/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const dataDir = "/usr";
+const userDir = "/root";
+// const dataDir = "/home/dancheg97/fmnx-install";
+// const userDir = "/home/dancheg97/fmnx-install";
+
 Future writeConfigurations() async {
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
@@ -13,12 +18,12 @@ Future writeConfigurations() async {
   var kblayout = prefs.getString("kblayout");
   var timezone = prefs.getString("timezone");
 
-  var pkgsFile = File("/usr/additional_packages");
+  var pkgsFile = File("$dataDir/additional_packages");
   var rawPkgs = await pkgsFile.readAsString();
   var packages = rawPkgs.split("\n");
   var jsonPkgs = '"${packages.join('","')}"';
 
-  var credsFile = File("/usr/creds.json");
+  var credsFile = File("$dataDir/creds.json");
   credsFile = await credsFile.writeAsString('''{
   "!root-password": "$pass",
   "!users": [
@@ -30,7 +35,7 @@ Future writeConfigurations() async {
   ]
 }''');
 
-  var diskFile = File("/usr/disk.json");
+  var diskFile = File("$dataDir/disk.json");
   diskFile = await diskFile.writeAsString('''{
   "/dev/$disk": {
     "partitions": [
@@ -97,7 +102,7 @@ Future writeConfigurations() async {
   }
 }''');
 
-  var configFile = File("/usr/config.json");
+  var configFile = File("$dataDir/config.json");
   configFile = await configFile.writeAsString('''{
   "additional-repositories": ["multilib"],
   "audio": "pipewire",
@@ -134,7 +139,7 @@ Future writeConfigurations() async {
   "version": "2.5.5"
 }''');
 
-  var gitfile = File("/root/.gitconfig");
+  var gitfile = File("$userDir/.gitconfig");
   configFile = await gitfile.writeAsString('''[credential]
 	helper = store
 [user]
@@ -149,7 +154,7 @@ Future<String> installSystem() async {
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
 
-  var installFile = File("/usr/install.sh");
+  var installFile = File("$dataDir/install.sh");
   var rawInstall = await installFile.readAsString();
   var rawInstallWithUser = rawInstall.replaceAll("<USER>", user);
   var callList = rawInstallWithUser.split("\n");
