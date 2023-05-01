@@ -35,3 +35,12 @@ First, you need to run this application on `arch` based linux distribution, and 
 TODO
 xprop WM_CLASS
 -->
+
+
+---
+
+### 📦 Install package with pack:
+
+```
+pack get fmnx.ru/dancheg97/fmnx-install
+```

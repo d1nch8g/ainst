@@ -1,0 +1,11 @@
+build-deps:
+  - flutter
+  - clang
+  - cmake
+scripts:
+  - flutter build linux
+mapping:
+  fmnx-install.sh: /usr/bin/fmnx-install
+  installer.desktop: /usr/share/applications/installer.desktop
+  build/linux/x64/release/bundle: /usr/share/fmnx-install
+  data/flutter_assets/assets/installer.png: /usr/share/icons/hicolor/512x512/apps/fmnx-install.png

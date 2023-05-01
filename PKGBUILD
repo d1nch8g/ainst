@@ -5,31 +5,12 @@ pkgver="0.29"
 pkgrel="1"
 pkgdesc="UI wrapper over archinstall written in dart."
 arch=("x86_64")
-url="https://fmnx.ru/dancheg97/fmnx-install"
+url="https://fmnx.io/dev/fmnx-install"
 options=(!lto)
-license=("GPL3")
-depends=(
-  "archinstall"
-  "networkmanager"
-)
-optdepends=(
-  "sudo: privilege elevation"
-  "doas: privilege elevation"
-)
 makedepends=(
   "flutter"
   "clang"
   "cmake"
-)
-source=(
-  "fmnx-install-v${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz"
-  "fmnx-install.sh"
-  "installer.desktop"
-)
-sha1sums=(
-  "SKIP"
-  "SKIP"
-  "SKIP"
 )
 
 package() {

@@ -12,9 +12,7 @@ class CallResult {
 }
 
 Future<CallResult> syscall(String input) async {
-  var split = input.split(' ');
-  var cmd = split.removeAt(0);
-  var rez = await Process.run(cmd, split);
+  var rez = await Process.run("bash", ["-c", input]);
   return CallResult(
     stdout: "${rez.stdout}",
     stderr: "${rez.stderr}",
