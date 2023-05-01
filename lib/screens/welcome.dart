@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:installer/components/buttons.dart';
-import 'package:installer/components/notification.dart';
 import 'package:installer/constants.dart';
 import 'package:installer/screens/language.dart';
 import 'package:installer/utils/connect.dart';
