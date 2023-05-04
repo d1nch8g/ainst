@@ -23,10 +23,36 @@ to provide 'user-friendly' experience installation process.
 
 ![](examples/langs.png)
 
-### 📦 Install package with pack:
+### ⚙️ Configurations:
+
+The amount of configurations is limited at the moment, but we are working on that ⚒️⚒️⚒️. At the moment you can adjust packages required for installation and installation scripts in `~/.ainst.yml` file (typically /root/.ainst.yml, if you have not created any users).
+
+Default configuration:
+
+```yml
+additional-packages:
+  - bluez
+  - bluez-utils
+  - dconf
+  - ...
+install-scripts:
+  - archinstall --silent --disk_layouts /usr/disk.json --config /usr/config.json --creds /usr/creds.json
+  - cp /etc/os-release /mnt/archinstall/etc/os-release
+  - cp /etc/pacman.conf /mnt/archinstall/etc/pacman.conf
+  - ...
+```
+
+### 📦 Install package with [pack](https://fmnx.io/core/pack):
 
 ```
 pack get fmnx.io/core/ainst
 ```
 
-<!-- xprop WM_CLASS -->
+<!--
+Make evrything configurable with a yaml as a builder:
+ - spinners
+ - what to be shown and where
+ - which input params will do what
+ - which scripts will push wut??
+xprop WM_CLASS
+-->
