@@ -25,7 +25,7 @@ to provide 'user-friendly' experience installation process.
 
 ### ⚙️ Configurations:
 
-The amount of configurations is limited at the moment, but we are working on that ⚒️⚒️⚒️. At the moment you can adjust packages required for installation and installation scripts in `~/.ainst.yml` file (typically /root/.ainst.yml, if you have not created any users).
+The amount of configurations is limited at the moment, but we are working on that 🔨🔨🔨. At the moment you can adjust packages required for installation and installation scripts in `~/.ainst.yml` file (typically /root/.ainst.yml, if you have not created any users).
 
 Default configuration:
 

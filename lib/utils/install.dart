@@ -1,12 +1,11 @@
 import 'dart:io';
-
+import "package:yaml/yaml.dart";
 import 'package:ainst/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const dataDir = "/usr";
-const userDir = "/root";
-
 Future writeConfigurations() async {
+  var homedir = await getHomeDir();
+
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
   var pass = prefs.getString("pass")!;
@@ -16,12 +15,13 @@ Future writeConfigurations() async {
   var kblayout = prefs.getString("kblayout");
   var timezone = prefs.getString("timezone");
 
-  var pkgsFile = File("$dataDir/additional_packages");
-  var rawPkgs = await pkgsFile.readAsString();
-  var packages = rawPkgs.split("\n");
-  var jsonPkgs = '"${packages.join('","')}"';
+  var ainstcfg = File("$homedir/.ainst.yml");
+  var data = await ainstcfg.readAsString();
+  YamlMap mapData = loadYaml(data);
+  var pkgs = mapData["additional-packages"] as YamlList;
+  var jsonPkgs = '"${pkgs.join('","')}"';
 
-  var credsFile = File("$dataDir/creds.json");
+  var credsFile = File("$homedir/creds.json");
   credsFile = await credsFile.writeAsString('''{
   "!root-password": "$pass",
   "!users": [
@@ -33,7 +33,7 @@ Future writeConfigurations() async {
   ]
 }''');
 
-  var diskFile = File("$dataDir/disk.json");
+  var diskFile = File("$homedir/disk.json");
   diskFile = await diskFile.writeAsString('''{
   "/dev/$disk": {
     "partitions": [
@@ -100,7 +100,7 @@ Future writeConfigurations() async {
   }
 }''');
 
-  var configFile = File("$dataDir/config.json");
+  var configFile = File("$homedir/config.json");
   configFile = await configFile.writeAsString('''{
   "additional-repositories": ["multilib"],
   "audio": "pipewire",
@@ -137,7 +137,7 @@ Future writeConfigurations() async {
   "version": "2.5.5"
 }''');
 
-  var gitfile = File("$userDir/.gitconfig");
+  var gitfile = File("$homedir/.gitconfig");
   configFile = await gitfile.writeAsString('''[credential]
 	helper = store
 [user]
@@ -149,19 +149,33 @@ Future writeConfigurations() async {
 }
 
 Future<String> installSystem() async {
+  var homedir = await getHomeDir();
+
   var prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("user")!;
 
-  var installFile = File("$dataDir/install.sh");
-  var rawInstall = await installFile.readAsString();
-  var rawInstallWithUser = rawInstall.replaceAll("<USER>", user);
-  var callList = rawInstallWithUser.split("\n");
-
-  for (var call in callList) {
+  var ainstcfg = File("$homedir/.ainst.yml");
+  var data = await ainstcfg.readAsString();
+  YamlMap mapData = loadYaml(data);
+  var rawScripts = mapData["install-scripts"] as YamlList;
+  List<String> scripts = [];
+  for (var element in rawScripts) {
+    scripts.add("$element".replaceAll("<USER>", user));
+  }
+  for (var call in scripts) {
     var rez = await syscall(call);
     if (rez.error) {
       return "Unable to execute call: $call \n ${rez.stdout}${rez.stderr}";
     }
   }
   return "ok";
+}
+
+Future<String> getHomeDir() async {
+  var rez = await syscall("echo \$USER");
+  var homedir = "/${rez.stdout.trim()}";
+  if (rez.stdout.trim() != "root") {
+    homedir = "/home$homedir";
+  }
+  return homedir;
 }
