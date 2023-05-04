@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:installer/constants.dart';
+import 'package:ainst/constants.dart';
 
 class SearchDropdown extends StatefulWidget {
   final String label;

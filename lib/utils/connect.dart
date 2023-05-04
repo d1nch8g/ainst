@@ -1,4 +1,4 @@
-import 'package:installer/utils/syscall.dart';
+import 'package:ainst/utils/syscall.dart';
 
 // Returns true if it's ok
 Future<bool> netcheck() async {

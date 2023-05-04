@@ -5,7 +5,7 @@ build-deps:
 scripts:
   - flutter build linux
 mapping:
-  fmnx-install.sh: /usr/bin/fmnx-install
-  installer.desktop: /usr/share/applications/installer.desktop
-  assets/installer.png: /usr/share/icons/hicolor/512x512/apps/fmnx-install.png
-  build/linux/x64/release/bundle: /usr/share/fmnx-install
+  ainst.sh: /usr/bin/ainst
+  ainst.desktop: /usr/share/applications/ainst.desktop
+  assets/installer.png: /usr/share/icons/hicolor/512x512/apps/ainst.png
+  build/linux/x64/release/bundle: /usr/share/ainst

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:installer/utils/syscall.dart';
+import 'package:ainst/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const dataDir = "/usr";

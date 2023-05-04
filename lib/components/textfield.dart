@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:installer/constants.dart';
+import 'package:ainst/constants.dart';
 
 class TextForm extends StatelessWidget {
   final String hint;

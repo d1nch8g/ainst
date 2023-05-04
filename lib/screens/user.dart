@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:installer/components/buttons.dart';
-import 'package:installer/components/notification.dart';
-import 'package:installer/components/textfield.dart';
-import 'package:installer/constants.dart';
-import 'package:installer/screens/hardware.dart';
+import 'package:ainst/components/buttons.dart';
+import 'package:ainst/components/notification.dart';
+import 'package:ainst/components/textfield.dart';
+import 'package:ainst/constants.dart';
+import 'package:ainst/screens/hardware.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserContent extends StatelessWidget {

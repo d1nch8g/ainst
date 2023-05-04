@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:installer/components/buttons.dart';
-import 'package:installer/components/dropdown.dart';
-import 'package:installer/components/notification.dart';
-import 'package:installer/constants.dart';
-import 'package:installer/screens/installation.dart';
-import 'package:installer/utils/senderr.dart';
-import 'package:installer/utils/syscall.dart';
+import 'package:ainst/components/buttons.dart';
+import 'package:ainst/components/dropdown.dart';
+import 'package:ainst/components/notification.dart';
+import 'package:ainst/constants.dart';
+import 'package:ainst/screens/installation.dart';
+import 'package:ainst/utils/senderr.dart';
+import 'package:ainst/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HardwareContent extends StatefulWidget {

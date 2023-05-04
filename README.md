@@ -1,13 +1,13 @@
 <p align="center">
-<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="./assets/installer.png" />
+<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="./assets/logo.png" />
 </p>
 
 <h2 align="center">System installation utility</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.io/dev/install/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/GITEA-REPO-blue.svg)](https://fmnx.io/dev/install)
-[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-red.svg)](https://github.com/fmnx-io/install)
-[![Build Status](https://ci.fmnx.io/api/badges/dev/install/status.svg)](https://ci.fmnx.io/dev/install)
+[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.io/core/ainst/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/GITEA-REPO-yellow.svg)](https://fmnx.io/core/ainst)
+[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-red.svg)](https://github.com/fmnx-io/ainst)
+[![Build Status](https://ci.fmnx.io/api/badges/core/ainst/status.svg)](https://ci.fmnx.io/core/ainst)
 
 UI wrapper over archinstall utility styled to suite gnome applications. Installer is
 in alpha stage and providing only base functionality of archinstall, but can be

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:installer/components/buttons.dart';
-import 'package:installer/constants.dart';
-import 'package:installer/utils/install.dart';
-import 'package:installer/utils/syscall.dart';
+import 'package:ainst/components/buttons.dart';
+import 'package:ainst/constants.dart';
+import 'package:ainst/utils/install.dart';
+import 'package:ainst/utils/syscall.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InstallationContent extends StatefulWidget {
