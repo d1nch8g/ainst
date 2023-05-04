@@ -7,5 +7,5 @@ scripts:
 mapping:
   ainst.sh: /usr/bin/ainst
   ainst.desktop: /usr/share/applications/ainst.desktop
-  assets/installer.png: /usr/share/icons/hicolor/512x512/apps/ainst.png
+  assets/logo.png: /usr/share/icons/hicolor/512x512/apps/ainst.png
   build/linux/x64/release/bundle: /usr/share/ainst

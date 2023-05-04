@@ -3,6 +3,6 @@ Name=System Install
 GenericName=System Install
 Comment=System Install
 Exec=/usr/share/ainst/ainst
-WMClass=installer
+WMClass=ainst
 Icon=/usr/share/ainst/data/flutter_assets/assets/logo.png
 Type=Application
