@@ -26,7 +26,7 @@ to provide 'user-friendly' experience installation process.
 ### 📦 Install package with pack:
 
 ```
-pack get fmnx.io/dancheg97/fmnx-install
+pack get fmnx.io/dancheg97/ainst
 ```
 
 <!-- xprop WM_CLASS -->

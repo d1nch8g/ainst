@@ -5,8 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const dataDir = "/usr";
 const userDir = "/root";
-// const dataDir = "/home/dancheg97/fmnx-install";
-// const userDir = "/home/dancheg97/fmnx-install";
 
 Future writeConfigurations() async {
   var prefs = await SharedPreferences.getInstance();

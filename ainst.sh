@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec /usr/share/fmnx-install/installer
+exec /usr/share/ainst/ainst
