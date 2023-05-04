@@ -3,7 +3,8 @@ build-deps:
   - clang
   - cmake
 scripts:
-  - flutter build linux
+  - git config --global --add safe.directory /opt/flutter
+  - sudo flutter build linux
 mapping:
   ainst.sh: /usr/bin/ainst
   ainst.desktop: /usr/share/applications/ainst.desktop
