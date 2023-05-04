@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:ainst/components/buttons.dart';
-import 'package:ainst/constants.dart';
+import 'dart:async';
+
 import 'package:ainst/screens/language.dart';
 import 'package:ainst/utils/connect.dart';
 import 'package:ainst/utils/syscall.dart';
+import 'package:flutter/material.dart';
+import 'package:ainst/components/buttons.dart';
+import 'package:ainst/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -15,55 +17,23 @@ class WelcomeContent extends StatefulWidget {
 }
 
 class _WelcomeContentState extends State<WelcomeContent> {
-  Widget connectWidget = const FmnxTextButton(text: "Install");
+  Timer timer =
+      Timer.periodic(const Duration(milliseconds: 324), (timer) async {
+    var prefs = await SharedPreferences.getInstance();
+    if (await netcheck()) {
+      prefs.setBool("connected", true);
+    }
+  });
 
   cleanPrefs() async {
     var prefs = await SharedPreferences.getInstance();
     prefs.clear();
   }
 
-  checkConn() async {
-    var connected = await netcheck();
-    if (connected) {
-      setState(() {
-        connectWidget = FmnxTextButton(
-          text: "Install",
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const LanguageContent(),
-              ),
-            );
-          },
-        );
-      });
-      return;
-    }
-    setState(() {
-      connectWidget = FmnxTextButton(
-        text: "Install",
-        onPressed: () async {
-          var connected = await netcheck();
-          if (!connected) {
-            syscall("gnome-control-center");
-            return;
-          }
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const LanguageContent(),
-            ),
-          );
-        },
-      );
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     cleanPrefs();
-    checkConn();
   }
 
   @override
@@ -94,7 +64,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "First connect to wifi, then run installation.",
+                "Welcome to the cutting edge, bud. Establish network connection to proceed installation...",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -112,7 +82,34 @@ class _WelcomeContentState extends State<WelcomeContent> {
                   },
                 ),
                 const SizedBox(width: 42),
-                connectWidget,
+                FmnxTextButton(
+                  text: "Install",
+                  onPressed: () async {
+                    var prefs = await SharedPreferences.getInstance();
+                    if (prefs.getBool("connected") == true) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LanguageContent(),
+                        ),
+                      );
+                      timer.cancel();
+                      return;
+                    }
+                    var connected = await netcheck();
+                    if (!connected) {
+                      syscall("gnome-control-center");
+                      return;
+                    }
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LanguageContent(),
+                      ),
+                    );
+                    timer.cancel();
+                  },
+                ),
               ],
             ),
           ],

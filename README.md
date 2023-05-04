@@ -6,7 +6,7 @@
 
 [![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.io/core/ainst/src/branch/main/LICENSE)
 [![Generic badge](https://img.shields.io/badge/GITEA-REPO-yellow.svg)](https://fmnx.io/core/ainst)
-[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-red.svg)](https://github.com/fmnx-io/ainst)
+[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-white.svg)](https://github.com/fmnx-io/ainst)
 [![Build Status](https://ci.fmnx.io/api/badges/core/ainst/status.svg)](https://ci.fmnx.io/core/ainst)
 
 UI wrapper over archinstall utility styled to suite gnome applications. Installer is
@@ -26,7 +26,7 @@ to provide 'user-friendly' experience installation process.
 ### 📦 Install package with pack:
 
 ```
-pack get fmnx.io/dancheg97/ainst
+pack get fmnx.io/core/ainst
 ```
 
 <!-- xprop WM_CLASS -->

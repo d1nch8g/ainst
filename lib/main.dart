@@ -7,7 +7,7 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    title: "System installer",
+    title: "System installation",
     fullScreen: true,
     titleBarStyle: TitleBarStyle.hidden,
   );
