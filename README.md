@@ -14,7 +14,7 @@ UI wrapper over archinstall utility styled to suite gnome applications. Installe
 in alpha stage and providing only base functionality of archinstall, but can be
 easily customized and completed with all required functionality. Flutter app is
 making system calls to archinstall and serves only as graphical representation
-to provide 'user-friendly' experience installation process.
+to provide user-friendly experience for installation process.
 
 - Hardware parameters:
 
