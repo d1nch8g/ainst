@@ -82,7 +82,7 @@ class _HardwareContentState extends State<HardwareContent> {
                   width: 320,
                   onChanged: (value) async {
                     var prefs = await SharedPreferences.getInstance();
-                    prefs.setString("disk", value.split(" ")[0]);
+                    prefs.setString("DISK", value.split(" ")[0]);
                   },
                 ),
                 const SizedBox(width: 32),
@@ -92,7 +92,7 @@ class _HardwareContentState extends State<HardwareContent> {
                   width: 320,
                   onChanged: (String v) async {
                     var prefs = await SharedPreferences.getInstance();
-                    prefs.setString("gfx", v);
+                    prefs.setString("GFXDRIVER", v);
                   },
                 ),
               ],
@@ -129,7 +129,7 @@ class DiskCheckButton extends StatelessWidget {
       text: "Next",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();
-        if (prefs.getString("disk") == null) {
+        if (prefs.getString("DISK") == null) {
           // ignore: use_build_context_synchronously
           showBottomSheet(
             context: context,
@@ -143,7 +143,7 @@ class DiskCheckButton extends StatelessWidget {
           );
           return;
         }
-        if (prefs.getString("gfx") == null) {
+        if (prefs.getString("GFXDRIVER") == null) {
           // ignore: use_build_context_synchronously
           showBottomSheet(
             context: context,

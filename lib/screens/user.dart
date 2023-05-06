@@ -117,9 +117,9 @@ class UserCheckButton extends StatelessWidget {
 
   setParams(String user, String email, String pass) async {
     var prefs = await SharedPreferences.getInstance();
-    prefs.setString("user", user);
-    prefs.setString("email", email);
-    prefs.setString("pass", pass);
+    prefs.setString("USER", user);
+    prefs.setString("EMAIL", email);
+    prefs.setString("PASS", pass);
   }
 
   @override

@@ -46,7 +46,7 @@ class LanguageContent extends StatelessWidget {
                     label: 'System language',
                     onChanged: (lang) async {
                       var prefs = await SharedPreferences.getInstance();
-                      prefs.setString("syslang", langMapping[lang]!);
+                      prefs.setString("SYSLANG", langMapping[lang]!);
                     },
                   ),
                   BaseDropdown(
@@ -54,7 +54,7 @@ class LanguageContent extends StatelessWidget {
                     label: 'Keyboard layout',
                     onChanged: (layout) async {
                       var prefs = await SharedPreferences.getInstance();
-                      prefs.setString("kblayout", kbLayouts[layout]!);
+                      prefs.setString("KBLAYOUT", kbLayouts[layout]!);
                     },
                   ),
                   SearchDropdown(
@@ -62,7 +62,7 @@ class LanguageContent extends StatelessWidget {
                     label: 'Timezone',
                     onChanged: (v) async {
                       var prefs = await SharedPreferences.getInstance();
-                      prefs.setString("timezone", v);
+                      prefs.setString("TIMEZONE", v);
                     },
                   ),
                 ],
@@ -100,7 +100,7 @@ class LanguageCheckButton extends StatelessWidget {
       text: "Next",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();
-        if (prefs.getString("syslang") == null) {
+        if (prefs.getString("SYSLANG") == null) {
           // ignore: use_build_context_synchronously
           showBottomSheet(
             context: context,
@@ -114,7 +114,7 @@ class LanguageCheckButton extends StatelessWidget {
           );
           return;
         }
-        if (prefs.getString("kblayout") == null) {
+        if (prefs.getString("KBLAYOUT") == null) {
           // ignore: use_build_context_synchronously
           showBottomSheet(
             context: context,
@@ -128,7 +128,7 @@ class LanguageCheckButton extends StatelessWidget {
           );
           return;
         }
-        if (prefs.getString("timezone") == null) {
+        if (prefs.getString("TIMEZONE") == null) {
           // ignore: use_build_context_synchronously
           showBottomSheet(
             context: context,
