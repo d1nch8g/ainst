@@ -13,6 +13,9 @@ fillConfigWithVaraibles() async {
 
   for (var key in keys) {
     var elem = prefs.getString(key);
+    if (elem.runtimeType == bool) {
+      continue;
+    }
     if (elem != null) {
       aisntstring = aisntstring.replaceAll("<AINST=$elem>", elem);
     }
