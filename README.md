@@ -10,11 +10,9 @@
 [![Generic badge](https://img.shields.io/badge/CODEBERG-REPO-45a3fb.svg)](https://codeberg.org/fmnx/ainst)
 [![Build Status](https://ci.fmnx.io/api/badges/core/ainst/status.svg)](https://ci.fmnx.io/core/ainst)
 
-UI wrapper over archinstall utility styled to suite gnome applications. Installer is
-in alpha stage and providing only base functionality of archinstall, but can be
-easily customized and completed with all required functionality. Flutter app is
-making system calls to archinstall and serves only as graphical representation
-to provide user-friendly experience for installation process.
+UI wrapper over archinstall utility styled to suite gnome applications. Installer is in alpha stage and providing only base functionality of archinstall, but can be easily customized and completed with all required functionality. Flutter app is making system calls to archinstall and serves only as graphical representation to provide user-friendly experience for installation process.
+
+You can find example of `.ainst.yml` in [fmnx iso repo](https://fmnx.io/core/iso)
 
 - Hardware parameters:
 
