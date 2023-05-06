@@ -60,8 +60,8 @@ class _InstallationContentState extends State<InstallationContent> {
         ],
       );
     });
-    await fillConfigWithVaraibles();
-    var rez = await installSystem();
+    var scripts = await getInstallationScripts();
+    var rez = await installSystem(scripts);
     if (rez != "ok") {
       setState(() {
         placeholder = SizedBox(

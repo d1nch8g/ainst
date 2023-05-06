@@ -3,7 +3,7 @@ import "package:yaml/yaml.dart";
 import 'package:ainst/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-fillConfigWithVaraibles() async {
+Future<List<String>> getInstallationScripts() async {
   var prefs = await SharedPreferences.getInstance();
   var keys = prefs.getKeys();
 
@@ -21,15 +21,17 @@ fillConfigWithVaraibles() async {
       print(e);
     }
   }
-  await ainstfile.writeAsString(aisntstring);
+
+  YamlMap mapData = loadYaml(aisntstring);
+  var scripts = mapData["install-scripts"] as YamlList;
+  List<String> rez = [];
+  for (var script in scripts) {
+    rez.add("$script");
+  }
+  return rez;
 }
 
-Future<String> installSystem() async {
-  var homedir = await getHomeDir();
-  var ainstcfg = await File("$homedir/.ainst.yml").readAsString();
-  YamlMap mapData = loadYaml(ainstcfg);
-
-  var scripts = mapData["install-scripts"] as YamlList;
+Future<String> installSystem(scripts) async {
   for (var call in scripts) {
     var rez = await syscall("$call");
     if (rez.error) {
