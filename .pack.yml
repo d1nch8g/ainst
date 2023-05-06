@@ -4,6 +4,7 @@ build-deps:
   - cmake
 scripts:
   - git config --global --add safe.directory /opt/flutter
+  - sudo chmod a+rwx -R /opt/flutter
   - sudo flutter build linux
 mapping:
   ainst.sh: /usr/bin/ainst

@@ -60,7 +60,7 @@ class _InstallationContentState extends State<InstallationContent> {
         ],
       );
     });
-    await writeConfigurations();
+    await fillConfigWithVaraibles();
     var rez = await installSystem();
     if (rez != "ok") {
       setState(() {

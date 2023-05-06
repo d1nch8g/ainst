@@ -3,167 +3,31 @@ import "package:yaml/yaml.dart";
 import 'package:ainst/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future writeConfigurations() async {
-  var homedir = await getHomeDir();
-
+fillConfigWithVaraibles() async {
   var prefs = await SharedPreferences.getInstance();
-  var user = prefs.getString("user")!;
-  var pass = prefs.getString("pass")!;
-  var email = prefs.getString("email")!;
-  var disk = prefs.getString("disk")!;
-  var syslang = prefs.getString("syslang");
-  var kblayout = prefs.getString("kblayout");
-  var timezone = prefs.getString("timezone");
+  var keys = prefs.getKeys();
 
-  var ainstcfg = File("$homedir/.ainst.yml");
-  var data = await ainstcfg.readAsString();
-  YamlMap mapData = loadYaml(data);
-  var pkgs = mapData["additional-packages"] as YamlList;
-  var jsonPkgs = '"${pkgs.join('","')}"';
+  var homedir = await getHomeDir();
+  var ainstfile = File("$homedir/.ainst.yml");
+  var aisntstring = await ainstfile.readAsString();
 
-  var credsFile = File("$homedir/creds.json");
-  credsFile = await credsFile.writeAsString('''{
-  "!root-password": "$pass",
-  "!users": [
-    {
-      "username": "$user",
-      "!password": "$pass",
-      "sudo": true
+  for (var key in keys) {
+    var elem = prefs.getString(key);
+    if (elem != null) {
+      aisntstring = aisntstring.replaceAll("<AINST=$elem>", elem);
     }
-  ]
-}''');
-
-  var diskFile = File("$homedir/disk.json");
-  diskFile = await diskFile.writeAsString('''{
-  "/dev/$disk": {
-    "partitions": [
-      {
-        "boot": true,
-        "encrypted": false,
-        "filesystem": {
-          "format": "fat32"
-        },
-        "mountpoint": "/boot",
-        "size": "512MiB",
-        "start": "1MiB",
-        "type": "primary",
-        "wipe": true
-      },
-      {
-        "btrfs": {
-          "subvolumes": [
-            {
-              "compress": false,
-              "mountpoint": "/",
-              "name": "@",
-              "nodatacow": false
-            },
-            {
-              "compress": false,
-              "mountpoint": "/home",
-              "name": "@home",
-              "nodatacow": false
-            },
-            {
-              "compress": false,
-              "mountpoint": "/var/log",
-              "name": "@log",
-              "nodatacow": false
-            },
-            {
-              "compress": false,
-              "mountpoint": "/var/cache/pacman/pkg",
-              "name": "@pkg",
-              "nodatacow": false
-            },
-            {
-              "compress": false,
-              "mountpoint": "/.snapshots",
-              "name": "@.snapshots",
-              "nodatacow": false
-            }
-          ]
-        },
-        "encrypted": false,
-        "filesystem": {
-          "format": "btrfs",
-          "mount_options": []
-        },
-        "mountpoint": null,
-        "size": "100%",
-        "start": "513MiB",
-        "type": "primary",
-        "wipe": true
-      }
-    ],
-    "wipe": true
   }
-}''');
-
-  var configFile = File("$homedir/config.json");
-  configFile = await configFile.writeAsString('''{
-  "additional-repositories": ["multilib"],
-  "audio": "pipewire",
-  "config_version": "2.5.5",
-  "debug": false,
-  "desktop-environment": "gnome",
-  "gfx_driver": "All open-source (default)",
-  "harddrives": ["/dev/$disk"],
-  "hostname": "fmnx-$user",
-  "keyboard-layout": "$kblayout",
-  "sys-language": "$syslang",
-  "timezone": "$timezone",
-  "bootloader": "systemd-bootctl",
-  "nic": {
-    "dhcp": true,
-    "dns": null,
-    "gateway": null,
-    "iface": null,
-    "ip": null,
-    "type": "nm"
-  },
-  "no_pkg_lookups": false,
-  "offline": false,
-  "profile": {
-    "path": "/usr/lib/python3.10/site-packages/archinstall/profiles/desktop.py"
-  },
-  "packages": [
-    $jsonPkgs
-  ],
-  "script": "guided",
-  "silent": false,
-  "swap": false,
-  "sys-encoding": "UTF-8",
-  "version": "2.5.5"
-}''');
-
-  var gitfile = File("$homedir/.gitconfig");
-  configFile = await gitfile.writeAsString('''[credential]
-	helper = store
-[user]
-	name = $user
-	email = $email
-[safe]
-	directory = /opt/flutter
-''');
+  await ainstfile.writeAsString(aisntstring);
 }
 
 Future<String> installSystem() async {
   var homedir = await getHomeDir();
+  var ainstcfg = await File("$homedir/.ainst.yml").readAsString();
+  YamlMap mapData = loadYaml(ainstcfg);
 
-  var prefs = await SharedPreferences.getInstance();
-  var user = prefs.getString("user")!;
-
-  var ainstcfg = File("$homedir/.ainst.yml");
-  var data = await ainstcfg.readAsString();
-  YamlMap mapData = loadYaml(data);
-  var rawScripts = mapData["install-scripts"] as YamlList;
-  List<String> scripts = [];
-  for (var element in rawScripts) {
-    scripts.add("$element".replaceAll("<USER>", user));
-  }
+  var scripts = mapData["install-scripts"] as YamlList;
   for (var call in scripts) {
-    var rez = await syscall(call);
+    var rez = await syscall("$call");
     if (rez.error) {
       return "Unable to execute call: $call \n ${rez.stdout}${rez.stderr}";
     }
