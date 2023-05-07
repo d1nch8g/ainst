@@ -15,7 +15,7 @@ Future<List<String>> getInstallationScripts() async {
     try {
       var elem = prefs.getString(key);
       if (elem != null) {
-        aisntstring = aisntstring.replaceAll("<AINST=$elem>", elem);
+        aisntstring = aisntstring.replaceAll("<AINST=$key>", elem);
       }
     } catch (e) {
       print(e);
