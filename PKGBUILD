@@ -2,6 +2,7 @@
 # More info at: https://fmnx.io/core/pack
 
 pkgname="ainst"
+pkgdesc="⚙️ System installation utility configurable in runtime"
 pkgver="1"
 pkgrel="1"
 arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64' 'riscv64')
@@ -9,7 +10,7 @@ url="https://fmnx.io/core/ainst"
 
 # Edit build dependencies
 makedepends=(
-  "flutter"
+  "fmnx.io/pkg/flutter"
   "clang"
   "cmake"
 )
