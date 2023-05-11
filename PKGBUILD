@@ -11,6 +11,7 @@ url="https://fmnx.io/core/ainst"
 # Edit build dependencies
 makedepends=(
   "fmnx.io/pkg/flutter"
+  "ninja"
   "clang"
   "cmake"
 )
