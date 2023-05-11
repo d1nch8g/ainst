@@ -27,7 +27,7 @@ package() {
   # Example of file installation
   install -Dm755 ainst.sh $pkgdir/usr/bin/ainst
   install -Dm755 ainst.desktop $pkgdir/usr/share/applications/ainst.desktop
-  install -Dm755 assets/logo.png $pkgdir/usr/share/icons/hicolor/512x512/apps/ainst.png
+  install -Dm755 assets/ainst.png $pkgdir/usr/share/icons/hicolor/512x512/apps/ainst.png
   # Example of dir installation
   cd build/linux/x64/release/bundle && find . -type f -exec install -Dm755 {} $pkgdir/usr/share/ainst/{} \; && cd $srcdir/..
 }

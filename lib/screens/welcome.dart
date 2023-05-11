@@ -45,7 +45,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/logo.png",
+              "assets/ainst.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

@@ -19,8 +19,8 @@ class LanguageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/language.png",
+            Image.network(
+              "https://fmnx.io/dancheg97/Pictures/raw/branch/main/disk.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

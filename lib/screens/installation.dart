@@ -82,8 +82,8 @@ class _InstallationContentState extends State<InstallationContent> {
         key: UniqueKey(),
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/refresh.png",
+          Image.network(
+            "https://fmnx.io/dancheg97/Pictures/raw/branch/main/refresh.png",
             height: MediaQuery.of(context).size.height * 0.36,
             width: MediaQuery.of(context).size.height * 0.36,
           ),
@@ -131,8 +131,8 @@ class _InstallationContentState extends State<InstallationContent> {
           key: UniqueKey(),
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/system.png",
+            Image.network(
+              "https://fmnx.io/dancheg97/Pictures/raw/branch/main/disk.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

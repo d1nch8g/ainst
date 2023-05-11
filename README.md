@@ -44,7 +44,7 @@ install-scripts:
 ### 📦 Install package with [pack](https://fmnx.io/core/pack):
 
 ```
-pack get fmnx.io/core/ainst
+pack i fmnx.io/core/ainst
 ```
 
 <!--
