@@ -54,7 +54,7 @@ class _InstallationContentState extends State<InstallationContent> {
           FmnxTextButton(
             text: "Open documentation",
             onPressed: () {
-              launchUrl(Uri.parse('https://docs.fmnx.io/'));
+              launchUrl(Uri.parse('https://docs.fmnx.su/'));
             },
           ),
         ],
@@ -83,7 +83,7 @@ class _InstallationContentState extends State<InstallationContent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.network(
-            "https://fmnx.io/dancheg97/Pictures/raw/branch/main/refresh.png",
+            "https://fmnx.su/dancheg97/Pictures/raw/branch/main/refresh.png",
             height: MediaQuery.of(context).size.height * 0.36,
             width: MediaQuery.of(context).size.height * 0.36,
           ),
@@ -132,7 +132,7 @@ class _InstallationContentState extends State<InstallationContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              "https://fmnx.io/dancheg97/Pictures/raw/branch/main/disk.png",
+              "https://fmnx.su/dancheg97/Pictures/raw/branch/main/disk.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

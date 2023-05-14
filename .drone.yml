@@ -30,4 +30,4 @@ steps:
       force: true
       commit: true
       ssh_key:
-        from_secret: CBSSHKEY
+        from_secret: SSHKEY

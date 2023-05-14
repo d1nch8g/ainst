@@ -1,18 +1,18 @@
 <p align="center">
-<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://fmnx.io/dancheg97/Pictures/raw/branch/main/ainst.png" />
+<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://fmnx.su/dancheg97/Pictures/raw/branch/main/ainst.png" />
 </p>
 
 <h2 align="center">System installation utility</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.io/core/ainst/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/FMNX-REPO-006db0.svg)](https://fmnx.io/core/ainst)
+[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.su/core/ainst/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/FMNX-REPO-006db0.svg)](https://fmnx.su/core/ainst)
 [![Generic badge](https://img.shields.io/badge/GITHUB-REPO-white.svg)](https://github.com/fmnx-io/ainst)
 [![Generic badge](https://img.shields.io/badge/CODEBERG-REPO-45a3fb.svg)](https://codeberg.org/fmnx/ainst)
-[![Build Status](https://ci.fmnx.io/api/badges/core/ainst/status.svg)](https://ci.fmnx.io/core/ainst)
+[![Build Status](https://ci.fmnx.su/api/badges/core/ainst/status.svg)](https://ci.fmnx.su/core/ainst)
 
 UI wrapper over archinstall utility styled to suite gnome applications. Installer is in alpha stage and providing only base functionality of archinstall, but can be easily customized and completed with all required functionality. Flutter app is making system calls to archinstall and serves only as graphical representation to provide user-friendly experience for installation process.
 
-You can find example of `.ainst.yml` in [fmnx iso repo](https://fmnx.io/core/iso)
+You can find example of `.ainst.yml` in [fmnx iso repo](https://fmnx.su/core/iso)
 
 - Hardware parameters:
 
@@ -41,10 +41,10 @@ install-scripts:
   - ...
 ```
 
-### 📦 Install package with [pack](https://fmnx.io/core/pack):
+### 📦 Install package with [pack](https://fmnx.su/core/pack):
 
 ```
-pack i fmnx.io/core/ainst
+pack i fmnx.su/core/ainst
 ```
 
 <!--
