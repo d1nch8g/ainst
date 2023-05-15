@@ -4,8 +4,8 @@
 pkgname="ainst"
 pkgdesc="⚙️ System installation utility configurable in runtime"
 pkgver="1"
-pkgrel="1"
-arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64' 'riscv64')
+pkgrel="2"
+arch=('any')
 url="https://fmnx.su/core/ainst"
 
 # Edit build dependencies
@@ -18,7 +18,6 @@ makedepends=(
 
 build() {
   cd ..
-  # Example build command
   git config --global --add safe.directory /opt/flutter
   sudo chmod a+rwx -R /opt/flutter
   sudo flutter build linux
@@ -26,10 +25,8 @@ build() {
 
 package() {
   cd ..
-  # Example of file installation
   install -Dm755 ainst.sh $pkgdir/usr/bin/ainst
   install -Dm755 ainst.desktop $pkgdir/usr/share/applications/ainst.desktop
   install -Dm755 assets/ainst.png $pkgdir/usr/share/icons/hicolor/512x512/apps/ainst.png
-  # Example of dir installation
   cd build/linux/x64/release/bundle && find . -type f -exec install -Dm755 {} $pkgdir/usr/share/ainst/{} \; && cd $srcdir/..
 }
