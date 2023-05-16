@@ -4,11 +4,14 @@
 
 <h2 align="center">System installation utility</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPL-orange.svg)](https://fmnx.su/core/ainst/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/FMNX-REPO-006db0.svg)](https://fmnx.su/core/ainst)
-[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-white.svg)](https://github.com/fmnx-io/ainst)
-[![Generic badge](https://img.shields.io/badge/CODEBERG-REPO-45a3fb.svg)](https://codeberg.org/fmnx/ainst)
+![Generic badge](https://img.shields.io/badge/status-alpha-red.svg)
+[![Generic badge](https://img.shields.io/badge/license-gpl-orange.svg)](https://fmnx.su/core/ainst/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/fmnx-repo-006db0.svg)](https://fmnx.su/core/ainst)
+[![Generic badge](https://img.shields.io/badge/github-repo-white.svg)](https://github.com/fmnx-io/ainst)
+[![Generic badge](https://img.shields.io/badge/codeberg-repo-45a3fb.svg)](https://codeberg.org/fmnx/ainst)
 [![Build Status](https://ci.fmnx.su/api/badges/core/ainst/status.svg)](https://ci.fmnx.su/core/ainst)
+
+> **Warning!** Project is in alpha stage, API's are very likely to be changed.
 
 UI wrapper over archinstall utility styled to suite gnome applications. Installer is in alpha stage and providing only base functionality of archinstall, but can be easily customized and completed with all required functionality. Flutter app is making system calls to archinstall and serves only as graphical representation to provide user-friendly experience for installation process.
 
