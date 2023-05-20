@@ -18,7 +18,7 @@ makedepends=(
 
 build() {
   cd ..
-  flutter build linux
+  sudo flutter build linux
 }
 
 package() {
