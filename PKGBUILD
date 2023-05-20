@@ -5,7 +5,7 @@ pkgname="ainst"
 pkgdesc="⚙️ System installation utility configurable in runtime"
 pkgver=`git describe --tags`
 pkgrel="1"
-arch=('any')
+arch=('x86_64')
 url="https://fmnx.su/core/ainst"
 
 # Edit build dependencies
