@@ -18,9 +18,7 @@ makedepends=(
 
 build() {
   cd ..
-  git config --global --add safe.directory /opt/flutter
-  sudo chmod a+rwx -R /opt/flutter
-  sudo flutter build linux
+  flutter build linux
 }
 
 package() {
