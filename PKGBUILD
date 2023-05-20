@@ -3,8 +3,8 @@
 
 pkgname="ainst"
 pkgdesc="⚙️ System installation utility configurable in runtime"
-pkgver="1"
-pkgrel="2"
+pkgver=`git describe --tags`
+pkgrel="1"
 arch=('any')
 url="https://fmnx.su/core/ainst"
 
