@@ -131,8 +131,8 @@ class _InstallationContentState extends State<InstallationContent> {
           key: UniqueKey(),
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              "https://fmnx.su/dancheg97/Pictures/raw/branch/main/disk.png",
+            Image.asset(
+              "assets/",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

@@ -56,8 +56,8 @@ class _HardwareContentState extends State<HardwareContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              "https://fmnx.su/dancheg97/Pictures/raw/branch/main/disk.png",
+            Image.asset(
+              "assets/storage.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

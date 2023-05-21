@@ -5,6 +5,7 @@
 <h2 align="center">System installation utility</h2>
 
 ![Generic badge](https://img.shields.io/badge/status-alpha-red.svg)
+[![Generic badge](https://img.shields.io/badge/flaticon-icons-03fca1.svg)](https://www.flaticon.com)
 [![Generic badge](https://img.shields.io/badge/license-gpl-orange.svg)](https://fmnx.su/core/ainst/src/branch/main/LICENSE)
 [![Generic badge](https://img.shields.io/badge/fmnx-repo-006db0.svg)](https://fmnx.su/core/ainst)
 [![Generic badge](https://img.shields.io/badge/github-repo-white.svg)](https://github.com/fmnx-io/ainst)

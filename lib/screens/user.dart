@@ -23,7 +23,7 @@ class UserContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              "https://fmnx.su/dancheg97/Pictures/raw/branch/main/user.png",
+              "https://cdn-icons-png.flaticon.com/512/10256/10256325.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 32),
