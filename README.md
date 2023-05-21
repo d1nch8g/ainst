@@ -45,12 +45,3 @@ install-scripts:
 ```
 pack i fmnx.su/core/ainst
 ```
-
-<!--
-Make evrything configurable with a yaml as a builder:
- - spinners
- - what to be shown and where
- - which input params will do what
- - which scripts will push wut??
-xprop WM_CLASS
--->
