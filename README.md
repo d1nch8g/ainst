@@ -33,11 +33,6 @@ The amount of configurations is limited at the moment, but we are working on tha
 Default configuration:
 
 ```yml
-additional-packages:
-  - bluez
-  - bluez-utils
-  - dconf
-  - ...
 install-scripts:
   - archinstall --silent --disk_layouts /usr/disk.json --config /usr/config.json --creds /usr/creds.json
   - cp /etc/os-release /mnt/archinstall/etc/os-release

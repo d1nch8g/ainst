@@ -22,8 +22,8 @@ class UserContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              "https://cdn-icons-png.flaticon.com/512/10256/10256325.png",
+            Image.asset(
+              "assets/logins.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 32),

@@ -19,8 +19,8 @@ class LanguageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              "https://cdn-icons-png.flaticon.com/512/2014/2014826.png",
+            Image.asset(
+              "assets/languages.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),
