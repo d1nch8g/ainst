@@ -1,5 +1,5 @@
 <p align="center">
-<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://fmnx.su/dancheg97/Pictures/raw/branch/main/ainst.png" />
+<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://fmnx.su/core/ainst/raw/branch/main/assets/ainst.png" />
 </p>
 
 <h2 align="center">System installation utility</h2>
