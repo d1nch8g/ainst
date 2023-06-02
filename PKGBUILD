@@ -2,7 +2,7 @@
 # More info at: https://fmnx.su/core/pack
 
 pkgname="ainst"
-pkgdesc="⚙️ System installation utility configurable in runtime"
+pkgdesc="Graphical system installation utility configurable in runtime"
 pkgver=`git describe --tags`
 pkgrel="1"
 arch=('x86_64')
