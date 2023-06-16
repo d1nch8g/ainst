@@ -55,7 +55,7 @@ class _InstallationContentState extends State<InstallationContent> {
             text: "Open documentation",
             onPressed: () {
               launchUrl(Uri.parse(
-                'https://fmnx.su/core/iso/wiki/About-distribution',
+                'https://fmnx.su/core/iso/src/branch/main/docs/RAEADME.md',
               ));
             },
           ),
