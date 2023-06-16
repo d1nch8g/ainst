@@ -54,7 +54,9 @@ class _InstallationContentState extends State<InstallationContent> {
           FmnxTextButton(
             text: "Open documentation",
             onPressed: () {
-              launchUrl(Uri.parse('https://docs.fmnx.su/'));
+              launchUrl(Uri.parse(
+                'https://fmnx.su/core/iso/wiki/About-distribution',
+              ));
             },
           ),
         ],
@@ -83,7 +85,7 @@ class _InstallationContentState extends State<InstallationContent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/install.png",
+            "assets/reboot.png",
             height: MediaQuery.of(context).size.height * 0.36,
             width: MediaQuery.of(context).size.height * 0.36,
           ),
@@ -132,7 +134,7 @@ class _InstallationContentState extends State<InstallationContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/reboot.png",
+              "assets/install.png",
               height: MediaQuery.of(context).size.height * 0.36,
             ),
             const SizedBox(height: 24),

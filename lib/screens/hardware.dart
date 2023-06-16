@@ -66,7 +66,7 @@ class _HardwareContentState extends State<HardwareContent> {
               child: const Text(
                 "Choose hardware parameters",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFFFFFFFF),
                   fontSize: 24,
                 ),
                 textAlign: TextAlign.center,
