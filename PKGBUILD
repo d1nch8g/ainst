@@ -7,7 +7,7 @@ pkgrel="1"
 arch=('x86_64')
 url="https://fmnx.su/core/ainst"
 makedepends=(
-  "flutter"
+  # "flutter"
   "gtk3"
   "ninja"
   "clang"
