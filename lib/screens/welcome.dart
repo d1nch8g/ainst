@@ -64,7 +64,7 @@ class _WelcomeContentState extends State<WelcomeContent> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
               child: const Text(
-                "Welcome to the cutting edge, bud. Establish network connection to proceed installation...",
+                "Web development linux distrtibution. Establish network connection to proceed installation...",
                 style: TextStyle(
                   color: Colors.white,
                 ),
