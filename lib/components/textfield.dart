@@ -19,7 +19,12 @@ class TextForm extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         obscureText: password,
+        cursorColor: primaryColorLight,
         decoration: InputDecoration(
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: primaryColorLight),
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),

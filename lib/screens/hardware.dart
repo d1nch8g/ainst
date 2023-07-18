@@ -101,7 +101,7 @@ class _HardwareContentState extends State<HardwareContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FmnxTextButton(
+                FmnxButton(
                   text: "Back",
                   onPressed: () {
                     Navigator.pop(context);
@@ -125,7 +125,7 @@ class DiskCheckButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FmnxTextButton(
+    return FmnxButton(
       text: "Next",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();

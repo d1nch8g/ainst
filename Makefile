@@ -8,11 +8,6 @@ push:
 	git push github
 	git push codeberg
 
-.PHONY: build
-build:
-	sh update.sh
-
-.PHONY: test
-test:
-	flutter build linux
-	sudo ./build/linux/x64/release/bundle/ainst
+prepare:
+	sudo pacman -Syu --noconfirm cmake clang
+	cp .ainst.yml ${HOME}/.ainst.yml	

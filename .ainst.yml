@@ -1,0 +1,6 @@
+install-scripts:
+  - sleep 30
+  - echo <AINST=USER> >> ~/ainst-creds
+  - echo <AINST=DISK> >> ~/ainst-creds
+  - echo <AINST=PASS> >> ~/ainst-creds
+  - echo <AINST=EMAIL> >> ~/ainst-creds

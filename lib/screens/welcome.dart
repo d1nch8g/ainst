@@ -75,14 +75,14 @@ class _WelcomeContentState extends State<WelcomeContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FmnxTextButton(
+                FmnxButton(
                   text: "Test the system",
                   onPressed: () {
                     windowManager.destroy();
                   },
                 ),
                 const SizedBox(width: 42),
-                FmnxTextButton(
+                FmnxButton(
                   text: "Install",
                   onPressed: () async {
                     var prefs = await SharedPreferences.getInstance();

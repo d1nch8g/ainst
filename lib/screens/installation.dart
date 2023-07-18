@@ -51,7 +51,7 @@ class _InstallationContentState extends State<InstallationContent> {
             ),
           ),
           const SizedBox(height: 24),
-          FmnxTextButton(
+          FmnxButton(
             text: "Open documentation",
             onPressed: () {
               launchUrl(Uri.parse(
@@ -66,16 +66,7 @@ class _InstallationContentState extends State<InstallationContent> {
     var rez = await installSystem(scripts);
     if (rez != "ok") {
       setState(() {
-        placeholder = SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
-          height: MediaQuery.of(context).size.height * 0.85,
-          child: SingleChildScrollView(
-            child: Text(
-              rez,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        );
+        placeholder = ErrorWindow(errmes: rez);
       });
       return;
     }
@@ -113,7 +104,7 @@ class _InstallationContentState extends State<InstallationContent> {
             ),
           ),
           const SizedBox(height: 24),
-          FmnxTextButton(
+          FmnxButton(
             text: "Reboot",
             onPressed: () {
               syscall("reboot ''");
@@ -161,7 +152,7 @@ class _InstallationContentState extends State<InstallationContent> {
               ),
             ),
             const SizedBox(height: 24),
-            FmnxTextButton(
+            FmnxButton(
               text: "Start",
               onPressed: () {
                 runInstall();
@@ -181,6 +172,29 @@ class _InstallationContentState extends State<InstallationContent> {
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 644),
           child: placeholder,
+        ),
+      ),
+    );
+  }
+}
+
+class ErrorWindow extends StatelessWidget {
+  final String errmes;
+
+  const ErrorWindow({
+    super.key,
+    required this.errmes,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.65,
+      height: MediaQuery.of(context).size.height * 0.85,
+      child: SingleChildScrollView(
+        child: Text(
+          errmes,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

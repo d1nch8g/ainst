@@ -72,7 +72,7 @@ class LanguageContent extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FmnxTextButton(
+                FmnxButton(
                   text: "Back",
                   onPressed: () {
                     Navigator.pop(context);
@@ -96,7 +96,7 @@ class LanguageCheckButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FmnxTextButton(
+    return FmnxButton(
       text: "Next",
       onPressed: () async {
         var prefs = await SharedPreferences.getInstance();

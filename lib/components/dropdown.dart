@@ -108,6 +108,7 @@ class _SearchDropdownState extends State<SearchDropdown> {
                     fontSize: 14,
                     color: Colors.white,
                   ),
+                  cursorColor: primaryColorLight,
                   decoration: InputDecoration(
                     isDense: true,
                     focusColor: primaryColor,
@@ -122,6 +123,10 @@ class _SearchDropdownState extends State<SearchDropdown> {
                     hintStyle: const TextStyle(
                       fontSize: 12,
                       color: Colors.white,
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryColorLight),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
