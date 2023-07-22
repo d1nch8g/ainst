@@ -8,7 +8,7 @@ Future<List<String>> getInstallationScripts() async {
   var keys = prefs.getKeys();
 
   var homedir = await getHomeDir();
-  var ainstfile = File("$homedir/.ainst.yml");
+  var ainstfile = File("$homedir/ainst.yml");
   var aisntstring = await ainstfile.readAsString();
 
   for (var key in keys) {

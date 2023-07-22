@@ -5,6 +5,7 @@ import 'package:ainst/constants.dart';
 import 'package:ainst/utils/install.dart';
 import 'package:ainst/utils/syscall.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 
 class InstallationContent extends StatefulWidget {
   const InstallationContent({super.key});
@@ -188,15 +189,55 @@ class ErrorWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.65,
-      height: MediaQuery.of(context).size.height * 0.85,
-      child: SingleChildScrollView(
-        child: Text(
-          errmes,
-          style: const TextStyle(color: Colors.white),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(3.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: primaryColorLight),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            height: MediaQuery.of(context).size.height * 0.85,
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                  scrollbarTheme: ScrollbarThemeData(
+                thumbColor: MaterialStateProperty.all(primaryColorLight),
+              )),
+              child: SingleChildScrollView(
+                child: Text(
+                  errmes,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
         ),
-      ),
+        const SizedBox(height: 24),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FmnxButton(
+              text: "Copy error",
+              onPressed: () async {
+                await Clipboard.setData(ClipboardData(text: errmes));
+              },
+            ),
+            const SizedBox(width: 24),
+            FmnxButton(
+              text: "Open issue",
+              onPressed: () {
+                launchUrl(Uri.parse(
+                  'https://fmnx.su/core/ainst/issues/new',
+                ));
+              },
+            ),
+          ],
+        )
+      ],
     );
   }
 }

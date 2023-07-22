@@ -14,13 +14,13 @@
 
 > **Warning!** Project is in alpha stage, API's are very likely to be changed.
 
-Ainst is a system installation UI. You can use it to execute installation scripts with paramters provided by user as inputs in application text fields. To test ainst you can install it with [pack](https://fmnx.su/core/pack), place `~/.ainst.yml` in your home directory and run installer. It swap variables in scripts and sequentially execute `install-script` list provided in configuration line by line.
+Ainst is a system installation UI. You can use it to execute installation scripts with paramters provided by user as inputs in application text fields. To test ainst you can install it with [pack](https://fmnx.su/core/pack), place `~/ainst.yml` in your home directory and run installer. It swap variables in scripts and sequentially execute `install-script` list provided in configuration line by line.
 
 Is is much easier to adjust installation application for your distribution needs if you don't have to recompile it each time you build an ISO, ainst is just a UI which can execute any installation script.
 
 Currently, only installation scripts can be configured in runtime, but we are planning to extend configuration to provide ability to add additional views, text input forms, change fonts, colors, images, etc...
 
-You can find example of `.ainst.yml` in [fmnx iso repo](https://fmnx.su/core/iso).
+You can find example of `ainst.yml` in [fmnx iso repo](https://fmnx.su/core/iso).
 
 - UI for hardware parameters:
 
@@ -32,7 +32,7 @@ You can find example of `.ainst.yml` in [fmnx iso repo](https://fmnx.su/core/iso
 
 ### Configurations:
 
-The amount of configurations is limited at the moment, but we are working on that 🔨🔨🔨. At the moment you can adjust packages required for installation and installation scripts in `~/.ainst.yml` file (typically /root/.ainst.yml, if you have not created any users).
+The amount of configurations is limited at the moment, but we are working on that 🔨🔨🔨. At the moment you can adjust packages required for installation and installation scripts in `~/ainst.yml` file (typically /root/ainst.yml, if you have not created any users).
 
 Default configuration:
 
