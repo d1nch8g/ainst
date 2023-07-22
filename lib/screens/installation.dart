@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ainst/components/buttons.dart';
 import 'package:ainst/constants.dart';
@@ -17,57 +18,35 @@ class InstallationContent extends StatefulWidget {
 class _InstallationContentState extends State<InstallationContent> {
   Widget placeholder = Container();
 
-  runInstall() async {
+  setDocumentation(String text) {
     setState(() {
-      placeholder = Column(
-        key: UniqueKey(),
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SpinKitCubeGrid(
-            color: Colors.white,
-            size: MediaQuery.of(context).size.height * 0.36,
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            child: const Text(
-              "Installing the system...",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            child: const Text(
-              "System installation process have started. You can learn more about distro on the page below.",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 24),
-          FmnxButton(
-            text: "Open documentation",
-            onPressed: () {
-              launchUrl(Uri.parse(
-                'https://fmnx.su/core/iso/src/branch/main/docs/RAEADME.md',
-              ));
-            },
-          ),
-        ],
+      placeholder = DocumentationView(
+        documentation: text,
+        openSpinner: setSpinner,
       );
     });
+  }
+
+  setSpinner() {
+    setState(() {
+      placeholder = SpinnerView(
+        openDocumentation: setDocumentation,
+      );
+    });
+  }
+
+  runInstall() async {
+    setState(() {
+      placeholder = SpinnerView(
+        openDocumentation: setDocumentation,
+      );
+    });
+
     var scripts = await getInstallationScripts();
     var rez = await installSystem(scripts);
     if (rez != "ok") {
       setState(() {
-        placeholder = ErrorWindow(errmes: rez);
+        placeholder = ErrorView(errmes: rez);
       });
       return;
     }
@@ -108,7 +87,7 @@ class _InstallationContentState extends State<InstallationContent> {
           FmnxButton(
             text: "Reboot",
             onPressed: () {
-              syscall("reboot ''");
+              syscall("reboot");
             },
           ),
         ],
@@ -179,10 +158,65 @@ class _InstallationContentState extends State<InstallationContent> {
   }
 }
 
-class ErrorWindow extends StatelessWidget {
+class SpinnerView extends StatelessWidget {
+  final void Function(String) openDocumentation;
+
+  const SpinnerView({
+    super.key,
+    required this.openDocumentation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      key: UniqueKey(),
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SpinKitCubeGrid(
+          color: Colors.white,
+          size: MediaQuery.of(context).size.height * 0.36,
+        ),
+        const SizedBox(height: 24),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.65,
+          child: const Text(
+            "Installing the system...",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 24),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.65,
+          child: const Text(
+            "System installation process have started. You can learn more about distro on the page below.",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 24),
+        FmnxButton(
+          text: "Open documentation",
+          onPressed: () async {
+            var desc = await getDescriptionMarkdownString();
+            openDocumentation(desc);
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class ErrorView extends StatelessWidget {
   final String errmes;
 
-  const ErrorWindow({
+  const ErrorView({
     super.key,
     required this.errmes,
   });
@@ -237,6 +271,72 @@ class ErrorWindow extends StatelessWidget {
             ),
           ],
         )
+      ],
+    );
+  }
+}
+
+class DocumentationView extends StatelessWidget {
+  final String documentation;
+  final void Function() openSpinner;
+
+  const DocumentationView({
+    super.key,
+    required this.documentation,
+    required this.openSpinner,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(3.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: primaryColorLight),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          width: MediaQuery.of(context).size.width * 0.65,
+          height: MediaQuery.of(context).size.height * 0.56,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            height: MediaQuery.of(context).size.height * 0.62,
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                scrollbarTheme: ScrollbarThemeData(
+                  thumbColor: MaterialStateProperty.all(primaryColorLight),
+                ),
+              ),
+              child: Markdown(
+                data: documentation,
+                styleSheet: MarkdownStyleSheet(
+                  a: const TextStyle(color: primaryColorLighter),
+                  p: const TextStyle(color: primaryColorLight),
+                  h2: const TextStyle(color: primaryColorLighter),
+                  code: TextStyle(
+                    backgroundColor: secondaryColor,
+                    fontFamily: 'monospace',
+                    fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+                    color: primaryColorLighter,
+                  ),
+                ),
+                styleSheetTheme: MarkdownStyleSheetBaseTheme.platform,
+                onTapLink: (text, href, title) => {
+                  launchUrl(Uri.parse(href!)),
+                },
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        FmnxButton(
+          text: "Return back",
+          onPressed: () {
+            openSpinner();
+          },
+        ),
       ],
     );
   }

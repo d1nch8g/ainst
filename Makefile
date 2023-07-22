@@ -10,4 +10,5 @@ push:
 
 prepare:
 	sudo pacman -Syu --noconfirm cmake clang
-	cp ainst.yml ${HOME}/ainst.yml	
+	cp ainst.yml ${HOME}/ainst.yml
+	cp ainst.md ${HOME}/ainst.md

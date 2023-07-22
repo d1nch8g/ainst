@@ -1,6 +1,74 @@
+# Scripts that will be sequentially executed by ainst installer.
+
 install-scripts:
-  - sleep 30
-  - echo <AINST=USER> >> ~/ainst-creds
-  - echo <AINST=DISK> >> ~/ainst-creds
-  - echo <AINST=PASS> >> ~/ainst-creds
-  - echo <AINST=EMAIL> >> ~/ainst-creds
+  # Setting installation parameters.
+  - sed -i 's|<USER>|{{USER}}|g' /root/creds.json
+  - sed -i 's|<PASS>|{{PASS}}|g' /root/creds.json
+  - sed -i 's|<DISK>|{{DISK}}|g' /root/disk.json
+  - sed -i 's|<USER>|{{USER}}|g' /root/.gitconfig
+  - sed -i 's|<EMAIL>|{{EMAIL}}|g' /root/.gitconfig
+  - sed -i 's|<DISK>|{{DISK}}|g' /root/config.json
+  - sed -i 's|<GFXDRIVER>|{{GFXDRIVER}}|g' /root/config.json
+  - sed -i 's|<USER>|{{USER}}|g' /root/config.json
+  - sed -i 's|<KBLAYOUT>|{{KBLAYOUT}}|g' /root/config.json
+  - sed -i 's|<SYSLANG>|{{SYSLANG}}|g' /root/config.json
+  - sed -i 's|<TIMEZONE>|{{TIMEZONE}}|g' /root/config.json
+  - sed -i "s|<USER>|{{USER}}|g" /root/.zshrc
+  - sed -i "s|<USER>|{{USER}}|g" /root/gpg-key-script
+  - sed -i "s|<EMAIL>|{{EMAIL}}|g" /root/gpg-key-script
+  - sed -i "s|<PASS>|{{PASS}}|g" /root/gpg-key-script
+  - sed -i "s|john@doe.com|{{EMAIL}}|g" /etc/makepkg.conf
+  - sed -i "s|John Doe|{{USER}}|g" /etc/makepkg.conf
+  - sed -i "s|#PACKAGER|PACKAGER|g" /etc/makepkg.conf
+
+  # Running installation script.
+  - archinstall --silent --disk_layouts /root/disk.json --config /root/config.json --creds /root/creds.json
+
+  # Generating GnuPG key.
+  - gpg --batch --gen-key gpg-key-script
+
+  # Transfering/configuring system parameters.
+  - cp /etc/os-release /mnt/archinstall/etc/os-release
+  - cp /etc/pacman.conf /mnt/archinstall/etc/pacman.conf
+  - cp /etc/makepkg.conf /mnt/archinstall/etc/makepkg.conf
+  - cp /etc/nanorc /mnt/archinstall/etc/nanorc
+  - sed -i "s|/bin/bash|/usr/bin/zsh|g" /mnt/archinstall/etc/passwd
+  - sed -i "s|root|{{USER}}|g" /etc/gdm/custom.conf
+  - cp /etc/gdm/custom.conf /mnt/archinstall/etc/gdm/custom.conf
+  - cp /etc/default/grub /mnt/archinstall/etc/default/grub
+  - arch-chroot /mnt/archinstall grub-mkconfig -o /boot/grub/grub.cfg
+
+  # Copying UI parameters.
+  - mkdir -p /mnt/archinstall/etc/dconf/profile
+  - cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user
+  - mkdir -p /mnt/archinstall/etc/dconf/db/local.d
+  - cp /etc/dconf/db/local.d/00-settings /mnt/archinstall/etc/dconf/db/local.d/00-settings
+  - mkdir -p /mnt/archinstall/etc/dconf/profile
+  - cp /etc/dconf/profile/user /mnt/archinstall/etc/dconf/profile/user
+  - mkdir -p /mnt/archinstall/usr/local/share/pacman
+  - cp -r /usr/local/share/pacman/keyrings /mnt/archinstall/usr/local/share/pacman/keyrings
+
+  # Installing additional packages, adding user to docker group.
+  - arch-chroot /mnt/archinstall pacman -Syu --noconfirm --needed --noprogressbar git bluez-utils dconf-editor chromium nautilus xorg-drivers gedit eog gnome-disk-utility gnome-keyring gnome-logs gnome-system-monitor gnome-shell-extensions gnome-characters gnome-font-viewer gnome-calculator gnome-calendar gnome-clocks gnome-shell-extension-dash-to-dock gnome-shell-extension-compact-top-bar geary deja-dup baobab xdg-user-dirs-gtk papirus-icon-theme ttf-droid adw-gtk-theme zsh-autosuggestions zsh-syntax-highlighting zsh-theme-powerlevel10k docker docker-compose vscodium pack nano-syntax-highlighting-git
+  - arch-chroot /mnt/archinstall usermod -aG docker {{USER}}
+
+  # Setting up background image and logo.
+  - mkdir -p /mnt/archinstall/usr/local/share/backgrounds
+  - cp /usr/local/share/backgrounds/wallpaper.jpg /mnt/archinstall/usr/local/share/backgrounds/wallpaper.jpg
+  - cp /usr/local/share/backgrounds/fmnx-linux.png /mnt/archinstall/usr/local/share/backgrounds/fmnx-linux.png
+  - arch-chroot /mnt/archinstall xdg-icon-resource install --novendor --size 512 /usr/local/share/backgrounds/fmnx-linux.png
+  - arch-chroot /mnt/archinstall dconf update
+
+  # Transfering contents of root directory to new user.
+  - rm /root/config.json
+  - rm /root/disk.json
+  - rm /root/creds.json
+  - rm /root/ainst.yml
+  - rm /root/gpg-key-script
+  - rm /root/.automated_script.sh
+  - rm /root/.config/autostart/ainst.desktop
+  - rm /root/.zlogin
+  - cp -a /root/. /mnt/archinstall/home/{{USER}}
+  - arch-chroot /mnt/archinstall chown -R {{USER}} /home/{{USER}}
+  - cp -a /root/.zshrc /mnt/archinstall/root/.zshrc
+  - cp -a /root/.p10k.zsh /mnt/archinstall/root/.p10k.zsh

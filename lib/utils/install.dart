@@ -15,7 +15,7 @@ Future<List<String>> getInstallationScripts() async {
     try {
       var elem = prefs.getString(key);
       if (elem != null) {
-        aisntstring = aisntstring.replaceAll("<AINST=$key>", elem);
+        aisntstring = aisntstring.replaceAll("{{$key}}", elem);
       }
     } catch (e) {
       print(e);
@@ -48,4 +48,10 @@ Future<String> getHomeDir() async {
     homedir = "/home$homedir";
   }
   return homedir;
+}
+
+Future<String> getDescriptionMarkdownString() async {
+  var homedir = await getHomeDir();
+  var ainstfile = File("$homedir/ainst.md");
+  return await ainstfile.readAsString();
 }
