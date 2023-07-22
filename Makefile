@@ -7,6 +7,8 @@ push:
 	git push
 	git push github
 	git push codeberg
+	pack -Bqs
+	pack -P fmnx.su/core/ainst
 
 prepare:
 	sudo pacman -Syu --noconfirm cmake clang
