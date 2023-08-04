@@ -2,7 +2,7 @@
 
 pkgname="ainst"
 pkgdesc="Graphical system installation utility configurable in runtime"
-pkgver="0.2.2"
+pkgver="0.2.3"
 pkgrel="1"
 arch=('x86_64')
 url="https://fmnx.su/core/ainst"
