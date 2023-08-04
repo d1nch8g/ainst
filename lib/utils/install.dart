@@ -12,14 +12,16 @@ Future<List<String>> getInstallationScripts() async {
   var aisntstring = await ainstfile.readAsString();
 
   for (var key in keys) {
+    stdout.writeln("Running script: $key");
     try {
       var elem = prefs.getString(key);
       if (elem != null) {
         aisntstring = aisntstring.replaceAll("{{$key}}", elem);
       }
-    } catch (e) {
-      print(e);
+    } catch (err) {
+      stderr.writeln("Error, $err");
     }
+    stdout.writeln("Finished, success!\n");
   }
 
   YamlMap mapData = loadYaml(aisntstring);
