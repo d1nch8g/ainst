@@ -12,7 +12,6 @@ Future<List<String>> getInstallationScripts() async {
   var aisntstring = await ainstfile.readAsString();
 
   for (var key in keys) {
-    stdout.writeln("Running script: $key");
     try {
       var elem = prefs.getString(key);
       if (elem != null) {
@@ -21,7 +20,6 @@ Future<List<String>> getInstallationScripts() async {
     } catch (err) {
       stderr.writeln("Error, $err");
     }
-    stdout.writeln("Finished, success!\n");
   }
 
   YamlMap mapData = loadYaml(aisntstring);
@@ -35,10 +33,12 @@ Future<List<String>> getInstallationScripts() async {
 
 Future<String> installSystem(scripts) async {
   for (var call in scripts) {
+    stdout.writeln("Running script: $call");
     var rez = await syscall("$call");
     if (rez.error) {
       return "Unable to execute call: $call \n ${rez.stdout}${rez.stderr}";
     }
+    stdout.writeln("Finished, ok!\n");
   }
   return "ok";
 }
