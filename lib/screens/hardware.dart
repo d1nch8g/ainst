@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ainst/components/buttons.dart';
 import 'package:ainst/components/dropdown.dart';
 import 'package:ainst/components/notification.dart';
 import 'package:ainst/constants.dart';
 import 'package:ainst/screens/installation.dart';
-import 'package:ainst/utils/senderr.dart';
 import 'package:ainst/utils/syscall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +30,7 @@ class _HardwareContentState extends State<HardwareContent> {
     disks = [];
     var rez = await syscall("lsblk");
     if (rez.error) {
-      sendErr("stdout: ${rez.stdout}, stderr: ${rez.stderr}");
+      stderr.writeln("stdout: ${rez.stdout}, stderr: ${rez.stderr}");
     }
     for (var line in rez.stdout.split("\n")) {
       if (line.contains("disk") && !line.contains("SWAP")) {
