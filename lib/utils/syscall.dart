@@ -12,10 +12,25 @@ class CallResult {
 }
 
 Future<CallResult> syscall(String input) async {
-  var rez = await Process.run("bash", ["-c", input]);
+  var rez = await Process.start("bash", ["-c", input]);
+  var out = "";
+  var err = "";
+
+  await rez.stdout.forEach((b) {
+    var str = String.fromCharCodes(b);
+    stdout.write(str);
+    out += str;
+  });
+
+  await rez.stderr.forEach((b) {
+    var str = String.fromCharCodes(b);
+    stderr.write(str);
+    err += str;
+  });
+
   return CallResult(
-    stdout: "${rez.stdout}",
-    stderr: "${rez.stderr}",
-    error: rez.exitCode != 0,
+    stdout: out,
+    stderr: err,
+    error: await rez.exitCode != 0,
   );
 }
