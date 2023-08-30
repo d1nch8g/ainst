@@ -45,7 +45,7 @@ class UserContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextForm(
-                    hint: "Name",
+                    hint: "Real name",
                     controller: userController,
                   ),
                   const SizedBox(width: 32),
