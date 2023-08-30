@@ -4,13 +4,14 @@ pkgname="ainst"
 pkgdesc="Graphical system installation utility configurable in runtime"
 pkgver="0.2.4"
 pkgrel="1"
-arch=('x86_64')
+arch=("x86_64")
 url="https://fmnx.su/core/ainst"
 makedepends=(
   "gtk3"
   "ninja"
   "clang"
   "cmake"
+  "flutter"
 )
 
 build() {
